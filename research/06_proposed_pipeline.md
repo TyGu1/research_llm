@@ -198,14 +198,36 @@ the generated S0 text?
 - Baseline: entity-substituted version of original question (Presidio-style)
 - Hypothesis: proxy questions cover the topic space but not the specific instance
 
-### Test 2: Privacy Leakage
-**Question:** Can a SOTA LLM recover the original S2 question from the generated S0 text?
+### Test 2: Sensitive Data Recovery from Transmitted Content
+**Question:** Can an attacker recover the sensitive data in the original S2 prompt from
+what is actually sent to the cloud?
 
-- Method: run reconstruction attack (arXiv:2410.12443 methodology) on:
-  (a) generated text without vocabulary exclusion
-  (b) generated text with vocabulary exclusion
-- Models: GPT-4o, Claude 3.5 Sonnet (highest known recovery rates)
-- Success criterion: recovery rate < 10% (vs. 91–94% for DP sanitization)
+The tested object is not the methodology — it is the transmitted content (S0 proxy questions
+and/or generated text). The methodology is irrelevant to the attacker.
+
+```
+Input to attacker:  S0 proxy questions (what the cloud actually receives)
+Attack goal:        recover sensitive content from the original S2 prompt
+                    (entity names, deal values, patient data, etc.)
+Comparison:         DP reconstruction attack recovers 91–94% from DP-sanitized text
+```
+
+This is the same security question as arXiv:2410.12443, applied to our pipeline output
+rather than DP-sanitized text. The claim is not that the methodology is hard to reverse-
+engineer — it is that the transmitted content contains no sensitive data to recover, because
+the information bottleneck is irreversible, not merely noisy.
+
+- Method: run three attack variants on the S0 proxy questions:
+  (a) Direct recovery prompt — attacker asks LLM to reconstruct the source situation
+  (b) In-context learning attack — attacker provides (S2, S0) example pairs, then targets
+  (c) Domain expert prompt — attacker poses as domain expert, guesses source situation
+- Test conditions: with and without vocabulary exclusion
+- Models: GPT-4o, Claude 3.5 Sonnet (highest known recovery rates in arXiv:2410.12443)
+- Recovery scoring:
+  - Domain recovery (M&A, healthcare, legal) — easiest; some leakage acceptable
+  - Situation recovery ("large acquisition in European software") — medium
+  - Specific value recovery (company name, deal size, patient identity) — must be near zero
+- Success criterion: specific value recovery < 10% (vs. 91–94% for DP sanitization)
 
 ### Test 3: Answer Quality
 **Question:** How close is the synthesized answer to the oracle answer?

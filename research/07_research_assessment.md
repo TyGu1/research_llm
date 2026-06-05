@@ -72,15 +72,28 @@ A system that knows its limits is more deployable than one that claims to work e
 
 ## What Would Make This a Strong Paper
 
-### Result 1: The Reconstruction Attack Test (Headline Result)
+### Result 1: Sensitive Data Recovery from Transmitted Content (Headline Result)
 
-Run the reconstruction attack methodology (arXiv:2410.12443) on:
-- (a) topic-modeled text without vocabulary exclusion
-- (b) topic-modeled text with vocabulary exclusion
+The test object is not the methodology — it is the transmitted content: the S0 proxy
+questions that actually reach the cloud LLM. The question is the same one arXiv:2410.12443
+asked, applied to our pipeline output instead of DP-sanitized text:
 
-If vocabulary-excluded text resists recovery at < 10% — against GPT-4o and Claude 3.5
-Sonnet, which achieve 91–94% on DP-sanitized text — that is a direct challenge to the
-dominant approach in the field and a strong empirical contribution.
+> Can an attacker recover the sensitive data in the original S2 prompt from what is sent
+> to the cloud?
+
+```
+DP pipeline:           transmits DP-sanitized text  → 91–94% sensitive data recovery
+This pipeline:         transmits S0 proxy questions  → [X]% sensitive data recovery
+```
+
+The DP case fails because noise is reversible — the sensitive content was present in the
+transmitted text, just perturbed. Our case should succeed because the information bottleneck
+is irreversible — the sensitive specifics (entity names, deal values, patient identities)
+never entered the transmitted content. There is nothing to recover.
+
+If specific value recovery from S0 proxy questions is < 10% against GPT-4o and Claude 3.5
+Sonnet, that is the headline result: a practical, deployable pipeline from which sensitive
+data cannot be recovered — a property no DP-based approach has demonstrated.
 
 ### Result 2: Task-Type Quality Curves (Core Practitioner Contribution)
 
