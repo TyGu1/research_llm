@@ -2,8 +2,11 @@
 Orchestrates the full topic-bottleneck pipeline end-to-end.
 Each step's output is captured in PipelineResult for evaluation.
 """
+import json
+import logging
 import time
 from dataclasses import dataclass
+from pathlib import Path
 
 from src.data.cuad_loader import CUADSample
 from src.pipeline.base import (
@@ -96,10 +99,36 @@ class PipelineRunner:
         result.step_timings = timings
         return result
 
-    def run_batch(self, samples: list[CUADSample], verbose: bool = True) -> list[PipelineResult]:
+    def run_batch(
+        self,
+        samples: list[CUADSample],
+        verbose: bool = True,
+        checkpoint_dir: Path | None = None,
+    ) -> list[PipelineResult]:
         results: list[PipelineResult] = []
         for i, sample in enumerate(samples):
             if verbose:
                 print(f"[{i+1}/{len(samples)}] {sample.category} — {sample.id}")
             results.append(self.run(sample))
+
+            # Periodic checkpoint: save partial results every 10 samples
+            if checkpoint_dir is not None and (i + 1) % 10 == 0:
+                self._save_checkpoint(results, checkpoint_dir)
+
+        # Final checkpoint
+        if checkpoint_dir is not None and results:
+            self._save_checkpoint(results, checkpoint_dir)
+
         return results
+
+    @staticmethod
+    def _save_checkpoint(results: list[PipelineResult], checkpoint_dir: Path) -> None:
+        checkpoint_dir.mkdir(parents=True, exist_ok=True)
+        path = checkpoint_dir / "checkpoint.json"
+        data = [
+            {"sample_id": r.sample_id, "error": r.error, "has_answer": bool(r.final_answer)}
+            for r in results
+        ]
+        with open(path, "w") as f:
+            json.dump(data, f)
+        logging.getLogger(__name__).debug("Checkpoint saved: %d results to %s", len(results), path)

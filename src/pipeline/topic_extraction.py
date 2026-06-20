@@ -3,10 +3,13 @@ Step 1: Extract topic distribution from a question + context using a local LLM.
 Outputs a TopicDistribution (dict of topic_name → weight).
 """
 import json
+import logging
 import re
 import time
 
 from src.pipeline.base import TopicDistribution, TopicExtractor
+
+logger = logging.getLogger(__name__)
 
 SYSTEM_PROMPT = """You are a topic modeling assistant. Given a legal question and contract context,
 identify the main legal/business topics present. Respond ONLY with valid JSON in this exact format:
@@ -43,6 +46,7 @@ def _parse_topic_json(text: str) -> dict[str, float]:
             return {k: v / total for k, v in raw.items()} if total > 0 else raw
 
     # Last resort: return a generic topic
+    logger.warning("Topic extraction failed — LLM output could not be parsed, falling back to generic topic. Raw output: %.200s", text)
     return {"legal_contract": 1.0}
 
 

@@ -121,6 +121,8 @@ class CUADSample:
 class CUADDataset:
     HF_PATH = "theatticusproject/cuad"
     JSON_FILE = "CUAD_v1/CUAD_v1.json"
+    # Pin to a specific revision for reproducibility (last modified 2023-01-02)
+    HF_REVISION = "a3c393f5d103fd0c516374e4fdff676c8176dcb1"
 
     def __init__(self) -> None:
         self._samples: list[CUADSample] | None = None
@@ -129,10 +131,10 @@ class CUADDataset:
         if self._samples is not None:
             return self._samples
 
-        # Load the raw SQuAD-format JSON from HuggingFace
+        # Load the raw SQuAD-format JSON from HuggingFace (pinned revision)
         ds = load_dataset(
             "json",
-            data_files=f"hf://datasets/{self.HF_PATH}/{self.JSON_FILE}",
+            data_files=f"hf://datasets/{self.HF_PATH}@{self.HF_REVISION}/{self.JSON_FILE}",
             split="train",
         )
         # ds has a single row with field "data" containing the SQuAD structure
