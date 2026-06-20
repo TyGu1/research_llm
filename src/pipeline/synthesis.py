@@ -25,9 +25,10 @@ about this contract. Be concrete and reference the contract text where possible.
 
 
 class LLMSynthesizer(Synthesizer):
-    def __init__(self, client, max_context_chars: int = 8000):
+    def __init__(self, client, max_context_chars: int = 8000, temperature: float = 0.0):
         self._client = client
         self._max_context_chars = max_context_chars
+        self._temperature = temperature
 
     def synthesize(
         self,
@@ -47,4 +48,4 @@ class LLMSynthesizer(Synthesizer):
             s0_answers=s0_text,
         )
 
-        return self._client.generate(prompt, system=SYSTEM_PROMPT)
+        return self._client.generate(prompt, system=SYSTEM_PROMPT, temperature=self._temperature)

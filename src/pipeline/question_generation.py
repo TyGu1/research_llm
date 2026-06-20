@@ -39,14 +39,15 @@ def _parse_numbered_list(text: str) -> list[str]:
 
 
 class LLMQuestionGenerator(ProxyQuestionGenerator):
-    def __init__(self, client, n: int = 10):
+    def __init__(self, client, n: int = 10, temperature: float = 0.0):
         self._client = client
         self._default_n = n
+        self._temperature = temperature
 
     def generate(self, s0_text: str, n: int | None = None) -> list[str]:
         n = n or self._default_n
         prompt = PROMPT_TEMPLATE.format(n=n, s0_text=s0_text)
-        response = self._client.generate(prompt, system=SYSTEM_PROMPT)
+        response = self._client.generate(prompt, system=SYSTEM_PROMPT, temperature=self._temperature)
 
         questions = _parse_numbered_list(response)
 

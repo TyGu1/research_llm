@@ -20,10 +20,11 @@ Write the text now:"""
 
 
 class LLMTextGenerator(S0TextGenerator):
-    def __init__(self, client, min_words: int = 200, max_words: int = 300):
+    def __init__(self, client, min_words: int = 200, max_words: int = 300, temperature: float = 0.0):
         self._client = client
         self._min_words = min_words
         self._max_words = max_words
+        self._temperature = temperature
 
     def generate(self, topics: TopicDistribution) -> str:
         topic_list = "\n".join(
@@ -36,7 +37,7 @@ class LLMTextGenerator(S0TextGenerator):
             topic_list=topic_list,
         )
 
-        text = self._client.generate(prompt, system=SYSTEM_PROMPT)
+        text = self._client.generate(prompt, system=SYSTEM_PROMPT, temperature=self._temperature)
 
         # Validate word count; retry once if out of range
         word_count = len(text.split())
@@ -45,6 +46,6 @@ class LLMTextGenerator(S0TextGenerator):
                 f"Rewrite the following text so it is between {self._min_words} "
                 f"and {self._max_words} words. Keep the same topics and tone.\n\n{text}"
             )
-            text = self._client.generate(retry_prompt, system=SYSTEM_PROMPT)
+            text = self._client.generate(retry_prompt, system=SYSTEM_PROMPT, temperature=self._temperature)
 
         return text.strip()

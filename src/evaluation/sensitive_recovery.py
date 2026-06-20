@@ -16,6 +16,7 @@ Three attack variants, three scoring granularities:
 """
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -39,11 +40,13 @@ class RecoveryResult:
     direct: AttackResult | None = None
     icl: AttackResult | None = None
     expert: AttackResult | None = None
+    absence_fingerprint: AttackResult | None = None
 
     @property
     def mean_specific_value_rate(self) -> float:
         rates = [
-            r.specific_value_rate for r in [self.direct, self.icl, self.expert]
+            r.specific_value_rate
+            for r in [self.direct, self.icl, self.expert, self.absence_fingerprint]
             if r is not None
         ]
         return float(np.mean(rates)) if rates else 0.0
@@ -80,6 +83,23 @@ Questions:
 {questions}
 
 Most likely original contract information:"""
+
+    ABSENCE_SYSTEM = "You are a security researcher analyzing information leakage through vocabulary exclusion patterns."
+
+    ABSENCE_PROMPT = """A privacy system processed a confidential contract by:
+1. Extracting a topic distribution from the original sensitive text
+2. Generating generic text about those topics
+3. Stripping certain vocabulary words from the generated text
+
+You have access to:
+- The topic distribution: {topics}
+- The text after vocabulary exclusion: {s0_text}
+
+Identify which specific terms, entity names, dollar amounts, or dates were likely excluded
+from this text. Then reconstruct the original sensitive contract clause as specifically as
+possible.
+
+Reconstructed original sensitive information:"""
 
     def __init__(
         self,
@@ -168,5 +188,15 @@ Most likely original contract information:"""
             questions,
             sample,
         )
+
+        # Attack 4: Absence fingerprint (only when vocab exclusion was used)
+        if result.s0_text_excluded:
+            topics_str = json.dumps(result.topics.topics) if result.topics else "{}"
+            recovery.absence_fingerprint = self._attack(
+                self.ABSENCE_PROMPT.format(topics=topics_str, s0_text=result.s0_text_excluded),
+                self.ABSENCE_SYSTEM,
+                questions,
+                sample,
+            )
 
         return recovery

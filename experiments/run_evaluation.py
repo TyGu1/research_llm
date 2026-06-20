@@ -65,13 +65,13 @@ def build_runner(cfg: PipelineConfig, local_client: OllamaClient, cloud_client) 
         else LLMQuestionSelector(client=local_client)
     )
     return PipelineRunner(
-        topic_extractor=LLMTopicExtractor(client=local_client, max_context_tokens=cfg.local_model_max_tokens),
-        text_generator=LLMTextGenerator(client=local_client, min_words=cfg.s0_text_min_words, max_words=cfg.s0_text_max_words),
+        topic_extractor=LLMTopicExtractor(client=local_client, max_context_tokens=cfg.local_model_max_tokens, temperature=cfg.temperature),
+        text_generator=LLMTextGenerator(client=local_client, min_words=cfg.s0_text_min_words, max_words=cfg.s0_text_max_words, temperature=cfg.temperature),
         vocab_excluder=RegexVocabExcluder() if cfg.use_vocab_exclusion else None,
-        question_generator=LLMQuestionGenerator(client=local_client, n=cfg.num_proxy_questions),
+        question_generator=LLMQuestionGenerator(client=local_client, n=cfg.num_proxy_questions, temperature=cfg.temperature),
         question_selector=selector,
-        cloud_answerer=StandardCloudAnswerer(cloud_client=cloud_client),
-        synthesizer=LLMSynthesizer(client=local_client),
+        cloud_answerer=StandardCloudAnswerer(cloud_client=cloud_client, temperature=cfg.temperature),
+        synthesizer=LLMSynthesizer(client=local_client, temperature=cfg.temperature),
         num_proxy_questions=cfg.num_proxy_questions,
         num_selected_questions=cfg.num_selected_questions,
     )
@@ -213,7 +213,7 @@ def main():
     # Test 1: Sensitive data recovery
     recovery_results = []
     if not args.no_recovery:
-        print("Test 1: Sensitive data recovery (3 attack variants)...")
+        print("Test 1: Sensitive data recovery (4 attack variants)...")
         recovery_eval = SensitiveRecoveryEvaluator(
             attacker_client=cloud_client,
             embed_model=embed_model,
@@ -231,10 +231,21 @@ def main():
                     "situation_score": rr.direct.situation_score if rr.direct else None,
                     "specific_value_rate": rr.direct.specific_value_rate if rr.direct else None,
                 } if rr.direct else None,
+                "icl": {
+                    "domain_recovered": rr.icl.domain_recovered if rr.icl else None,
+                    "situation_score": rr.icl.situation_score if rr.icl else None,
+                    "specific_value_rate": rr.icl.specific_value_rate if rr.icl else None,
+                } if rr.icl else None,
                 "expert": {
                     "domain_recovered": rr.expert.domain_recovered if rr.expert else None,
+                    "situation_score": rr.expert.situation_score if rr.expert else None,
                     "specific_value_rate": rr.expert.specific_value_rate if rr.expert else None,
                 } if rr.expert else None,
+                "absence_fingerprint": {
+                    "domain_recovered": rr.absence_fingerprint.domain_recovered if rr.absence_fingerprint else None,
+                    "situation_score": rr.absence_fingerprint.situation_score if rr.absence_fingerprint else None,
+                    "specific_value_rate": rr.absence_fingerprint.specific_value_rate if rr.absence_fingerprint else None,
+                } if rr.absence_fingerprint else None,
             })
     else:
         print("Test 1: Skipped (--no-recovery)")

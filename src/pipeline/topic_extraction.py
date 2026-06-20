@@ -47,9 +47,10 @@ def _parse_topic_json(text: str) -> dict[str, float]:
 
 
 class LLMTopicExtractor(TopicExtractor):
-    def __init__(self, client, max_context_tokens: int = 2000):
+    def __init__(self, client, max_context_tokens: int = 2000, temperature: float = 0.0):
         self._client = client
         self._max_context_tokens = max_context_tokens
+        self._temperature = temperature
 
     def extract(self, question: str, context: str) -> TopicDistribution:
         # Rough truncation: ~4 chars per token
@@ -57,7 +58,7 @@ class LLMTopicExtractor(TopicExtractor):
         truncated_ctx = context[:max_chars]
 
         prompt = PROMPT_TEMPLATE.format(question=question, context=truncated_ctx)
-        response = self._client.generate(prompt, system=SYSTEM_PROMPT)
+        response = self._client.generate(prompt, system=SYSTEM_PROMPT, temperature=self._temperature)
         topics = _parse_topic_json(response)
 
         # Normalize weights
