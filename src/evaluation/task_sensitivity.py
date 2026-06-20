@@ -18,6 +18,16 @@ from src.evaluation.answer_quality import QualityResult
 from src.data.question_taxonomy import TASK_TYPES
 
 
+def _confidence_interval_95(values: list[float]) -> tuple[float, float]:
+    """Bootstrap 95% confidence interval (1000 resamples)."""
+    if len(values) < 2:
+        m = float(np.mean(values)) if values else 0.0
+        return (m, m)
+    rng = np.random.default_rng(42)
+    means = [float(np.mean(rng.choice(values, size=len(values), replace=True))) for _ in range(1000)]
+    return (float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5)))
+
+
 @dataclass
 class TaskGroupStats:
     task_type: str
@@ -26,6 +36,10 @@ class TaskGroupStats:
     mean_semantic_sim: float
     mean_gold_span_overlap: float
     mean_specific_value_recovery: float     # from recovery test
+    ci95_bertscore_f1: tuple[float, float] = (0.0, 0.0)
+    ci95_semantic_sim: tuple[float, float] = (0.0, 0.0)
+    ci95_gold_span_overlap: tuple[float, float] = (0.0, 0.0)
+    ci95_specific_value_recovery: tuple[float, float] = (0.0, 0.0)
 
 
 @dataclass
@@ -61,5 +75,9 @@ class TaskSensitivityEvaluator:
                 mean_semantic_sim=float(np.mean(g["semantic_sim"])),
                 mean_gold_span_overlap=float(np.mean(g["gold_span_overlap"])),
                 mean_specific_value_recovery=float(np.mean(g["specific_value_rate"])),
+                ci95_bertscore_f1=_confidence_interval_95(g["bertscore_f1"]),
+                ci95_semantic_sim=_confidence_interval_95(g["semantic_sim"]),
+                ci95_gold_span_overlap=_confidence_interval_95(g["gold_span_overlap"]),
+                ci95_specific_value_recovery=_confidence_interval_95(g["specific_value_rate"]),
             )
         return result

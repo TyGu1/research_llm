@@ -24,6 +24,27 @@ def mean_of(rows: list[dict | None], key: str) -> float | None:
     return statistics.mean(vals) if vals else None
 
 
+def ci95_of(rows: list[dict | None], key: str) -> tuple[float, float] | None:
+    """Bootstrap 95% confidence interval for a metric across rows."""
+    import random
+    vals = [r[key] for r in rows if r is not None and r.get(key) is not None]
+    if len(vals) < 2:
+        return None
+    rng = random.Random(42)
+    means = []
+    for _ in range(1000):
+        sample = [rng.choice(vals) for _ in range(len(vals))]
+        means.append(statistics.mean(sample))
+    means.sort()
+    return (means[25], means[974])
+
+
+def fmt_ci(ci: tuple[float, float] | None) -> str:
+    if ci is None:
+        return ""
+    return f"[{ci[0]:.3f}, {ci[1]:.3f}]"
+
+
 def fmt(v: float | None, precision: int = 3) -> str:
     if v is None:
         return "  n/a  "
@@ -36,8 +57,8 @@ def print_quality_table(data: dict):
     qe = data.get("quality_entity_substitution", [])
 
     print("\n── Answer Quality (vs. Oracle) ─────────────────────────────")
-    print(f"  {'Metric':<28} {'Pipeline':>9} {'Local':>9} {'Entity-sub':>10}")
-    print(f"  {'─'*28} {'─'*9} {'─'*9} {'─'*10}")
+    print(f"  {'Metric':<28} {'Pipeline':>9} {'Local':>9} {'Entity-sub':>10}  {'Pipeline 95% CI':>18}")
+    print(f"  {'─'*28} {'─'*9} {'─'*9} {'─'*10}  {'─'*18}")
 
     for key, label in [
         ("bertscore_f1", "BERTScore F1"),
@@ -47,7 +68,8 @@ def print_quality_table(data: dict):
         mp = mean_of(qp, key)
         ml = mean_of(ql, key)
         me = mean_of(qe, key)
-        print(f"  {label:<28} {fmt(mp):>9} {fmt(ml):>9} {fmt(me):>10}")
+        ci = ci95_of(qp, key)
+        print(f"  {label:<28} {fmt(mp):>9} {fmt(ml):>9} {fmt(me):>10}  {fmt_ci(ci):>18}")
 
     n_valid = sum(1 for r in qp if r is not None)
     print(f"  (n={n_valid} valid samples)")
@@ -100,15 +122,18 @@ def print_task_sensitivity(data: dict):
         return
 
     print("\n── Task Sensitivity ────────────────────────────────────────")
-    print(f"  {'Task type':<28} {'n':>4} {'BERTScore':>9} {'Sem sim':>8} {'SVR':>7}")
-    print(f"  {'─'*28} {'─'*4} {'─'*9} {'─'*8} {'─'*7}")
+    print(f"  {'Task type':<28} {'n':>4} {'BERTScore':>9} {'Sem sim':>8} {'SVR':>7}  {'BERTScore 95% CI':>18}")
+    print(f"  {'─'*28} {'─'*4} {'─'*9} {'─'*8} {'─'*7}  {'─'*18}")
 
     for tt, g in sorted(ts.items()):
+        ci = g.get("ci95_bertscore_f1")
+        ci_str = f"[{ci[0]:.3f}, {ci[1]:.3f}]" if ci else ""
         print(
             f"  {tt:<28} {g['n']:>4} "
             f"{fmt(g.get('mean_bertscore_f1')):>9} "
             f"{fmt(g.get('mean_semantic_sim')):>8} "
-            f"{fmt(g.get('mean_specific_value_recovery')):>7}"
+            f"{fmt(g.get('mean_specific_value_recovery')):>7}  "
+            f"{ci_str:>18}"
         )
 
 

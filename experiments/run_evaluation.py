@@ -168,6 +168,13 @@ def main():
     print("  Baselines done")
 
     # ── Evaluation ────────────────────────────────────────────────────────────
+    import torch
+    import numpy as np
+    import random as _random
+    _random.seed(cfg.cuad_seed)
+    np.random.seed(cfg.cuad_seed)
+    torch.manual_seed(cfg.cuad_seed)
+
     from sentence_transformers import SentenceTransformer
     embed_model = SentenceTransformer(cfg.similarity_model)
 
@@ -279,6 +286,10 @@ def main():
             "mean_semantic_sim": g.mean_semantic_sim,
             "mean_gold_span_overlap": g.mean_gold_span_overlap,
             "mean_specific_value_recovery": g.mean_specific_value_recovery,
+            "ci95_bertscore_f1": list(g.ci95_bertscore_f1),
+            "ci95_semantic_sim": list(g.ci95_semantic_sim),
+            "ci95_gold_span_overlap": list(g.ci95_gold_span_overlap),
+            "ci95_specific_value_recovery": list(g.ci95_specific_value_recovery),
         }
         for tt, g in task_result.groups.items()
     }
