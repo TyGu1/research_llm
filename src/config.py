@@ -32,6 +32,7 @@ class PipelineConfig(BaseSettings):
     cuad_max_samples: int = 50
     cuad_answerable_only: bool = True
     cuad_seed: int = 42
+    cuad_split: str = "dev"  # "dev" | "test" | "all"
 
     # Evaluation
     similarity_model: str = "all-MiniLM-L6-v2"

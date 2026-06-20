@@ -1,11 +1,12 @@
 """
-Unit tests for CUAD loader utilities — question rewriting and taxonomy mapping.
+Unit tests for CUAD loader utilities — question rewriting, taxonomy mapping,
+and deterministic dev/test split.
 
 Avoids the HuggingFace dataset download by testing only the transformation
 logic (QUESTION_TEMPLATES lookup, _rewrite_question, task type mapping).
 """
 import pytest
-from src.data.cuad_loader import QUESTION_TEMPLATES, CUADSample
+from src.data.cuad_loader import QUESTION_TEMPLATES, CUADSample, Split, _assign_split
 from src.data.question_taxonomy import (
     CATEGORY_TO_TASK_TYPE, TASK_TYPES, get_task_type,
 )
@@ -96,3 +97,46 @@ def test_cuad_sample_default_is_impossible():
     )
     assert sample.is_impossible
     assert sample.answers == []
+
+
+# ── Split assignment ─────────────────────────────────────────────────────────
+
+def test_assign_split_is_deterministic():
+    """Same id always gets the same split."""
+    s1 = _assign_split("sample-abc-123")
+    s2 = _assign_split("sample-abc-123")
+    assert s1 == s2
+
+
+def test_assign_split_returns_valid_split():
+    assert _assign_split("any-id") in (Split.DEV, Split.TEST)
+
+
+def test_assign_split_produces_both_splits():
+    """Over many ids, both splits should appear."""
+    splits = {_assign_split(f"id-{i}") for i in range(200)}
+    assert Split.DEV in splits
+    assert Split.TEST in splits
+
+
+def test_assign_split_approximate_ratio():
+    """With default 30% test, ratio should be roughly 0.3 over many samples."""
+    n = 5000
+    test_count = sum(1 for i in range(n) if _assign_split(f"s-{i}") == Split.TEST)
+    ratio = test_count / n
+    assert 0.25 < ratio < 0.35, f"Test ratio {ratio:.3f} outside expected range"
+
+
+def test_cuad_sample_default_split_is_dev():
+    sample = CUADSample(
+        id="x",
+        question="Q?",
+        raw_question="Raw Q",
+        context="ctx",
+        answers=["ans"],
+        category="Parties",
+        task_type="entity_specific",
+        doc_title="Doc",
+        is_impossible=False,
+    )
+    assert sample.split == Split.DEV

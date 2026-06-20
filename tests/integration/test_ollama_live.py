@@ -53,8 +53,9 @@ def test_ollama_generate_with_system_prompt():
 
 @skip_no_ollama
 def test_ollama_embed_returns_list_of_floats():
-    client = OllamaClient(base_url=OLLAMA_URL, model="phi3", embed_model="nomic-embed-text")
-    result = client.embed("This is a test sentence for embedding.")
+    # fix: wrong — OllamaClient has no embed_model constructor arg; pass at embed() call time
+    client = OllamaClient(base_url=OLLAMA_URL, model="phi3")
+    result = client.embed("This is a test sentence for embedding.", model="nomic-embed-text")
     assert isinstance(result, list)
     assert len(result) > 0
     assert all(isinstance(x, float) for x in result)
@@ -63,16 +64,18 @@ def test_ollama_embed_returns_list_of_floats():
 @skip_no_ollama
 def test_ollama_embed_consistent_dimensions():
     """Same model should always return the same embedding dimension."""
-    client = OllamaClient(base_url=OLLAMA_URL, model="phi3", embed_model="nomic-embed-text")
-    e1 = client.embed("First sentence.")
-    e2 = client.embed("Second sentence, quite different from the first one.")
+    # fix: wrong — OllamaClient has no embed_model constructor arg; pass at embed() call time
+    client = OllamaClient(base_url=OLLAMA_URL, model="phi3")
+    e1 = client.embed("First sentence.", model="nomic-embed-text")
+    e2 = client.embed("Second sentence, quite different from the first one.", model="nomic-embed-text")
     assert len(e1) == len(e2)
 
 
 @skip_no_ollama
 def test_ollama_embed_different_texts_differ():
     """Embeddings for different texts should not be identical."""
-    client = OllamaClient(base_url=OLLAMA_URL, model="phi3", embed_model="nomic-embed-text")
-    e1 = client.embed("Contract termination clause.")
-    e2 = client.embed("Governing law and jurisdiction selection.")
+    # fix: wrong — OllamaClient has no embed_model constructor arg; pass at embed() call time
+    client = OllamaClient(base_url=OLLAMA_URL, model="phi3")
+    e1 = client.embed("Contract termination clause.", model="nomic-embed-text")
+    e2 = client.embed("Governing law and jurisdiction selection.", model="nomic-embed-text")
     assert e1 != e2

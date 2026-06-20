@@ -43,7 +43,8 @@ skip_no_ollama = pytest.mark.skipif(
 
 @pytest.fixture
 def live_runner():
-    client = OllamaClient(base_url=OLLAMA_URL, model="phi3", embed_model="nomic-embed-text")
+    # fix: wrong — OllamaClient has no embed_model constructor arg; selector gets model via config
+    client = OllamaClient(base_url=OLLAMA_URL, model="phi3")
     # Use MockOllamaClient as cloud answerer to avoid needing a real API key
     cloud = MockOllamaClient()
     return PipelineRunner(
@@ -60,7 +61,8 @@ def live_runner():
 
 @pytest.fixture
 def live_runner_with_exclusion():
-    client = OllamaClient(base_url=OLLAMA_URL, model="phi3", embed_model="nomic-embed-text")
+    # fix: wrong — OllamaClient has no embed_model constructor arg; selector gets model via config
+    client = OllamaClient(base_url=OLLAMA_URL, model="phi3")
     cloud = MockOllamaClient()
     return PipelineRunner(
         topic_extractor=LLMTopicExtractor(client=client, max_context_tokens=1500),

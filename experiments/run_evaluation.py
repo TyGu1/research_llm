@@ -23,7 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.config import PipelineConfig
-from src.data.cuad_loader import CUADDataset
+from src.data.cuad_loader import CUADDataset, Split
 from src.llm.ollama_client import OllamaClient
 from src.llm.cloud_client import CloudClient
 from src.llm.mock_client import MockOllamaClient
@@ -53,6 +53,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--question-selector", choices=["embedding", "llm"], default="embedding")
     p.add_argument("--no-recovery", action="store_true", help="Skip sensitive recovery attacks (faster)")
     p.add_argument("--cloud-provider", default=None, help="Cloud provider: mock | openai | anthropic")
+    p.add_argument("--split", choices=["dev", "test", "all"], default=None, help="Dataset split: dev (iterate), test (final), all")
     p.add_argument("--out-dir", default=None, help="Output directory (default: results/)")
     return p.parse_args()
 
@@ -104,6 +105,8 @@ def main():
     cfg.question_selector = args.question_selector
     cfg.cuad_max_samples = args.max_samples
     cfg.cuad_seed = args.seed
+    if args.split:
+        cfg.cuad_split = args.split
 
     out_dir = Path(args.out_dir or cfg.results_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -112,7 +115,6 @@ def main():
     local_client = OllamaClient(
         base_url=cfg.ollama_base_url,
         model=cfg.local_model,
-        embed_model=cfg.embed_model,
     )
     if cfg.cloud_provider == "mock":
         cloud_client = MockOllamaClient()
@@ -125,14 +127,17 @@ def main():
         )
 
     # ── Load data ─────────────────────────────────────────────────────────────
-    print(f"Loading CUAD (up to {cfg.cuad_max_samples} samples)...")
+    split = {"dev": Split.DEV, "test": Split.TEST, "all": None}[cfg.cuad_split]
+    split_label = cfg.cuad_split
+    print(f"Loading CUAD (up to {cfg.cuad_max_samples} samples, split={split_label})...")
     dataset = CUADDataset()
     samples = dataset.sample(
         n=cfg.cuad_max_samples,
         seed=cfg.cuad_seed,
         answerable_only=cfg.cuad_answerable_only,
+        split=split,
     )
-    print(f"  Loaded {len(samples)} samples")
+    print(f"  Loaded {len(samples)} samples ({split_label} split)")
 
     # ── Pipeline ──────────────────────────────────────────────────────────────
     runner = build_runner(cfg, local_client, cloud_client)
@@ -149,17 +154,17 @@ def main():
 
     # ── Baselines ─────────────────────────────────────────────────────────────
     print("\nRunning baselines...")
-    oracle = OracleBaseline(client=cloud_client)
-    local_only = LocalOnlyBaseline(client=local_client)
-    entity_sub = EntitySubstitutionBaseline(local_client=local_client, cloud_client=cloud_client)
+    oracle = OracleBaseline(cloud_client=cloud_client)
+    local_only = LocalOnlyBaseline(local_client=local_client)
+    entity_sub = EntitySubstitutionBaseline(cloud_client=cloud_client)
 
     oracle_answers = []
     local_answers = []
     entity_answers = []
     for s in samples:
-        oracle_answers.append(oracle.answer(s))
-        local_answers.append(local_only.answer(s))
-        entity_answers.append(entity_sub.answer(s))
+        oracle_answers.append(oracle.run(s).answer)
+        local_answers.append(local_only.run(s).answer)
+        entity_answers.append(entity_sub.run(s).answer)
     print("  Baselines done")
 
     # ── Evaluation ────────────────────────────────────────────────────────────
@@ -278,6 +283,7 @@ def main():
         "config": {
             "local_model": cfg.local_model,
             "cloud_provider": cfg.cloud_provider,
+            "cuad_split": cfg.cuad_split,
             "num_samples": len(samples),
             "use_vocab_exclusion": cfg.use_vocab_exclusion,
             "question_selector": cfg.question_selector,

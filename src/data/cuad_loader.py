@@ -12,9 +12,17 @@ passing it to the pipeline.
 """
 from __future__ import annotations
 
+import hashlib
 import random
 from dataclasses import dataclass, field
+from enum import Enum
 from datasets import load_dataset
+
+
+class Split(Enum):
+    """Dataset split. Partition is deterministic and based on sample id hash."""
+    DEV = "dev"    # for prompt iteration and hyperparameter tuning
+    TEST = "test"  # held out — touch once for final numbers
 
 # Maps raw CUAD question prefixes to natural question templates.
 # Key: substring that identifies the category in the raw question.
@@ -86,6 +94,16 @@ def _extract_category(raw_question: str) -> str:
     return "Other"
 
 
+def _assign_split(sample_id: str, test_fraction: float = 0.3) -> Split:
+    """Deterministically assign a sample to dev or test based on its id hash.
+
+    Uses SHA-256 so the partition is stable regardless of load order or dataset
+    version.  The same sample_id always lands in the same split.
+    """
+    h = int(hashlib.sha256(sample_id.encode()).hexdigest(), 16)
+    return Split.TEST if (h % 1000) < (test_fraction * 1000) else Split.DEV
+
+
 @dataclass
 class CUADSample:
     id: str
@@ -97,6 +115,7 @@ class CUADSample:
     task_type: str          # mapped task type (from question_taxonomy)
     doc_title: str
     is_impossible: bool
+    split: Split = Split.DEV
 
 
 class CUADDataset:
@@ -130,8 +149,9 @@ class CUADDataset:
                     raw_q = qa["question"]
                     category = _extract_category(raw_q)
                     answers = [a["text"] for a in qa.get("answers", [])]
+                    sample_id = qa["id"]
                     samples.append(CUADSample(
-                        id=qa["id"],
+                        id=sample_id,
                         question=_get_template(raw_q),
                         raw_question=raw_q,
                         context=context,
@@ -140,6 +160,7 @@ class CUADDataset:
                         task_type=get_task_type(category),
                         doc_title=title,
                         is_impossible=qa.get("is_impossible", len(answers) == 0),
+                        split=_assign_split(sample_id),
                     ))
 
         self._samples = samples
@@ -151,9 +172,12 @@ class CUADDataset:
         seed: int = 42,
         answerable_only: bool = True,
         categories: list[str] | None = None,
+        split: Split | None = None,
     ) -> list[CUADSample]:
         samples = self.load()
 
+        if split is not None:
+            samples = [s for s in samples if s.split == split]
         if answerable_only:
             samples = [s for s in samples if not s.is_impossible]
         if categories:

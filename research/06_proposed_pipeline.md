@@ -104,6 +104,52 @@ The second version conveys the same logical structure but uses no domain-specifi
 that could anchor re-identification. No paper found in the literature (as of June 2026) applies
 this specific technique.
 
+### Known Vulnerability: Absence Fingerprint Attack
+
+Vocabulary exclusion introduces a second-order information leak. An attacker who can infer
+the topic of the S0 text (e.g. "enterprise SaaS acquisitions") can compare the text against
+the vocabulary they would *expect* for that topic. Words that are conspicuously absent —
+"valuation", "EBITDA", "multiple" — form an **absence fingerprint** that reveals exactly
+which terms were stripped, and therefore which terms appeared in the original S2 context.
+
+The current implementation is deterministic: the exclusion set is derived directly from
+topic names (see `src/pipeline/vocab_exclusion.py`, `_topic_vocab_words`). An attacker
+who knows or guesses the topic distribution can reconstruct the full exclusion set by
+diffing expected vs. observed vocabulary, effectively reversing the hardening step.
+
+**Severity:** This does not expose the original S2 question directly, but it narrows the
+re-identification space — the attacker learns the domain-specific vocabulary of the source,
+which is precisely what the exclusion step was designed to hide.
+
+#### Proposed Mitigations
+
+1. **Random over-exclusion.** Also strip a random subset of words that are *not* in the
+   topic vocabulary. The attacker cannot distinguish real exclusions from decoys, adding
+   noise to the absence signal. Trade-off: may degrade S0 text quality if too aggressive.
+
+2. **Paraphrase instead of delete.** Replace topic words with hypernyms or synonyms
+   (e.g. "EBITDA" → "financial metric") rather than leaving gaps. The text stays fluent
+   and there is no absence signal. Trade-off: requires an LLM call or a curated synonym
+   map, and the hypernym itself may still leak partial information.
+
+3. **Generate without the words in the first place.** Instruct the S0 text generation
+   prompt (Step 2) to avoid topic-specific vocabulary entirely, rather than generating
+   it and stripping post-hoc. No gap artifacts because the words were never present.
+   Trade-off: harder to verify compliance; the LLM may still use related terms.
+
+4. **Fixed-size vocabulary masking.** Always strip exactly N words drawn from a
+   predefined domain lexicon, regardless of the actual topic. The exclusion set size
+   is constant, removing the information-theoretic signal from word counts. Trade-off:
+   requires maintaining a comprehensive domain lexicon per use-case.
+
+**Recommendation:** Option 3 (generation-time avoidance) eliminates the attack surface
+entirely and should be the default. Options 1 and 4 can serve as defence-in-depth when
+the generation prompt cannot be fully trusted.
+
+This vulnerability should be included in the Test 2 (Sensitive Data Recovery) evaluation:
+a dedicated attack variant where the adversary is given the topic distribution alongside
+the S0 text and attempts to recover the excluded vocabulary.
+
 ---
 
 ## Where This Sits vs. Prior Work

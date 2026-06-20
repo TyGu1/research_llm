@@ -26,6 +26,13 @@ neither the original content nor the vocabulary that would anchor a topic-to-ins
 That combination — topic bottleneck + vocabulary exclusion — has not been studied empirically.
 It is a novel contribution.
 
+**Caveat:** The current regex-based exclusion creates a deterministic absence fingerprint —
+an attacker who infers the topic can diff expected vs. observed vocabulary and recover the
+excluded terms. This must be addressed before the exclusion variant can be called "strongest."
+See *06_proposed_pipeline.md § Absence Fingerprint Attack* for the full analysis and four
+proposed mitigations. Generation-time avoidance (instructing Step 2 to never produce
+topic-specific words) is the recommended default.
+
 ### The Synthesis Step Is Underrated
 
 The insight that a local LLM can apply an externally-obtained reasoning framework to
