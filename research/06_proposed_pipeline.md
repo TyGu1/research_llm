@@ -157,7 +157,7 @@ the S0 text and attempts to recover the excluded vocabulary.
 | Component | Closest prior work | Key difference |
 |---|---|---|
 | Topic modeling as privacy bottleneck | PRISM "semantic sketch" (arXiv:2511.22788) | PRISM uses LDP + edge SLM refinement; here topic modeling is the bottleneck itself |
-| Synthetic proxy question generation | SAGE for RAG (arXiv:2406.14773) | SAGE generates synthetic documents; this generates synthetic questions |
+| Synthetic proxy question generation | Synthetic Data for RAG (arXiv:2406.14773) | That work generates synthetic documents; this generates synthetic questions |
 | Local LLM synthesizes using S0 answers | HaS "Seek" step (arXiv:2309.03057) | HaS re-maps entity substitutions; this applies S0 reasoning frameworks to S2 specifics |
 | Vocabulary exclusion from topic text | — | **Not found in existing literature. Appears novel.** |
 | Full pipeline | — | **No prior paper combines topic bottleneck + proxy question selection + local synthesis** |

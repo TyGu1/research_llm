@@ -241,7 +241,7 @@ model weights are cryptographically hidden from the cloud provider.
 - **Results:** ~20–30% latency overhead; defeats ICA/BSS and anchor-based attacks on Llama-2 7B.
 - **Link:** https://arxiv.org/abs/2603.05035
 
-### AloePri: Covariant Obfuscation for Industrial LLM Inference
+### Towards Privacy-Preserving LLM Inference via Covariant Obfuscation
 - **Authors:** Yu Lin, Qizhi Zhang et al. (ByteDance + Nanjing University)
 - **Year:** 2026 (arXiv:2603.01499)
 - **Technique:** Jointly transforms data and model parameters (covariant obfuscation) so each
@@ -303,7 +303,7 @@ decrypt. No information leaks even to the cloud provider. Currently too slow for
   filtering, DP preprocessing, synthetic data substitution.
 - **Link:** https://aclanthology.org/2024.findings-acl.267/
 
-### SAGE: Mitigating Privacy Issues in RAG via Pure Synthetic Data
+### Mitigating the Privacy Issues in Retrieval-Augmented Generation (RAG) via Pure Synthetic Data
 - **Year:** 2024 (arXiv:2406.14773)
 - **Technique:** Two-stage synthetic data generation replaces real private documents in the
   retrieval corpus. Attribute-based extraction preserves key context; agent-based refinement

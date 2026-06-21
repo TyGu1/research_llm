@@ -3,7 +3,7 @@ import json
 
 
 class OllamaClient:
-    def __init__(self, base_url: str, model: str, timeout: float = 120.0):
+    def __init__(self, base_url: str, model: str, timeout: float = 300.0):
         self.base_url = base_url.rstrip("/")
         self.model = model
         self.timeout = timeout

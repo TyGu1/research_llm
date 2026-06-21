@@ -10,10 +10,11 @@ class PipelineConfig(BaseSettings):
     embed_model: str = "nomic-embed-text"
 
     # Cloud LLM
-    cloud_provider: str = "mock"        # "openai" | "anthropic" | "mock"
+    cloud_provider: str = "mock"        # "openai" | "azure" | "anthropic" | "mock"
     cloud_model: str = "gpt-4o"
     cloud_api_key: str = ""
-    cloud_base_url: str = ""            # override for Anthropic or local proxies
+    cloud_base_url: str = ""            # override for Anthropic or Azure endpoint
+    cloud_api_version: str = ""         # Azure API version
 
     # Pipeline parameters
     num_proxy_questions: int = 10       # Step 3: generate N proxy questions
@@ -36,7 +37,7 @@ class PipelineConfig(BaseSettings):
 
     # Evaluation
     similarity_model: str = "all-MiniLM-L6-v2"
-    bertscore_model: str = "microsoft/deberta-xlarge-mnli"
+    bertscore_model: str = "roberta-large"
 
     # Output
     results_dir: str = "results"

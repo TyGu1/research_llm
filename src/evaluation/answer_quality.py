@@ -32,7 +32,7 @@ class AnswerQualityEvaluator:
     def __init__(
         self,
         embed_model: SentenceTransformer,
-        bertscore_model: str = "microsoft/deberta-xlarge-mnli",
+        bertscore_model: str = "roberta-large",
         device: str = "cpu",
     ):
         self._embed_model = embed_model
@@ -60,10 +60,12 @@ class AnswerQualityEvaluator:
         gold_answers: list[str],
     ) -> QualityResult:
         # BERTScore (returns tensors; take mean F1)
+        # Truncate to avoid tokenizer overflow with very long texts
+        max_chars = 8000
         if prediction and oracle_answer:
             _, _, f1 = bertscore(
-                [prediction],
-                [oracle_answer],
+                [prediction[:max_chars]],
+                [oracle_answer[:max_chars]],
                 model_type=self._bertscore_model,
                 device=self._device,
                 verbose=False,

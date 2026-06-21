@@ -52,18 +52,20 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--use-vocab-exclusion", action="store_true", help="Enable vocab exclusion step")
     p.add_argument("--question-selector", choices=["embedding", "llm"], default="embedding")
     p.add_argument("--no-recovery", action="store_true", help="Skip sensitive recovery attacks (faster)")
-    p.add_argument("--cloud-provider", default=None, help="Cloud provider: mock | openai | anthropic")
+    p.add_argument("--cloud-provider", default=None, help="Cloud provider: mock | openai | azure | anthropic")
+    p.add_argument("--local-provider", default="ollama", choices=["ollama", "cloud"], help="Local LLM provider: ollama (default) or cloud (reuse cloud client)")
     p.add_argument("--split", choices=["dev", "test", "all"], default=None, help="Dataset split: dev (iterate), test (final), all")
     p.add_argument("--out-dir", default=None, help="Output directory (default: results/)")
     return p.parse_args()
 
 
-def build_runner(cfg: PipelineConfig, local_client: OllamaClient, cloud_client) -> PipelineRunner:
-    selector = (
-        EmbeddingQuestionSelector(ollama_client=local_client, embed_model=cfg.embed_model)
-        if cfg.question_selector == "embedding"
-        else LLMQuestionSelector(client=local_client)
-    )
+def build_runner(cfg: PipelineConfig, local_client, cloud_client, use_ollama_embeddings: bool = True) -> PipelineRunner:
+    if cfg.question_selector == "embedding" and use_ollama_embeddings:
+        # Embedding-based selection requires Ollama's embed endpoint
+        embed_client = OllamaClient(base_url=cfg.ollama_base_url, model=cfg.embed_model)
+        selector = EmbeddingQuestionSelector(ollama_client=embed_client, embed_model=cfg.embed_model)
+    else:
+        selector = LLMQuestionSelector(client=local_client)
     return PipelineRunner(
         topic_extractor=LLMTopicExtractor(client=local_client, max_context_tokens=cfg.local_model_max_tokens, temperature=cfg.temperature),
         text_generator=LLMTextGenerator(client=local_client, min_words=cfg.s0_text_min_words, max_words=cfg.s0_text_max_words, temperature=cfg.temperature),
@@ -112,10 +114,6 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # ── Clients ───────────────────────────────────────────────────────────────
-    local_client = OllamaClient(
-        base_url=cfg.ollama_base_url,
-        model=cfg.local_model,
-    )
     if cfg.cloud_provider == "mock":
         cloud_client = MockOllamaClient()
     else:
@@ -124,6 +122,25 @@ def main():
             model=cfg.cloud_model,
             api_key=cfg.cloud_api_key,
             base_url=cfg.cloud_base_url,
+            api_version=cfg.cloud_api_version,
+        )
+
+    if args.local_provider == "cloud":
+        # Use a separate cloud client with the local model name for pipeline steps
+        local_model_name = cfg.local_model if args.local_model else cfg.cloud_model
+        local_client = CloudClient(
+            provider=cfg.cloud_provider,
+            model=local_model_name,
+            api_key=cfg.cloud_api_key,
+            base_url=cfg.cloud_base_url,
+            api_version=cfg.cloud_api_version,
+        )
+        # Cloud models have large context windows; don't truncate
+        cfg.local_model_max_tokens = 0
+    else:
+        local_client = OllamaClient(
+            base_url=cfg.ollama_base_url,
+            model=cfg.local_model,
         )
 
     # ── Load data ─────────────────────────────────────────────────────────────
@@ -140,7 +157,8 @@ def main():
     print(f"  Loaded {len(samples)} samples ({split_label} split)")
 
     # ── Pipeline ──────────────────────────────────────────────────────────────
-    runner = build_runner(cfg, local_client, cloud_client)
+    use_ollama_emb = args.local_provider == "ollama"
+    runner = build_runner(cfg, local_client, cloud_client, use_ollama_embeddings=use_ollama_emb)
 
     print(f"\nRunning pipeline ({cfg.local_model}, vocab_exclusion={cfg.use_vocab_exclusion})...")
     t_pipeline_start = time.monotonic()
@@ -221,9 +239,15 @@ def main():
     recovery_results = []
     if not args.no_recovery:
         print("Test 1: Sensitive data recovery (4 attack variants)...")
+        # Build ICL examples from first 3 successful results for the ICL attack
+        icl_examples = []
+        for s, r in zip(samples, pipeline_results):
+            if not r.error and r.selected_questions and len(icl_examples) < 3:
+                icl_examples.append((s.context[:200], r.selected_questions))
         recovery_eval = SensitiveRecoveryEvaluator(
             attacker_client=cloud_client,
             embed_model=embed_model,
+            icl_examples=icl_examples,
         )
         for sample, result in zip(samples, pipeline_results):
             if result.error or not result.selected_questions:

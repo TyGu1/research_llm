@@ -57,9 +57,12 @@ class LLMTopicExtractor(TopicExtractor):
         self._temperature = temperature
 
     def extract(self, question: str, context: str) -> TopicDistribution:
-        # Rough truncation: ~4 chars per token
-        max_chars = self._max_context_tokens * 4
-        truncated_ctx = context[:max_chars]
+        # Rough truncation: ~4 chars per token; 0 = no truncation
+        if self._max_context_tokens > 0:
+            max_chars = self._max_context_tokens * 4
+            truncated_ctx = context[:max_chars]
+        else:
+            truncated_ctx = context
 
         prompt = PROMPT_TEMPLATE.format(question=question, context=truncated_ctx)
         response = self._client.generate(prompt, system=SYSTEM_PROMPT, temperature=self._temperature)
