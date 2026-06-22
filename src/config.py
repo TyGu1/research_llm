@@ -5,7 +5,7 @@ from pydantic import Field
 class PipelineConfig(BaseSettings):
     # Local LLM (Ollama)
     ollama_base_url: str = "http://localhost:11434"
-    local_model: str = "phi3"
+    local_model: str = "gpt-4o-mini"
     local_model_heavy: str = "gemma4:26b"
     embed_model: str = "nomic-embed-text"
 
@@ -26,7 +26,7 @@ class PipelineConfig(BaseSettings):
     temperature: float = 0.0           # 0.0 for eval runs, higher for exploration
 
     # Context handling
-    local_model_max_tokens: int = 2000  # context truncation for phi3 (4k ctx)
+    local_model_max_tokens: int = 0     # 0 = no truncation (gpt-4o-mini has 128K ctx)
     heavy_model_max_tokens: int = 0     # 0 = no truncation (gemma4:26b 128k ctx)
 
     # CUAD sampling
