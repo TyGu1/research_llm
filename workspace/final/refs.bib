@@ -1,0 +1,418 @@
+% =============================================================================
+% References for Literature Review — Privacy-Preserving LLM Inference
+% Generated from 02_literature_review.md
+% =============================================================================
+
+% ---- Family 1: Prompt Sanitization and Entity Substitution ----
+
+@misc{chowdhury2025,
+  title     = {Pr{\(\varepsilon\varepsilon\)}mpt: Sanitizing Sensitive Prompts for {LLMs}},
+  author    = {Amrita Roy Chowdhury and David Glukhov and Divyam Anshumaan and Prasad Chalasani and Nicolas Papernot and Somesh Jha and Mihir Bellare},
+  year      = {2025},
+  eprint    = {2504.05147},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2504.05147}
+}
+
+@misc{chen2023,
+  title     = {Hide and Seek ({HaS}): A Lightweight Framework for Prompt Privacy Protection},
+  author    = {Yu Chen and Tingxin Li and Huiming Liu and Yang Yu},
+  year      = {2023},
+  eprint    = {2309.03057},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2309.03057}
+}
+
+@misc{conqa2025,
+  title     = {{CON-QA}: Privacy-Preserving {QA} Using Cloud {LLMs} in Contract Domain},
+  author    = {Ajeet Kumar Singh and Rajsabi Surya and Anurag Tripathi and Santanu Choudhury and Sudhir Bisane},
+  year      = {2025},
+  eprint    = {2509.19925},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2509.19925}
+}
+
+@misc{albanese2026,
+  title     = {Anonymous-by-Construction: An {LLM}-Driven Framework for Privacy-Preserving Text},
+  author    = {Federico Albanese and Pablo Ronco and Nicol{\'a}s D'Ippolito},
+  year      = {2026},
+  eprint    = {2603.17217},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2603.17217}
+}
+
+@misc{agyemang2026,
+  title     = {{LLM-Redactor}: An Empirical Evaluation of Eight Techniques},
+  author    = {Justice Owusu Agyemang and Jerry John Kponyo and Elliot Amponsah and Godfred Manu Addo Boakye and Kwame Opuni-Boachie Obour Agyekum},
+  year      = {2026},
+  eprint    = {2604.12064},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2604.12064}
+}
+
+@inproceedings{yang2025,
+  title     = {Robust Utility-Preserving Text Anonymization ({RUPTA})},
+  author    = {Tianyu Yang and Xiaodan Zhu and Iryna Gurevych},
+  year      = {2025},
+  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (ACL 2025)},
+  eprint    = {2407.11770},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2407.11770}
+}
+
+@misc{zhou2025,
+  title     = {Operationalizing Data Minimization for Privacy-Preserving {LLM} Prompting},
+  author    = {Jijie Zhou and Niloofar Mireshghallah and Tianshi Li},
+  year      = {2025},
+  eprint    = {2510.03662},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2510.03662}
+}
+
+@misc{carpentier2024,
+  title     = {Preempting Text Sanitization Utility in Resource-Constrained Settings},
+  author    = {Robin Carpentier and Benjamin Zi Hao Zhao and Hassan Jameel Asghar and Dali Kaafar},
+  year      = {2024},
+  eprint    = {2411.11521},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2411.11521}
+}
+
+@inproceedings{pseudonymization2023,
+  title     = {Privacy- and Utility-Preserving {NLP} with Pseudonymization},
+  author    = {Oleksandr Yermilov and Vipul Raheja and Artem Chernodub},
+  year      = {2023},
+  booktitle = {Proceedings of the ACL TrustNLP Workshop},
+  eprint    = {2306.05561},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2306.05561}
+}
+
+% ---- Family 2: Differential Privacy for Text ----
+
+@inproceedings{yue2021,
+  title     = {{SanText}: Sanitized Text Generation via Differential Privacy},
+  author    = {Xiang Yue and Minxin Du and Tianhao Wang and Yaliang Li and Huan Sun and Sherman S. M. Chow},
+  year      = {2021},
+  booktitle = {Findings of the Association for Computational Linguistics}
+}
+
+@misc{chen2023custext,
+  title     = {{CusText}: Customized Text Sanitization with Differential Privacy},
+  author    = {Huimin Chen and Fengran Mo and Yanhao Wang and Cen Chen and Jian-Yun Nie and Chengyu Wang and Jamie Cui},
+  year      = {2023},
+  eprint    = {2207.01193},
+  archivePrefix = {arXiv},
+  booktitle = {Findings of the Association for Computational Linguistics (ACL 2023)},
+  url       = {https://arxiv.org/abs/2207.01193}
+}
+
+@misc{tem2021,
+  title     = {{TEM}: High Utility Metric Differential Privacy on Text},
+  author    = {Ricardo Silva Carvalho and Theodore Vasiloudis and Oluwaseyi Feyisetan},
+  year      = {2021},
+  eprint    = {2107.07928},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2107.07928}
+}
+
+@inproceedings{cape2025,
+  title     = {{CAPE}: Context-Aware Prompt Perturbation with Differential Privacy},
+  author    = {Haoqi Wu and Wei Dai and Li Wang and Qiang Yan},
+  year      = {2025},
+  booktitle = {Proceedings of the 42nd International Conference on Machine Learning (ICML 2025)},
+  eprint    = {2505.05922},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2505.05922}
+}
+
+@misc{inferdpt2023,
+  title     = {{InferDPT}: Privacy-Preserving Inference for Closed-Box {LLMs}},
+  author    = {Meng Tong and Kejiang Chen and Jie Zhang and Yuang Qi and Weiming Zhang and Nenghai Yu and Tianwei Zhang and Zhikun Zhang},
+  year      = {2023},
+  eprint    = {2310.12214},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2310.12214}
+}
+
+@inproceedings{dyntext2025,
+  title     = {{DYNTEXT}: Semantic-Aware Dynamic Text Sanitization},
+  author    = {Juhua Zhang and Zhiliang Tian and Minghang Zhu and Yiping Song and Taishu Sheng and Siyi Yang and Qiunan Du and Xinwang Liu and Minlie Huang and Dongsheng Li},
+  year      = {2025},
+  booktitle = {Findings of the Association for Computational Linguistics (ACL 2025)},
+  url       = {https://aclanthology.org/2025.findings-acl.1038/}
+}
+
+@inproceedings{clusant2025,
+  title     = {{CluSanT}: Differentially Private and Semantically Coherent Text Sanitization},
+  author    = {Ahmed Musa Awon and Yun Lu and Shera Potka and Alex Thomo},
+  year      = {2025},
+  booktitle = {Proceedings of the 2025 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL 2025)},
+  url       = {https://aclanthology.org/2025.naacl-long.187/}
+}
+
+@misc{pang2024,
+  title     = {Reconstruction of Differentially Private Text Sanitization via {LLMs}},
+  author    = {Shuchao Pang and Zhigang Lu and Haichen Wang and Peng Fu and Yongbin Zhou and Minhui Xue},
+  year      = {2024},
+  eprint    = {2410.12443},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2410.12443}
+}
+
+% ---- Family 3: Split Inference + Embedding Noise ----
+
+@misc{snd2023,
+  title     = {Split-and-Denoise ({SnD}): Protect {LLM} Inference with Local Differential Privacy},
+  author    = {Peihua Mai and Ran Yan and Zhe Huang and Youjia Yang and Yan Pang},
+  year      = {2023},
+  eprint    = {2310.09130},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2310.09130}
+}
+
+@misc{splitinference2026,
+  title     = {Privacy-Aware Split Inference with Speculative Decoding over {WANs}},
+  author    = {Michael Cunningham},
+  year      = {2026},
+  eprint    = {2602.16760},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2602.16760}
+}
+
+@misc{dpquantization2026,
+  title     = {{DP} Split Inference via Stochastic Quantization and Soft Prompt},
+  author    = {Yujie Gu and Richeng Jin and Xiaoyu Ji and Yier Jin and Wenyuan Xu},
+  year      = {2026},
+  eprint    = {2602.11513},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2602.11513}
+}
+
+@inproceedings{zhan2025,
+  title     = {{PRISM}: Privacy-Aware Routing for Adaptive Cloud-Edge {LLM} Inference},
+  author    = {Junfei Zhan and Haoxun Shen and Zheng Lin and Tengjiao He},
+  year      = {2026},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence (AAAI 2026)},
+  eprint    = {2511.22788},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2511.22788}
+}
+
+@misc{splitprivacyleak2025,
+  title     = {What Does the Server See? Understanding Privacy Leakage from Large Language Models in Split Inference},
+  author    = {Mingyuan Fan and Yu Liu and Fuyi Wang and Cen Chen},
+  year      = {2025},
+  eprint    = {2605.23158},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2605.23158}
+}
+
+% ---- Family 4: Trusted Execution Environments (TEEs) ----
+
+@misc{chrapek2025,
+  title     = {Confidential {LLM} Inference: Performance Across {CPU} and {GPU} {TEEs}},
+  author    = {Marcin Chrapek and Marcin Copik and Etienne Mettaz and Torsten Hoefler},
+  year      = {2025},
+  eprint    = {2509.18886},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2509.18886}
+}
+
+@misc{belikov2026,
+  title     = {Good-Enough {LLM} Obfuscation ({GELO})},
+  author    = {Anatoly Belikov and Ilya Fedotov},
+  year      = {2026},
+  eprint    = {2603.05035},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2603.05035}
+}
+
+@misc{lin2026,
+  title     = {Towards Privacy-Preserving {LLM} Inference via Covariant Obfuscation},
+  author    = {Yu Lin and Qizhi Zhang and Wenqiang Ruan and Daode Zhang and Jue Hong and Ye Wu and Hanning Xia and Yunlong Mao and Sheng Zhong},
+  year      = {2026},
+  eprint    = {2603.01499},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2603.01499}
+}
+
+@misc{privacyrestore2024,
+  title     = {{PrivacyRestore}: Privacy Removal and Restoration},
+  author    = {Ziqian Zeng and Jianwei Wang and Junyao Yang and Zhengdong Lu and Haoran Li and Huiping Zhuang and Cen Chen},
+  year      = {2024},
+  eprint    = {2406.01394},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2406.01394}
+}
+
+% ---- Family 5: Homomorphic Encryption (FHE) and MPC ----
+
+@inproceedings{decastro2025,
+  title     = {{EncryptedLLM}: Privacy-Preserving {LLM} Inference via {GPU}-Accelerated {FHE}},
+  author    = {Leo De Castro and Daniel Escudero and Adya Agrawal and Antigoni Polychroniadou and Manuela Veloso},
+  year      = {2025},
+  booktitle = {Proceedings of the 42nd International Conference on Machine Learning (ICML 2025)},
+  url       = {https://proceedings.mlr.press/v267/de-castro25a.html}
+}
+
+@misc{fhelora2025,
+  title     = {Practical Secure Inference for Fine-tuned {LLMs} with {FHE}},
+  author    = {Zhang Ruoyan and Zheng Zhongxiang and Bao Wankang},
+  year      = {2025},
+  eprint    = {2501.01672},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2501.01672}
+}
+
+@misc{zheng2024,
+  title     = {{PermLLM}: Private Inference within 3 Seconds under {WAN}},
+  author    = {Fei Zheng and Chaochao Chen and Zhongxuan Han and Xiaolin Zheng},
+  year      = {2024},
+  eprint    = {2405.18744},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2405.18744}
+}
+
+@misc{iacrsurvey2026,
+  title     = {Privacy-Preserving {LLM} Inference in Practice},
+  author    = {Davide Andreoletti and Alessandro Rudi and Emanuele Carpanzano and Francesco Lelli and Tiziano Leidi},
+  year      = {2026},
+  howpublished = {IACR ePrint 2026/105},
+  url       = {https://eprint.iacr.org/2026/105}
+}
+
+% ---- Privacy-Preserving RAG ----
+
+@inproceedings{zeng2024,
+  title     = {The Good and the Bad: Exploring Privacy Issues in {RAG}},
+  author    = {Shenglai Zeng and Jiankun Zhang and Pengfei He and Yue Xing and Yiding Liu and Han Xu and Jie Ren and Shuaiqiang Wang and Dawei Yin and Yi Chang and Jiliang Tang},
+  year      = {2024},
+  booktitle = {Findings of the Association for Computational Linguistics (ACL 2024)},
+  eprint    = {2402.16893},
+  archivePrefix = {arXiv},
+  url       = {https://aclanthology.org/2024.findings-acl.267/}
+}
+
+@misc{syntheticrag2024,
+  title     = {Mitigating the Privacy Issues in Retrieval-Augmented Generation ({RAG}) via Pure Synthetic Data},
+  author    = {Shenglai Zeng and Jiankun Zhang and Pengfei He and Jie Ren and Tianqi Zheng and Hanqing Lu and Han Xu and Hui Liu and Yue Xing and Jiliang Tang},
+  year      = {2024},
+  eprint    = {2406.14773},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2406.14773}
+}
+
+@misc{dprag2024,
+  title     = {Privacy-Preserving {RAG} with Differential Privacy},
+  author    = {Tatsuki Koga and Ruihan Wu and Zhiyuan Zhang and Kamalika Chaudhuri},
+  year      = {2024},
+  eprint    = {2412.04697},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2412.04697}
+}
+
+% ---- Federated Learning + LLMs ----
+
+@misc{flsurvey2025,
+  title     = {A Survey on Federated Fine-tuning of Large Language Models},
+  author    = {Yebo Wu and Chunlin Tian and Jingguang Li and He Sun and Kahou Tam and Zhanting Zhou and Haicheng Liao and Jing Xiong and Zhijiang Guo and Li Li and Chengzhong Xu},
+  year      = {2025},
+  eprint    = {2503.12016},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url       = {https://arxiv.org/abs/2503.12016}
+}
+
+@misc{prifft2025,
+  title     = {{PriFFT}: Privacy-preserving Federated Fine-tuning via Hybrid Secret Sharing},
+  author    = {Zhichao You and Xuewen Dong and Ke Cheng and Xutong Mu and Jiaxuan Fu and Shiyang Ma and Qiang Qu and Yulong Shen},
+  year      = {2025},
+  eprint    = {2503.03146},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2503.03146}
+}
+
+@misc{dpfedlora2025,
+  title     = {{DP-FedLoRA}: Privacy-Enhanced Federated Fine-Tuning for On-Device {LLMs}},
+  author    = {Honghui Xu and Shiva Shrestha and Wei Chen and Zhiyuan Li and Zhipeng Cai},
+  year      = {2025},
+  eprint    = {2509.09097},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2509.09097}
+}
+
+% ---- Domain-Specific: Healthcare ----
+
+@article{becker2025,
+  title     = {Keeping Private Patient Data Off the Cloud: Local {LLMs} for Radiology Report Anonymization},
+  author    = {Fiona McIntosh and Sofya Murina and Luoyao Chen and H. Alberto Vargas and Anton S. Becker},
+  year      = {2025},
+  journal   = {European Journal of Radiology Artificial Intelligence},
+  doi       = {10.1016/j.ejrai.2025.100020},
+  url       = {https://www.sciencedirect.com/science/article/pii/S3050577125000180}
+}
+
+@article{llmanonymizer2024,
+  title     = {{LLM-Anonymizer}: Deidentifying Medical Documents with Local {LLMs}},
+  author    = {Isabella C. Wiest and Marie-Elisabeth Le{\ss}mann and Fabian Wolf and Dyke Ferber and Marko Van Treeck and Jiefu Zhu and Matthias P. Ebert and Christoph Benedikt Westphalen and Martin Wermke and Jakob Nikolas Kather},
+  year      = {2024},
+  journal   = {NEJM AI},
+  doi       = {10.1056/AIdbp2400537},
+  url       = {https://ai.nejm.org/doi/full/10.1056/AIdbp2400537}
+}
+
+% ---- Surveys and Meta-Analysis ----
+
+@inproceedings{anonymizationsurvey2025,
+  title     = {A Survey on Current Trends and Recent Advances in Text Anonymization},
+  author    = {Tobias Deu{\ss}er and Lorenz Sparrenberg and Armin Berger and Max Hahnb{\"u}ck and Christian Bauckhage and Rafet Sifa},
+  year      = {2025},
+  booktitle = {Proceedings of the IEEE International Conference on Data Science and Advanced Analytics (DSAA 2025)},
+  eprint    = {2508.21587},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2508.21587}
+}
+
+@inproceedings{metricssurvey2025,
+  title     = {How Do We Measure Privacy in Text? A Survey of Text Anonymization Metrics},
+  author    = {Yaxuan Ren and Krithika Ramesh and Yaxing Yao and Anjalie Field},
+  year      = {2025},
+  booktitle = {Findings of the Association for Computational Linguistics (ACL-IJCNLP 2025)},
+  eprint    = {2512.01109},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2512.01109}
+}
+
+@misc{zhao2024,
+  title     = {Privacy-Preserving Large Language Models: Mechanisms, Applications, and Future Directions},
+  author    = {Guoshenghui Zhao and Eric Song},
+  year      = {2024},
+  eprint    = {2412.06113},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url       = {https://arxiv.org/abs/2412.06113}
+}
