@@ -5,11 +5,16 @@ from pydantic import Field
 class PipelineConfig(BaseSettings):
     # Local LLM (Ollama)
     ollama_base_url: str = "http://localhost:11434"
-    local_model: str = "gpt-4o-mini"
+    local_model: str = "gpt-oss-120b"  # Azure AI OSS model; switch to gpt-oss-20b when available
     local_model_heavy: str = "gemma4:26b"
     embed_model: str = "nomic-embed-text"
 
-    # Cloud LLM
+    # Local LLM (cloud-as-local for steps 1-4, 6)
+    local_provider: str = "openai"      # "openai" | "azure" | "ollama"
+    local_api_key: str = ""
+    local_base_url: str = ""            # OpenAI-compatible endpoint for local model
+
+    # Cloud LLM (step 5: cloud answering)
     cloud_provider: str = "mock"        # "openai" | "azure" | "anthropic" | "mock"
     cloud_model: str = "gpt-4o"
     cloud_api_key: str = ""

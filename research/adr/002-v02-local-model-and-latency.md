@@ -28,21 +28,22 @@ For v0.2, we need to:
 
 ## Decision
 
-### Local Model: Replace Phi-3 with GPT-4o-mini
+### Local Model: Replace Phi-3 with gpt-oss-120b (Azure AI OSS)
 
-**GPT-4o-mini** is the new default local model for v0.2:
+**gpt-oss-120b** is the new default local model for v0.2, via Azure AI's OpenAI-compatible endpoint:
 
-| Property | Phi-3 (v0.1) | GPT-4o-mini (v0.2) |
-|---|---|---|
-| Context window | 4K | 128K |
-| Latency per call | ~2–4s (CPU) | ~0.3–0.5s |
-| Cost | Free (local) | $0.15/1M input tokens |
-| Quality | Good | Better instruction following |
-| Truncation needed | Yes (2000 tok) | No |
+| Property | Phi-3 (v0.1) | gpt-oss-120b (v0.2) | gpt-oss-20b (v0.3 target) |
+|---|---|---|---|
+| Context window | 4K | 128K | 128K |
+| Latency per call | ~2–4s (CPU) | ~1.4s | ~500ms (est.) |
+| Cost | Free (local) | Azure AI pricing | Azure AI pricing |
+| Truncation needed | Yes (2000 tok) | No | No |
 
-**Why GPT-4o-mini:** It's fast (~0.3s per call), cheap ($0.15/1M input), has 128K context (no truncation), and produces higher quality topic extractions and synthesis than Phi-3. The privacy architecture remains intact — GPT-4o-mini runs the local steps (1–4, 6) and never sees the cloud's responses combined with the sensitive context in a single call.
+**Why gpt-oss-120b:** Accessed via `https://andre-mc3rpw8k-eastus2.services.ai.azure.com/openai/v1/` using standard OpenAI SDK. At 1.4s per merged step 2+3 call, it's 5–7x faster than GPT-4o (8s) or Phi-3 on CPU (9s). Combined with embedding-based topic extraction (25ms) and batched question selection (25ms), total privacy tax drops to ~1.5s.
 
-**Note on threat model:** Using a cloud model for "local" steps means the topic extraction call does see the sensitive query. In a production deployment, this would be replaced with an on-premise model. For research benchmarking, GPT-4o-mini gives us the best latency and quality baseline to evaluate the pipeline's privacy properties independent of local model limitations.
+**Roadmap:** Switch to **gpt-oss-20b** when deployed — smaller model should cut latency to ~500ms, bringing total privacy tax under 1s.
+
+**Note on threat model:** Using a cloud model for "local" steps means the topic extraction step sees the sensitive query via a cloud API. In production, this would be replaced with an on-premise model. For research benchmarking, this gives us the best latency and quality baseline independent of local model limitations.
 
 ### Latency targets for v0.2
 
@@ -54,7 +55,7 @@ For v0.2, we need to:
 
 ### Specific optimizations
 
-1. **Remove context truncation.** Qwen2.5-3B has 32K context — set `local_model_max_tokens: 0`. No more information loss from cutting CUAD contracts at 2000 tokens.
+1. **Remove context truncation.** gpt-oss-120b has 128K context — set `local_model_max_tokens: 0`. No more information loss from cutting CUAD contracts at 2000 tokens.
 
 2. **Batch steps 1+2.** Topic extraction and S0 text generation can be a single LLM call ("Extract topics AND generate S0 text"). Saves one round-trip (~2.5s).
 
@@ -70,8 +71,10 @@ local_model: str = "phi3"
 local_model_max_tokens: int = 2000  # context truncation for phi3 (4k ctx)
 
 # v0.2
-local_model: str = "gpt-4o-mini"
+local_model: str = "gpt-oss-120b"  # switch to gpt-oss-20b when available
 local_model_max_tokens: int = 0     # no truncation (128K context)
+local_provider: str = "openai"
+local_base_url: str = "https://andre-mc3rpw8k-eastus2.services.ai.azure.com/openai/v1/"
 ```
 
 ## What changes in the paper

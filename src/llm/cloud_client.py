@@ -12,7 +12,12 @@ class CloudClient:
         timeout = 120.0  # seconds per request
 
         if provider == "openai":
-            self._client = OpenAI(api_key=api_key, timeout=timeout)
+            # Azure AI OSS models need api-key header instead of Bearer token
+            extra_headers = {"api-key": api_key} if "azure" in (base_url or "") else {}
+            self._client = OpenAI(
+                api_key=api_key, base_url=base_url or None,
+                timeout=timeout, default_headers=extra_headers,
+            )
         elif provider == "azure":
             self._client = AzureOpenAI(
                 api_key=api_key,

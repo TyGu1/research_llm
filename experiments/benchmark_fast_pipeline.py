@@ -34,12 +34,13 @@ from src.llm.cloud_client import CloudClient
 # Each entry: (name, provider, model, endpoint_override)
 # All use Azure OpenAI unless noted otherwise
 LLM_CANDIDATES = [
-    # (name, provider, model, endpoint_override)
-    # Only include models confirmed deployed on the Azure endpoint
-    ("gpt-4o", "azure", "gpt-4o", None),
-    # To add more candidates, deploy them on Azure or use a different provider:
-    # ("gpt-4o-mini", "azure", "gpt-4o-mini", None),
-    # ("gpt-35-turbo", "azure", "gpt-35-turbo", None),
+    # (name, provider, model, endpoint_override, api_key_override)
+    # gpt-oss-120b via Azure AI OSS (OpenAI-compatible endpoint) — fast, ~1.4s/call
+    ("gpt-oss-120b", "openai", "gpt-oss-120b",
+     "https://andre-mc3rpw8k-eastus2.services.ai.azure.com/openai/v1/", None),
+    # gpt-4o via Azure OpenAI — baseline quality ceiling
+    ("gpt-4o", "azure", "gpt-4o", None, None),
+    # TODO: add gpt-oss-20b when deployed — expected ~500ms/call
 ]
 
 
@@ -224,7 +225,7 @@ def main():
 
     all_results = {}
 
-    for name, provider, model, endpoint in LLM_CANDIDATES:
+    for name, provider, model, endpoint, api_key_ovr in LLM_CANDIDATES:
         print(f"\n{'='*60}")
         print(f"CANDIDATE: {name} ({provider}/{model})")
         print(f"{'='*60}")
@@ -233,9 +234,9 @@ def main():
         local_client = CloudClient(
             provider=provider,
             model=model,
-            api_key=cfg.cloud_api_key,
+            api_key=api_key_ovr or cfg.cloud_api_key,
             base_url=endpoint or cfg.cloud_base_url,
-            api_version=cfg.cloud_api_version,
+            api_version=cfg.cloud_api_version if provider == "azure" else "",
         )
 
         # Build fast pipeline
