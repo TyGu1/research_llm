@@ -1,4 +1,4 @@
-"""Tests for CloudClient Azure AI OSS auth header logic."""
+"""Tests for CloudClient: auth headers, async support, warmup, max_tokens."""
 from unittest.mock import patch, MagicMock
 
 
@@ -37,3 +37,35 @@ class TestCloudClientAzureOSSAuth:
             CloudClient(provider="openai", model="gpt-4o", api_key="test-key")
             call_kwargs = mock_openai.call_args[1]
             assert call_kwargs["default_headers"] == {}
+
+
+class TestCloudClientAsyncAndWarmup:
+    @patch("src.llm.cloud_client.AsyncOpenAI")
+    @patch("src.llm.cloud_client.OpenAI")
+    def test_openai_provider_creates_async_client(self, mock_openai, mock_async):
+        from src.llm.cloud_client import CloudClient
+        c = CloudClient(provider="openai", model="test", api_key="k")
+        assert c._async_client is not None
+        mock_async.assert_called_once()
+
+    @patch("src.llm.cloud_client.AzureOpenAI")
+    def test_azure_provider_no_async_client(self, mock_azure):
+        from src.llm.cloud_client import CloudClient
+        c = CloudClient(provider="azure", model="test", api_key="k", base_url="https://x.com")
+        assert c._async_client is None
+
+    def test_mock_provider_no_async(self):
+        from src.llm.cloud_client import CloudClient
+        c = CloudClient(provider="mock", model="test", api_key="k")
+        assert c._async_client is None
+
+    def test_generate_passes_max_tokens(self):
+        from src.llm.cloud_client import CloudClient
+        c = CloudClient(provider="mock", model="test", api_key="k")
+        result = c.generate("hello", max_tokens=100)
+        assert "[mock" in result
+
+    def test_warmup_no_crash_on_mock(self):
+        from src.llm.cloud_client import CloudClient
+        c = CloudClient(provider="mock", model="test", api_key="k")
+        c.warmup()  # should not raise

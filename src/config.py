@@ -22,7 +22,7 @@ class PipelineConfig(BaseSettings):
     cloud_api_version: str = ""         # Azure API version
 
     # Pipeline parameters
-    num_proxy_questions: int = 10       # Step 3: generate N proxy questions
+    num_proxy_questions: int = 5        # Step 3: generate N proxy questions (5 for speed, 10 for quality)
     num_selected_questions: int = 3     # Step 4: select K closest
     s0_text_min_words: int = 200
     s0_text_max_words: int = 300

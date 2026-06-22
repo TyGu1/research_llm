@@ -150,13 +150,14 @@ QUESTIONS:
         assert len(text) > 0
         assert len(questions) == 2
 
-    def test_caching(self):
+    def test_generates_text_and_questions(self):
         from unittest.mock import MagicMock
         from src.pipeline.merged_s0_questions import MergedS0Generator
 
         mock_client = MagicMock()
+        mock_client._async_client = None  # force merged mode
         mock_client.generate.return_value = """TEXT:
-Test text.
+Test text about legal topics.
 
 QUESTIONS:
 1. Question one here?
@@ -165,21 +166,36 @@ QUESTIONS:
         gen = MergedS0Generator(client=mock_client, n_questions=5)
         topics = TopicDistribution(topics={"test": 1.0})
 
-        # First call triggers LLM
-        gen.generate_text(topics)
+        text = gen.generate_text(topics)
+        assert "Test text" in text
         assert mock_client.generate.call_count == 1
 
-        # Second call uses cache
-        gen.generate_questions("", topics, n=5)
-        assert mock_client.generate.call_count == 1  # no additional call
+    def test_retry_on_empty_response(self):
+        from unittest.mock import MagicMock
+        from src.pipeline.merged_s0_questions import MergedS0Generator
+
+        mock_client = MagicMock()
+        mock_client._async_client = None
+        # First call returns empty, second returns valid
+        mock_client.generate.side_effect = [
+            "",
+            "TEXT:\nRetried text.\n\nQUESTIONS:\n1. Retried question?",
+        ]
+
+        gen = MergedS0Generator(client=mock_client, n_questions=5)
+        topics = TopicDistribution(topics={"test": 1.0})
+        text = gen.generate_text(topics)
+        assert "Retried" in text
+        assert mock_client.generate.call_count == 2
 
     def test_adapters(self):
         from unittest.mock import MagicMock
         from src.pipeline.merged_s0_questions import (
-            MergedS0Generator, MergedTextGeneratorAdapter, MergedQuestionGeneratorAdapter,
+            ParallelS0Generator, MergedTextGeneratorAdapter, MergedQuestionGeneratorAdapter,
         )
 
         mock_client = MagicMock()
+        mock_client._async_client = None  # force merged mode
         mock_client.generate.return_value = """TEXT:
 Adapter test text.
 
@@ -187,7 +203,7 @@ QUESTIONS:
 1. Adapter question one?
 2. Adapter question two?"""
 
-        merged = MergedS0Generator(client=mock_client, n_questions=5)
+        merged = ParallelS0Generator(client=mock_client, n_questions=5)
         text_adapter = MergedTextGeneratorAdapter(merged)
         q_adapter = MergedQuestionGeneratorAdapter(merged)
 
