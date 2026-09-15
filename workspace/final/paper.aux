@@ -1,0 +1,199 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{chen2023,albanese2026,agyemang2026,yang2025}
+\citation{yue2021,chen2023custext,tem2021,cape2025,inferdpt2023,dyntext2025,clusant2025}
+\citation{pang2024}
+\@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Contributions.}{1}{section*.4}\protected@file@percent }
+\citation{chen2023}
+\citation{conqa2025}
+\citation{albanese2026}
+\citation{yang2025}
+\citation{agyemang2026}
+\citation{yue2021}
+\citation{chen2023custext}
+\citation{tem2021}
+\citation{cape2025}
+\citation{inferdpt2023}
+\citation{dyntext2025}
+\citation{clusant2025}
+\citation{chowdhury2025}
+\citation{pang2024}
+\citation{snd2023}
+\citation{zhan2025}
+\citation{chrapek2025}
+\citation{decastro2025}
+\citation{zheng2024}
+\citation{zhou2025}
+\citation{carpentier2024}
+\citation{zeng2024,syntheticrag2024,dprag2024}
+\citation{metricssurvey2025}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Prompt Sanitization and Entity Substitution}{2}{subsection.2.1}\protected@file@percent }
+\newlabel{sec:rw-entity}{{2.1}{2}{Prompt Sanitization and Entity Substitution}{subsection.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Differential Privacy for Text}{2}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:rw-dp}{{2.2}{2}{Differential Privacy for Text}{subsection.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Hybrid Cloud-Edge and Split Inference}{2}{subsection.2.3}\protected@file@percent }
+\newlabel{sec:rw-split}{{2.3}{2}{Hybrid Cloud-Edge and Split Inference}{subsection.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Data Minimization and Privacy Metrics}{2}{subsection.2.4}\protected@file@percent }
+\newlabel{sec:rw-minimization}{{2.4}{2}{Data Minimization and Privacy Metrics}{subsection.2.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Threat Model and Problem Formulation}{2}{section.3}\protected@file@percent }
+\newlabel{sec:threat}{{3}{2}{Threat Model and Problem Formulation}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Sensitivity Classification}{2}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:sensitivity}{{3.1}{2}{Sensitivity Classification}{subsection.3.1}{}}
+\citation{pang2024}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Adversary Model}{3}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:adversary}{{3.2}{3}{Adversary Model}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Adversary.}{3}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{What is protected.}{3}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{What is not protected.}{3}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Methodology}{3}{section.4}\protected@file@percent }
+\newlabel{sec:method}{{4}{3}{Methodology}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Pipeline Overview}{3}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:pipeline-overview}{{4.1}{3}{Pipeline Overview}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Topic Extraction and S0 Text Generation}{3}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:topic-extraction}{{4.2}{3}{Topic Extraction and S0 Text Generation}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Step 1: Topic Extraction.}{3}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Step 2: S0 Text Generation.}{3}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Vocabulary Exclusion Hardening}{3}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:vocab-exclusion}{{4.3}{3}{Vocabulary Exclusion Hardening}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Step 2.5: Vocabulary Exclusion (Optional).}{3}{section*.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Absence Fingerprint Vulnerability.}{3}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Proxy Question Generation and Selection}{3}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:proxy-questions}{{4.4}{3}{Proxy Question Generation and Selection}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Step 3: Proxy Question Generation.}{3}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Step 4: Question Selection.}{3}{section*.14}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the topic-bottleneck query reformulation pipeline. The six-step process extracts a topic distribution from a sensitive (S2) question, generates generic S0 text, optionally applies vocabulary exclusion, generates and selects proxy questions, sends only S0 content to the cloud LLM, and synthesizes the final answer locally. Dashed red arrows indicate paths where the S2 question is used only locally. The trust boundary separates the local environment (green) from the cloud (blue).}}{4}{figure.caption.8}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:pipeline}{{1}{4}{Overview of the topic-bottleneck query reformulation pipeline. The six-step process extracts a topic distribution from a sensitive (S2) question, generates generic S0 text, optionally applies vocabulary exclusion, generates and selects proxy questions, sends only S0 content to the cloud LLM, and synthesizes the final answer locally. Dashed red arrows indicate paths where the S2 question is used only locally. The trust boundary separates the local environment (green) from the cloud (blue)}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Cloud Answering and Local Synthesis}{4}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:synthesis}{{4.5}{4}{Cloud Answering and Local Synthesis}{subsection.4.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Step 5: Cloud Answering.}{4}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Step 6: Local Synthesis.}{4}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Privacy Analysis}{4}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:privacy-analysis}{{4.6}{4}{Privacy Analysis}{subsection.4.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Anonymity set.}{4}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Information leakage bound.}{4}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations of this analysis.}{4}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Setup}{4}{section.5}\protected@file@percent }
+\newlabel{sec:setup}{{5}{4}{Experimental Setup}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dataset and Task Types}{4}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:dataset}{{5.1}{4}{Dataset and Task Types}{subsection.5.1}{}}
+\citation{pang2024}
+\citation{pang2024}
+\citation{pang2024}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Models and Configuration}{5}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:models}{{5.2}{5}{Models and Configuration}{subsection.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Metrics and Baselines}{5}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:metrics}{{5.3}{5}{Metrics and Baselines}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Privacy metrics.}{5}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Quality metrics.}{5}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Attack variants.}{5}{section*.22}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Sensitive data recovery from transmitted S0 proxy questions (N=48).}}{5}{table.caption.25}\protected@file@percent }
+\newlabel{tab:recovery}{{1}{5}{Sensitive data recovery from transmitted S0 proxy questions (N=48)}{table.caption.25}{}}
+\@writefile{toc}{\contentsline {paragraph}{Baselines.}{5}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{5}{section.6}\protected@file@percent }
+\newlabel{sec:results}{{6}{5}{Results}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Privacy: Specific Value Recovery}{5}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:privacy-results}{{6.1}{5}{Privacy: Specific Value Recovery}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Headline result.}{5}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vocabulary exclusion ablation.}{5}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Quality: Answer Preservation}{5}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:quality-results}{{6.2}{5}{Quality: Answer Preservation}{subsection.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Specific value recovery rates for our topic-bottleneck pipeline compared with DP-sanitized text attacked by various LLMs (Pang et al., 2024). Our approach achieves 2.3\% recovery (0\% with vocabulary exclusion), compared to 72--94\% for differential privacy methods. The dashed red line indicates the 10\% acceptable recovery threshold.}}{6}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:recovery}{{2}{6}{Specific value recovery rates for our topic-bottleneck pipeline compared with DP-sanitized text attacked by various LLMs (Pang et al., 2024). Our approach achieves 2.3\% recovery (0\% with vocabulary exclusion), compared to 72--94\% for differential privacy methods. The dashed red line indicates the 10\% acceptable recovery threshold}{figure.caption.26}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Answer quality comparison (N=48). BERTScore F1 and semantic similarity are measured against the oracle (cloud LLM given the full S2 question).}}{6}{table.caption.29}\protected@file@percent }
+\newlabel{tab:quality}{{2}{6}{Answer quality comparison (N=48). BERTScore F1 and semantic similarity are measured against the oracle (cloud LLM given the full S2 question)}{table.caption.29}{}}
+\@writefile{toc}{\contentsline {paragraph}{Vocabulary exclusion quality cost.}{6}{section*.30}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Quality-privacy trade-off across methods. The x-axis shows specific value recovery rate (lower is better for privacy) and the y-axis shows BERTScore F1 (higher is better for quality). Our pipeline and the entity substitution baseline are measured on CUAD; DP method recovery rates are from Pang et al.\nonbreakingspace \citep  {pang2024} with quality values estimated from the literature (not measured on CUAD). The green-shaded area marks the target zone below 10\% recovery.}}{6}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:scatter}{{3}{6}{Quality-privacy trade-off across methods. The x-axis shows specific value recovery rate (lower is better for privacy) and the y-axis shows BERTScore F1 (higher is better for quality). Our pipeline and the entity substitution baseline are measured on CUAD; DP method recovery rates are from Pang et al.~\cite {pang2024} with quality values estimated from the literature (not measured on CUAD). The green-shaded area marks the target zone below 10\% recovery}{figure.caption.28}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performance by task type (n=12 per type, baseline configuration without vocabulary exclusion). 95\% confidence intervals in brackets.}}{6}{table.caption.31}\protected@file@percent }
+\newlabel{tab:task}{{3}{6}{Performance by task type (n=12 per type, baseline configuration without vocabulary exclusion). 95\% confidence intervals in brackets}{table.caption.31}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Task-Type Analysis}{6}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:task-results}{{6.3}{6}{Task-Type Analysis}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Operating envelope confirmed.}{6}{section*.33}\protected@file@percent }
+\citation{pang2024}
+\citation{pang2024}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Performance metrics across four task types (n=12 each). Framework/reasoning, compliance, and procedural tasks achieve zero specific value recovery with strong BERTScore F1 (0.886--0.890). Entity-specific tasks show the expected quality-privacy trade-off with higher gold span overlap (0.65) and non-zero recovery (9.2\%). The dashed boundary highlights the operating envelope limit.}}{7}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:heatmap}{{4}{7}{Performance metrics across four task types (n=12 each). Framework/reasoning, compliance, and procedural tasks achieve zero specific value recovery with strong BERTScore F1 (0.886--0.890). Entity-specific tasks show the expected quality-privacy trade-off with higher gold span overlap (0.65) and non-zero recovery (9.2\%). The dashed boundary highlights the operating envelope limit}{figure.caption.32}{}}
+\@writefile{toc}{\contentsline {paragraph}{Entity-specific tasks.}{7}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recovery case analysis.}{7}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{BERTScore anomaly.}{7}{section*.36}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison of privacy-preserving LLM inference approaches. Recovery rates for DP methods are from Pang et al.\nonbreakingspace \citep  {pang2024}; TEE and FHE overhead from the respective papers.}}{7}{table.caption.38}\protected@file@percent }
+\newlabel{tab:comparison}{{4}{7}{Comparison of privacy-preserving LLM inference approaches. Recovery rates for DP methods are from Pang et al.~\cite {pang2024}; TEE and FHE overhead from the respective papers}{table.caption.38}{}}
+\@writefile{toc}{\contentsline {paragraph}{Bottleneck fidelity.}{7}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{7}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{7}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Why the Information Bottleneck Works}{7}{subsection.7.1}\protected@file@percent }
+\newlabel{sec:why-works}{{7.1}{7}{Why the Information Bottleneck Works}{subsection.7.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Operating Envelope and Deployment Guidance}{7}{subsection.7.2}\protected@file@percent }
+\newlabel{sec:envelope}{{7.2}{7}{Operating Envelope and Deployment Guidance}{subsection.7.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Limitations}{8}{subsection.7.3}\protected@file@percent }
+\newlabel{sec:limitations}{{7.3}{8}{Limitations}{subsection.7.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Single dataset.}{8}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Small sample size.}{8}{section*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Absence fingerprint attack not evaluated.}{8}{section*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Untested attack variants.}{8}{section*.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Local model capacity.}{8}{section*.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Latency.}{8}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ethical considerations.}{8}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{8}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{8}{8}{Conclusion}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Summary}{8}{subsection.8.1}\protected@file@percent }
+\newlabel{sec:summary}{{8.1}{8}{Summary}{subsection.8.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Future Work}{8}{subsection.8.2}\protected@file@percent }
+\newlabel{sec:future}{{8.2}{8}{Future Work}{subsection.8.2}{}}
+\bibstyle{ACM-Reference-Format}
+\bibdata{refs}
+\bibcite{agyemang2026}{{1}{2026}{{Agyemang et~al\mbox  {.}}}{{}}}
+\bibcite{albanese2026}{{2}{2026}{{Albanese et~al\mbox  {.}}}{{}}}
+\bibcite{carpentier2024}{{3}{2024}{{Carpentier et~al\mbox  {.}}}{{}}}
+\bibcite{tem2021}{{4}{2021}{{Carvalho et~al\mbox  {.}}}{{}}}
+\bibcite{decastro2025}{{5}{2025}{{Castro et~al\mbox  {.}}}{{}}}
+\bibcite{chen2023custext}{{6}{2023a}{{Chen et~al\mbox  {.}}}{{}}}
+\bibcite{dyntext2025}{{7}{2025}{{Chen et~al\mbox  {.}}}{{}}}
+\bibcite{chen2023}{{8}{2023b}{{Chen et~al\mbox  {.}}}{{}}}
+\bibcite{chowdhury2025}{{9}{2025}{{Chowdhury et~al\mbox  {.}}}{{}}}
+\bibcite{chrapek2025}{{10}{2025}{{Chrapek et~al\mbox  {.}}}{{}}}
+\bibcite{conqa2025}{{11}{2025}{{CON-QA Authors}}{{}}}
+\bibcite{dprag2024}{{12}{2024}{{Huang et~al\mbox  {.}}}{{}}}
+\bibcite{metricssurvey2025}{{13}{2025}{{Kolesnikova et~al\mbox  {.}}}{{}}}
+\bibcite{snd2023}{{14}{2023}{{Mai et~al\mbox  {.}}}{{}}}
+\bibcite{pang2024}{{15}{2024}{{Pang et~al\mbox  {.}}}{{}}}
+\bibcite{clusant2025}{{16}{2025}{{Park et~al\mbox  {.}}}{{}}}
+\bibcite{cape2025}{{17}{2025}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{inferdpt2023}{{18}{2023}{{Wu et~al\mbox  {.}}}{{}}}
+\bibcite{yang2025}{{19}{2025}{{Yang et~al\mbox  {.}}}{{}}}
+\bibcite{yue2021}{{20}{2021}{{Yue et~al\mbox  {.}}}{{}}}
+\bibcite{zeng2024}{{21}{2024a}{{Zeng et~al\mbox  {.}}}{{}}}
+\bibcite{syntheticrag2024}{{22}{2024b}{{Zeng et~al\mbox  {.}}}{{}}}
+\bibcite{zhan2025}{{23}{2026}{{Zhan et~al\mbox  {.}}}{{}}}
+\bibcite{zheng2024}{{24}{2024}{{Zheng et~al\mbox  {.}}}{{}}}
+\bibcite{zhou2025}{{25}{2025}{{Zhou et~al\mbox  {.}}}{{}}}
+\newlabel{tocindent-1}{0pt}
+\newlabel{tocindent0}{0pt}
+\newlabel{tocindent1}{6.30899pt}
+\newlabel{tocindent2}{10.34999pt}
+\newlabel{tocindent3}{0pt}
+\@writefile{toc}{\contentsline {section}{References}{9}{section*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Bottleneck Fidelity Metrics}{9}{appendix.A}\protected@file@percent }
+\newlabel{app:fidelity}{{A}{9}{Bottleneck Fidelity Metrics}{appendix.A}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Bottleneck fidelity metrics (N=48).}}{9}{table.caption.48}\protected@file@percent }
+\newlabel{tab:fidelity}{{5}{9}{Bottleneck fidelity metrics (N=48)}{table.caption.48}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Attack Variant Details}{9}{appendix.B}\protected@file@percent }
+\newlabel{app:attacks}{{B}{9}{Attack Variant Details}{appendix.B}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Detailed attack variant results (N=48).}}{9}{table.caption.49}\protected@file@percent }
+\newlabel{tab:attack-detail}{{6}{9}{Detailed attack variant results (N=48)}{table.caption.49}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Pipeline Timing}{9}{appendix.C}\protected@file@percent }
+\newlabel{app:timing}{{C}{9}{Pipeline Timing}{appendix.C}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Task-Type Confidence Intervals}{9}{appendix.D}\protected@file@percent }
+\newlabel{app:ci}{{D}{9}{Task-Type Confidence Intervals}{appendix.D}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Full results by task type with 95\% confidence intervals (n=12 per type).}}{10}{table.caption.50}\protected@file@percent }
+\newlabel{tab:ci}{{7}{10}{Full results by task type with 95\% confidence intervals (n=12 per type)}{table.caption.50}{}}
+\newlabel{TotPages}{{10}{10}{}{page.10}{}}
+\gdef \@abspage@last{10}

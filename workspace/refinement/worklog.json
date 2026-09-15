@@ -1,0 +1,30 @@
+{
+  "iterations": [
+    {
+      "iteration": 0,
+      "type": "initial_draft",
+      "timestamp": "2026-06-21T20:45:00Z",
+      "source": "workspace/drafts/paper.tex",
+      "notes": "Initial draft generated from outline.json and experimental_log.md"
+    },
+    {
+      "iteration": 1,
+      "type": "refinement",
+      "timestamp": "2026-06-21T20:50:00Z",
+      "weaknesses_addressed": [
+        "Overly strong 'provably non-sensitive' claim in abstract replaced with 'contain no sensitive specifics by construction'",
+        "Added caveat about cross-dataset comparison with Pang et al. DP recovery rates",
+        "Added note about estimated DP quality values in scatter plot caption",
+        "Improved local-only baseline BERTScore interpretation to distinguish surface similarity from answer utility",
+        "Added comparison summary table (Table 5) positioning approach against competing paradigms",
+        "Added situation score column to recovery table for completeness",
+        "Added ethical considerations paragraph per PETS reviewer expectations"
+      ],
+      "decision": "ACCEPT",
+      "halt_reason": "iter_cap_1_of_3_but_no_further_issues_identified"
+    }
+  ],
+  "final_snapshot": "workspace/final/paper.tex",
+  "total_iterations": 1,
+  "halt_reason": "Refinement complete - key weaknesses addressed, no further actionable issues identified"
+}

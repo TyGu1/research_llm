@@ -1,0 +1,407 @@
+{
+  "plotting_plan": [
+    {
+      "figure_id": "fig_pipeline_architecture",
+      "title": "Topic-Bottleneck Query Reformulation Pipeline",
+      "plot_type": "diagram",
+      "data_source": "idea.md",
+      "objective": "Visual summary (Block Diagram) of the six-step pipeline: topic extraction, S0 text generation, optional vocabulary exclusion, proxy question generation, question selection, cloud answering, and local synthesis. Show data flow boundaries (local vs. cloud) and sensitivity levels at each stage.",
+      "aspect_ratio": "16:9"
+    },
+    {
+      "figure_id": "fig_recovery_rate_comparison",
+      "title": "Specific Value Recovery Rate: Topic Bottleneck vs. DP Sanitization",
+      "plot_type": "plot",
+      "data_source": "both",
+      "objective": "Visual summary (Bar Chart) comparing specific value recovery rates: our pipeline (2.3%) vs. DP-sanitized text attacked by LLaMA-2 70B (72.18%), LLaMA-3 70B (82.39%), Gemma-2 (75.35%), GPT-4o (91.2%), Claude-3.5 Sonnet (94.01%). Include a dashed red line at 10% threshold.",
+      "aspect_ratio": "4:3"
+    },
+    {
+      "figure_id": "fig_task_type_heatmap",
+      "title": "Performance by Task Type",
+      "plot_type": "plot",
+      "data_source": "experimental_log.md",
+      "objective": "Visual summary (Heatmap) showing BERTScore F1, semantic similarity, gold span overlap, and specific value recovery across four task types (framework/reasoning, compliance/regulatory, procedural, entity-specific). Highlights the operating envelope boundary.",
+      "aspect_ratio": "4:3"
+    },
+    {
+      "figure_id": "fig_quality_privacy_scatter",
+      "title": "Quality vs. Privacy Trade-off Across Methods",
+      "plot_type": "plot",
+      "data_source": "both",
+      "objective": "Visual summary (Scatter Plot) with x-axis = specific value recovery rate (privacy, lower is better) and y-axis = BERTScore F1 (quality, higher is better). Plot points for: our pipeline (2.3%, 0.893), our pipeline + vocab exclusion (0%, 0.823), entity substitution baseline (estimated from literature), DP methods (91-94% recovery, varying quality). Show Pareto frontier.",
+      "aspect_ratio": "1:1"
+    }
+  ],
+  "intro_related_work_plan": {
+    "introduction_strategy": {
+      "hook_hypothesis": "State-of-the-art LLMs are cloud-only, creating a fundamental tension for enterprises with classified data: LLM value scales with prompt specificity, but privacy requires removing specificity before transmission.",
+      "problem_gap_hypothesis": "Existing privacy-preserving approaches (entity substitution, differential privacy) are fundamentally reversible -- modern LLMs recover 72-94% of original sensitive content from DP-sanitized text. No existing method provides an irreversible information bottleneck that structurally prevents reconstruction.",
+      "search_directions": [
+        "Find foundational papers on differential privacy for text (SanText, CusText, TEM) and their empirical privacy guarantees",
+        "Search for LLM-based reconstruction attacks on DP-sanitized text, especially arXiv:2410.12443 demonstrating 91-94% recovery rates",
+        "Identify enterprise privacy-preserving LLM inference frameworks (Presidio, PRISM, CON-QA, HaS) and their limitations",
+        "Search for information bottleneck theory applied to privacy, including topic modeling as a compression mechanism",
+        "Find papers on privacy-preserving QA in legal/contract domains (CUAD dataset, CON-QA) as evaluation baselines",
+        "Identify surveys on text anonymization metrics and their alignment with GDPR/HIPAA requirements"
+      ]
+    },
+    "related_work_strategy": {
+      "overview": "Investigate three specific paradigms that represent the landscape of privacy-preserving LLM inference, establishing that each has a fundamental reversibility limitation that the topic-bottleneck approach resolves.",
+      "subsections": [
+        {
+          "subsection_title": "2.1 Prompt Sanitization and Entity Substitution",
+          "methodology_cluster": "NER-based entity detection and replacement",
+          "sota_investigation_mission": "Identify current SOTA entity substitution methods (Presidio, HaS, CON-QA, Anonymous-by-Construction, RUPTA, LLM-Redactor) and their privacy guarantees. Determine whether any achieves provable resistance to LLM-based re-identification attacks.",
+          "limitation_hypothesis": "Entity substitution creates a one-to-one mapping between original and pseudonymized entities, which is structurally invertible by modern LLMs that can reason over dispersed contextual patterns.",
+          "limitation_search_queries": [
+            "LLM re-identification attacks on pseudonymized text",
+            "Entity substitution reversibility in privacy-preserving NLP",
+            "Contextual re-identification beyond named entity recognition"
+          ],
+          "bridge_to_our_method": "Our topic-bottleneck approach avoids entity-level substitution entirely by compressing through a many-to-one semantic bottleneck, making reconstruction structurally impossible rather than merely statistically difficult."
+        },
+        {
+          "subsection_title": "2.2 Differential Privacy for Text",
+          "methodology_cluster": "Token-level DP perturbation and embedding noise",
+          "sota_investigation_mission": "Identify the strongest DP text sanitization methods (SanText, CusText, TEM, CAPE, InferDPT, DYNTEXT, CluSanT) and their best-case privacy-utility trade-offs. Critically, establish the reconstruction attack results from Pang et al. (arXiv:2410.12443) showing 91-94% recovery.",
+          "limitation_hypothesis": "Token-level DP noise is reversible because modern LLMs memorize broad training data distributions and can bridge sanitized-to-original mappings via in-context learning, achieving 72-94% recovery rates.",
+          "limitation_search_queries": [
+            "Reconstruction attacks on differentially private text sanitization",
+            "LLM memorization and differential privacy circumvention",
+            "Privacy-utility Pareto frontier for text DP methods"
+          ],
+          "bridge_to_our_method": "Unlike DP methods that perturb the original text (leaving recoverable traces), our pipeline never transmits a modified version of the sensitive text -- it transmits independently generated S0 proxy questions derived from topic distributions, with no bijective mapping to the original."
+        },
+        {
+          "subsection_title": "2.3 Hybrid Cloud-Edge and Split Inference Approaches",
+          "methodology_cluster": "Architectural partitioning of inference across trust boundaries",
+          "sota_investigation_mission": "Identify cloud-edge routing (PRISM), split inference (SnD, speculative decoding), TEE-based (Confidential LLM, GELO), and FHE/MPC approaches (EncryptedLLM, PermLLM). Assess their deployment readiness and privacy guarantees.",
+          "limitation_hypothesis": "Hardware-based approaches (TEE, FHE) provide strong guarantees but require specialized infrastructure. Software-based split inference leaks information through intermediate activations. No approach achieves both strong privacy and immediate deployability with commodity hardware.",
+          "limitation_search_queries": [
+            "Privacy leakage from split LLM inference intermediate activations",
+            "TEE overhead for LLM inference deployment cost",
+            "Practical deployment barriers for FHE and MPC in LLM inference"
+          ],
+          "bridge_to_our_method": "Our approach requires only a local SLM and cloud API access -- no specialized hardware, no model modifications, no cryptographic protocols. It achieves privacy through information-theoretic compression rather than computational hardness assumptions."
+        },
+        {
+          "subsection_title": "2.4 Data Minimization and Privacy-Preserving RAG",
+          "methodology_cluster": "Information reduction and retrieval-based privacy",
+          "sota_investigation_mission": "Identify data minimization approaches (Zhou et al. showing GPT-4 tolerates 85.7% redaction), privacy-preserving RAG (synthetic data substitution, DP-RAG), and the privacy metrics survey (arXiv:2512.01109) showing no metric maps to legal compliance.",
+          "limitation_hypothesis": "Data minimization reduces information quantity but does not guarantee that remaining information is non-sensitive. RAG privacy focuses on corpus protection, not prompt privacy. No existing framework addresses semantic-level sensitivity classification with graduated sanitization.",
+          "limitation_search_queries": [
+            "Data minimization for LLM prompts empirical evaluation",
+            "Privacy-preserving retrieval-augmented generation attacks",
+            "Semantic sensitivity classification beyond NER"
+          ],
+          "bridge_to_our_method": "Our pipeline operationalizes data minimization at the semantic level: the topic bottleneck transmits only the minimum information needed (topic structure) while ensuring that all sensitive specifics are irreversibly compressed away."
+        }
+      ]
+    }
+  },
+  "section_plan": [
+    {
+      "section_title": "1. Introduction",
+      "subsections": [
+        {
+          "subsection_title": "1.1 The Cloud LLM Privacy Dilemma",
+          "content_bullets": [
+            "Open with the fundamental tension: LLM value proportional to prompt specificity vs. privacy requiring removal of specificity. Reference GDPR Art. 5(1)(c), HIPAA de-identification, CLOUD Act as hard constraints from idea.md.",
+            "Present the sensitivity taxonomy (S0-S3) from 01_problem_framing.md as the framing for the paper.",
+            "State that existing approaches (entity substitution, DP noise) are structurally reversible -- modern LLMs recover 72-94% of original content from DP-sanitized text per arXiv:2410.12443."
+          ],
+          "citation_hints": [
+            "Shuchao Pang et al. (Reconstruction of Differentially Private Text Sanitization via LLMs)",
+            "research paper or technical report introducing 'GDPR data minimization principle'",
+            "research paper or technical report introducing 'US CLOUD Act'"
+          ]
+        },
+        {
+          "subsection_title": "1.2 Contributions",
+          "content_bullets": [
+            "Contribution 1: Topic modeling as an irreversible information bottleneck for privacy. Many-to-one compression makes reconstruction structurally impossible.",
+            "Contribution 2: Vocabulary exclusion as a novel hardening layer that strips domain vocabulary from generated text, not found in existing literature.",
+            "Contribution 3: Local synthesis architecture where the local LLM applies cloud-obtained S0 reasoning frameworks to locally-held S2 specifics.",
+            "Contribution 4: Empirical operating envelope characterization by task type on CUAD dataset: 2.3% specific value recovery vs. 91-94% for DP methods, with 89.3% BERTScore F1 quality preservation."
+          ],
+          "citation_hints": []
+        }
+      ]
+    },
+    {
+      "section_title": "2. Related Work",
+      "subsections": [
+        {
+          "subsection_title": "2.1 Prompt Sanitization and Entity Substitution",
+          "content_bullets": [
+            "Survey entity substitution methods: Presidio-style NER replacement, HaS two-stage anonymize-and-recover, CON-QA one-to-many anonymization, Anonymous-by-Construction, RUPTA with LLM re-identification defense, LLM-Redactor eight-technique benchmark.",
+            "Highlight that all methods maintain a bijective or near-bijective mapping between original and sanitized text, making them vulnerable to LLM-based contextual re-identification."
+          ],
+          "citation_hints": [
+            "Yu Chen et al. (Hide and Seek: A Lightweight Framework for Prompt Privacy Protection)",
+            "research paper introducing 'CON-QA privacy-preserving QA in contract domain'",
+            "Federico Albanese et al. (Anonymous-by-Construction: An LLM-Driven Framework for Privacy-Preserving Text)",
+            "Tianyu Yang et al. (Robust Utility-Preserving Text Anonymization)",
+            "Justice Owusu Agyemang et al. (LLM-Redactor: An Empirical Evaluation of Eight Techniques)",
+            "research paper or technical report introducing 'Microsoft Presidio'"
+          ]
+        },
+        {
+          "subsection_title": "2.2 Differential Privacy for Text",
+          "content_bullets": [
+            "Cover foundational DP text methods (SanText, CusText, TEM) and recent advances (CAPE, InferDPT, DYNTEXT, CluSanT).",
+            "Present the reconstruction attack results from Pang et al. as the motivating negative result: GPT-4o achieves 91.2% recovery, Claude-3.5 Sonnet 94.01%. Explain that this fundamentally limits all pure-DP approaches for high-stakes data.",
+            "Note Pr-epsilon-epsilon-mpt as a hybrid approach using format-preserving encryption for structured tokens."
+          ],
+          "citation_hints": [
+            "Xiang Yue et al. (SanText: Sanitized Text Generation via Differential Privacy)",
+            "research paper introducing 'CusText customized text sanitization with differential privacy'",
+            "research paper introducing 'TEM truncated exponential mechanism'",
+            "research paper introducing 'CAPE context-aware prompt perturbation with differential privacy'",
+            "research paper introducing 'InferDPT privacy-preserving inference for closed-box LLMs'",
+            "Amrita Roy Chowdhury et al. (Sanitizing Sensitive Prompts for LLMs)",
+            "Shuchao Pang et al. (Reconstruction of Differentially Private Text Sanitization via LLMs)"
+          ]
+        },
+        {
+          "subsection_title": "2.3 Hybrid Cloud-Edge and Split Inference",
+          "content_bullets": [
+            "Cover split inference (SnD, speculative decoding over WANs, DP stochastic quantization), cloud-edge routing (PRISM), TEE-based inference (Confidential LLM, GELO, covariant obfuscation), and FHE/MPC approaches (EncryptedLLM, PermLLM).",
+            "Establish the deployability hierarchy: entity redaction (deployable now) to TEE (hardware investment) to FHE (5+ years). Position our approach as deployable now with commodity hardware."
+          ],
+          "citation_hints": [
+            "research paper introducing 'Split-and-Denoise LLM inference with local differential privacy'",
+            "Junfei Zhan et al. (PRISM: Privacy-Aware Routing for Adaptive Cloud-Edge LLM Inference)",
+            "Marcin Chrapek et al. (Confidential LLM Inference: Performance Across CPU and GPU TEEs)",
+            "Leo De Castro et al. (EncryptedLLM: Privacy-Preserving LLM Inference via GPU-Accelerated FHE)",
+            "Fei Zheng et al. (PermLLM: Private Inference within 3 Seconds under WAN)"
+          ]
+        },
+        {
+          "subsection_title": "2.4 Data Minimization and Privacy Metrics",
+          "content_bullets": [
+            "Cover data minimization for LLM prompting (Zhou et al.: GPT-4 tolerates 85.7% redaction), privacy-preserving RAG, and text sanitization utility preemption (Carpentier et al.).",
+            "Cite the privacy metrics survey (arXiv:2512.01109) showing existing metrics fail to capture GDPR/HIPAA standards.",
+            "Position our work at the intersection: we operationalize data minimization at the semantic level through topic compression."
+          ],
+          "citation_hints": [
+            "Jijie Zhou et al. (Operationalizing Data Minimization for Privacy-Preserving LLM Prompting)",
+            "Robin Carpentier et al. (Preempting Text Sanitization Utility in Resource-Constrained Settings)",
+            "research paper introducing 'How Do We Measure Privacy in Text survey of text anonymization metrics'",
+            "research paper introducing 'privacy-preserving RAG with differential privacy'"
+          ]
+        }
+      ]
+    },
+    {
+      "section_title": "3. Threat Model and Problem Formulation",
+      "subsections": [
+        {
+          "subsection_title": "3.1 Sensitivity Classification",
+          "content_bullets": [
+            "Define the S0-S3 sensitivity taxonomy from idea.md and 01_problem_framing.md: S0 (public), S1 (confidential), S2 (highly confidential), S3 (strictly confidential/regulated).",
+            "Map to regulatory requirements: GDPR Art. 5(1)(c) data minimization, HIPAA de-identification, CLOUD Act exposure."
+          ],
+          "citation_hints": [
+            "research paper or technical report introducing 'GDPR data minimization principle'",
+            "research paper or technical report introducing 'HIPAA Safe Harbor de-identification method'"
+          ]
+        },
+        {
+          "subsection_title": "3.2 Adversary Model",
+          "content_bullets": [
+            "Define the adversary: the cloud LLM provider (or any party with access to transmitted data). Adversary has full access to the S0 proxy questions sent to the cloud. Adversary has state-of-the-art LLM capabilities for reconstruction attacks.",
+            "Define what is protected: specific entity names, numerical values, temporal references, and any content classified S1 or above.",
+            "Define what is not protected: the general domain/topic of the query (explicitly accepted as leakage). State that domain recovery is expected and acceptable."
+          ],
+          "citation_hints": [
+            "Shuchao Pang et al. (Reconstruction of Differentially Private Text Sanitization via LLMs)"
+          ]
+        }
+      ]
+    },
+    {
+      "section_title": "4. Methodology",
+      "subsections": [
+        {
+          "subsection_title": "4.1 Pipeline Overview",
+          "content_bullets": [
+            "Present the six-step pipeline from idea.md with formal notation. Reference Figure fig_pipeline_architecture.",
+            "Define the key boundary: all processing of S2 content happens locally; only S0 proxy questions cross to the cloud."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "4.2 Topic Extraction and S0 Text Generation",
+          "content_bullets": [
+            "Detail Steps 1-2: local LLM extracts topic distribution from S2 question, then generates 200-300 words of generic S0 text about those topics. Explain the many-to-one compression property: an enormous number of different S2 prompts map to the same topic distribution.",
+            "Formalize the information bottleneck: the topic distribution is a lossy compression that preserves reasoning structure while stripping sensitive specifics."
+          ],
+          "citation_hints": [
+            "research paper or technical report introducing 'information bottleneck method'",
+            "research paper or technical report introducing 'Latent Dirichlet Allocation'"
+          ]
+        },
+        {
+          "subsection_title": "4.3 Vocabulary Exclusion Hardening",
+          "content_bullets": [
+            "Detail Step 2.5: strip all topic-vocabulary words from the generated S0 text before question generation. Explain as a second layer of many-to-one compression.",
+            "Present the absence fingerprint vulnerability: attacker who infers the topic can diff expected vs. observed vocabulary. Describe the four proposed mitigations from idea.md: random over-exclusion, paraphrase replacement, generation-time avoidance (recommended), fixed-size vocabulary masking.",
+            "Present this as a composable hardening layer for S3 data, not the default configuration."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "4.4 Proxy Question Generation and Selection",
+          "content_bullets": [
+            "Detail Steps 3-4: generate 10 candidate S0 proxy questions from the (optionally vocabulary-stripped) text, then select the 3 most relevant by comparing against the original S2 question using the local LLM.",
+            "Emphasize that the original S2 question is seen only by the local LLM in Step 4 -- it never leaves the local environment."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "4.5 Cloud Answering and Local Synthesis",
+          "content_bullets": [
+            "Detail Steps 5-6: send 3 S0 proxy questions to cloud LLM, receive S0 answers. Local LLM combines original S2 question with the 3 cloud-obtained S0 answers to produce final answer.",
+            "Draw the consultant analogy from idea.md: look up best practices externally, apply them to a confidential internal situation."
+          ],
+          "citation_hints": []
+        }
+      ]
+    },
+    {
+      "section_title": "5. Experimental Setup",
+      "subsections": [
+        {
+          "subsection_title": "5.1 Dataset and Task Types",
+          "content_bullets": [
+            "CUAD (Contract Understanding Atticus Dataset) dev split, 48 answerable legal contract QA pairs. Cite CUAD.",
+            "Four task types with 12 samples each: framework/reasoning, compliance/regulatory, procedural, entity-specific. Explain task type assignment rationale."
+          ],
+          "citation_hints": [
+            "research paper or technical report introducing 'CUAD Contract Understanding Atticus Dataset'"
+          ]
+        },
+        {
+          "subsection_title": "5.2 Models and Configuration",
+          "content_bullets": [
+            "Local model: Phi-3 (Microsoft). Cloud model: GPT-4o via Azure OpenAI. Cite both models.",
+            "Configuration: 10 proxy questions generated per sample, 3 selected. LLM-based question selector.",
+            "Two run configurations: baseline (vocabulary exclusion disabled) and hardened (vocabulary exclusion enabled)."
+          ],
+          "citation_hints": [
+            "research paper or technical report introducing 'Phi-3 language model'",
+            "research paper or technical report introducing 'GPT-4o'"
+          ]
+        },
+        {
+          "subsection_title": "5.3 Metrics and Baselines",
+          "content_bullets": [
+            "Privacy metrics: specific value recovery rate, domain recovery rate, situation score. Define each per idea.md and experimental_log.md.",
+            "Quality metrics: BERTScore F1, semantic similarity, gold span overlap, length ratio.",
+            "Baselines: (1) Oracle -- cloud LLM given full S2 question. (2) Local-only -- local LLM answers S2 question with no cloud access. (3) Entity substitution -- Presidio-style pipeline.",
+            "Attack variants: direct recovery prompt, domain expert prompt. Note ICL and absence fingerprint attacks are planned for future work."
+          ],
+          "citation_hints": [
+            "research paper or technical report introducing 'BERTScore'",
+            "research paper or technical report introducing 'Microsoft Presidio'"
+          ]
+        }
+      ]
+    },
+    {
+      "section_title": "6. Results",
+      "subsections": [
+        {
+          "subsection_title": "6.1 Privacy: Specific Value Recovery",
+          "content_bullets": [
+            "Report headline result: 2.3% mean specific value recovery rate across both attack variants. Compare with 91-94% for DP methods (arXiv:2410.12443). Reference Figure fig_recovery_rate_comparison.",
+            "Break down by attack variant: direct recovery prompt (2.1%), domain expert prompt (2.5%). Domain recovery is high (90-94%) but accepted as intentional.",
+            "Report vocabulary exclusion ablation: 0% specific value recovery with vocab exclusion enabled. Reference Figure fig_quality_privacy_scatter."
+          ],
+          "citation_hints": [
+            "Shuchao Pang et al. (Reconstruction of Differentially Private Text Sanitization via LLMs)"
+          ]
+        },
+        {
+          "subsection_title": "6.2 Quality: Answer Preservation",
+          "content_bullets": [
+            "Report pipeline quality: 89.3% BERTScore F1, 85.3% semantic similarity, 22.5% gold span overlap vs. oracle.",
+            "Compare with baselines: local-only (93.3% BERTScore but no cloud reasoning), entity substitution (82.0% BERTScore, 58.1% semantic similarity).",
+            "Report vocabulary exclusion quality cost: BERTScore drops from 89.3% to 82.3% (-7.0%), semantic similarity drops from 85.3% to 41.3% (-44.0%).",
+            "Interpret: pipeline produces longer reasoning-based answers (1.61x oracle length) rather than extracting text spans."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "6.3 Task-Type Analysis",
+          "content_bullets": [
+            "Present per-task-type results with confidence intervals from experimental_log.md. Reference Figure fig_task_type_heatmap.",
+            "Framework/reasoning, compliance, procedural: zero specific value recovery with BERTScore 0.886-0.890.",
+            "Entity-specific: 9.2% specific value recovery, 0.65 gold span overlap. Note RUBIOSRESTAURANTSINC outlier with 100% recovery on a document name query.",
+            "Confirm the operating envelope hypothesis from idea.md: strong for reasoning/compliance/procedural, weak for entity-specific."
+          ],
+          "citation_hints": []
+        }
+      ]
+    },
+    {
+      "section_title": "7. Discussion",
+      "subsections": [
+        {
+          "subsection_title": "7.1 Why the Information Bottleneck Works",
+          "content_bullets": [
+            "Explain the structural argument: topic modeling is many-to-one compression. DP noise is many-to-many perturbation within a recoverable neighborhood. Entity substitution is one-to-one mapping. Only many-to-one compression is irreversible.",
+            "Connect to the empirical result: 2.3% recovery vs. 91-94% is not an incremental improvement -- it is a qualitative difference in the privacy mechanism."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "7.2 Operating Envelope and Deployment Guidance",
+          "content_bullets": [
+            "Formalize the operating envelope: the pipeline handles 60-70% of enterprise LLM use cases (reasoning, compliance, process) with strong privacy. Quantitative/entity-specific queries should be routed to local models or TEE-based inference.",
+            "Present the graduated deployment model from 06_proposed_pipeline.md: S1 data -> standard bottleneck; S2 -> bottleneck + vocab exclusion consideration; S3 -> bottleneck + vocab exclusion mandatory.",
+            "Discuss the vocabulary exclusion trade-off: perfect privacy (0% recovery) but steep quality cost (semantic similarity drops 44%). Recommend as optional hardening for S3 only."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "7.3 Limitations",
+          "content_bullets": [
+            "Single dataset (CUAD, legal contracts domain). Generalization to healthcare, finance, and other S2/S3 domains untested.",
+            "Small sample size (N=48, 12 per task type). Confidence intervals are wide for entity-specific tasks.",
+            "Absence fingerprint attack not empirically evaluated. The vulnerability is characterized but mitigations are not tested.",
+            "ICL attack variant not evaluated. Session-level aggregation attacks not evaluated.",
+            "Local LLM (Phi-3) quality may bound synthesis step performance. Larger local models (Llama 70B) may yield different results.",
+            "Pipeline timing (31 minutes for 48 samples) not optimized; latency budget per query (~39 seconds) may be impractical for interactive use."
+          ],
+          "citation_hints": []
+        }
+      ]
+    },
+    {
+      "section_title": "8. Conclusion",
+      "subsections": [
+        {
+          "subsection_title": "8.1 Summary",
+          "content_bullets": [
+            "Summarize the four contributions: topic bottleneck mechanism, vocabulary exclusion hardening, local synthesis architecture, empirical operating envelope.",
+            "Headline numbers: 2.3% specific value recovery (vs. 91-94% for DP), 89.3% BERTScore F1 quality preservation."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "8.2 Future Work",
+          "content_bullets": [
+            "Multi-domain evaluation beyond legal contracts (healthcare, finance, internal process).",
+            "Absence fingerprint mitigation testing: evaluate generation-time avoidance and random over-exclusion mitigations empirically.",
+            "ICL and session-level aggregation attacks. Larger local models (Llama 70B). Latency optimization.",
+            "Formal privacy guarantee connecting topic compression to information-theoretic bounds."
+          ],
+          "citation_hints": []
+        }
+      ]
+    }
+  ]
+}

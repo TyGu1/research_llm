@@ -1,0 +1,413 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{25}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Agyemang et~al\mbox{.}(2026)]%
+        {agyemang2026}
+\bibfield{author}{\bibinfo{person}{Justice~Owusu Agyemang} {et~al\mbox{.}}}
+  \bibinfo{year}{2026}\natexlab{}.
+\newblock \bibinfo{title}{{LLM-Redactor}: An Empirical Evaluation of Eight
+  Techniques}.
+\newblock
+\newblock
+\showeprint[arxiv]{2604.12064}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2604.12064}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Albanese et~al\mbox{.}(2026)]%
+        {albanese2026}
+\bibfield{author}{\bibinfo{person}{Federico Albanese}, \bibinfo{person}{Pablo
+  Ronco}, {and} \bibinfo{person}{Nicol{\'a}s D'Ippolito}.}
+  \bibinfo{year}{2026}\natexlab{}.
+\newblock \bibinfo{title}{Anonymous-by-Construction: An {LLM}-Driven Framework
+  for Privacy-Preserving Text}.
+\newblock
+\newblock
+\showeprint[arxiv]{2603.17217}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2603.17217}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Carpentier et~al\mbox{.}(2024)]%
+        {carpentier2024}
+\bibfield{author}{\bibinfo{person}{Robin Carpentier} {et~al\mbox{.}}}
+  \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Preempting Text Sanitization Utility in
+  Resource-Constrained Settings}.
+\newblock
+\newblock
+\showeprint[arxiv]{2411.11521}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2411.11521}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Carvalho et~al\mbox{.}(2021)]%
+        {tem2021}
+\bibfield{author}{\bibinfo{person}{Ricardo~Silva Carvalho} {et~al\mbox{.}}}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \bibinfo{title}{{TEM}: High Utility Metric Differential Privacy on
+  Text}.
+\newblock
+\newblock
+\showeprint[arxiv]{2107.07928}
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2107.07928}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Castro et~al\mbox{.}(2025)]%
+        {decastro2025}
+\bibfield{author}{\bibinfo{person}{Leo~De Castro}, \bibinfo{person}{Daniel
+  Escudero}, {et~al\mbox{.}}} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{{EncryptedLLM}: Privacy-Preserving {LLM} Inference
+  via {GPU}-Accelerated {FHE}}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  42nd International Conference on Machine Learning (ICML 2025)}}.
+\newblock
+\urldef\tempurl%
+\url{https://proceedings.mlr.press/v267/de-castro25a.html}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Chen et~al\mbox{.}(2023a)]%
+        {chen2023custext}
+\bibfield{author}{\bibinfo{person}{Sai Chen} {et~al\mbox{.}}}
+  \bibinfo{year}{2023}\natexlab{a}.
+\newblock \bibinfo{title}{{CusText}: Customized Text Sanitization with
+  Differential Privacy}.
+\newblock
+\newblock
+\showeprint[arxiv]{2207.01193}
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2207.01193}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Chen et~al\mbox{.}(2025)]%
+        {dyntext2025}
+\bibfield{author}{\bibinfo{person}{Wen Chen} {et~al\mbox{.}}}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{{DYNTEXT}: Semantic-Aware Dynamic Text
+  Sanitization}. In \bibinfo{booktitle}{\emph{Findings of the Association for
+  Computational Linguistics (ACL 2025)}}.
+\newblock
+\urldef\tempurl%
+\url{https://aclanthology.org/2025.findings-acl.1038/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Chen et~al\mbox{.}(2023b)]%
+        {chen2023}
+\bibfield{author}{\bibinfo{person}{Yu Chen}, \bibinfo{person}{Tingxin Li},
+  \bibinfo{person}{Huiming Liu}, {and} \bibinfo{person}{Yang Yu}.}
+  \bibinfo{year}{2023}\natexlab{b}.
+\newblock \bibinfo{title}{Hide and Seek ({HaS}): A Lightweight Framework for
+  Prompt Privacy Protection}.
+\newblock
+\newblock
+\showeprint[arxiv]{2309.03057}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2309.03057}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Chowdhury et~al\mbox{.}(2025)]%
+        {chowdhury2025}
+\bibfield{author}{\bibinfo{person}{Amrita~Roy Chowdhury},
+  \bibinfo{person}{David Glukhov}, {et~al\mbox{.}}}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \bibinfo{title}{Pr{\(\varepsilon\varepsilon\)}mpt: Sanitizing
+  Sensitive Prompts for {LLMs}}.
+\newblock
+\newblock
+\showeprint[arxiv]{2504.05147}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2504.05147}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Chrapek et~al\mbox{.}(2025)]%
+        {chrapek2025}
+\bibfield{author}{\bibinfo{person}{Marcin Chrapek}, \bibinfo{person}{Marcin
+  Copik}, \bibinfo{person}{Etienne Mettaz}, {and} \bibinfo{person}{Torsten
+  Hoefler}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \bibinfo{title}{Confidential {LLM} Inference: Performance Across
+  {CPU} and {GPU} {TEEs}}.
+\newblock
+\newblock
+\showeprint[arxiv]{2509.18886}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2509.18886}
+\showURL{%
+\tempurl}
+
+
+\bibitem[{CON-QA Authors}(2025)]%
+        {conqa2025}
+\bibfield{author}{\bibinfo{person}{{CON-QA Authors}}.}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \bibinfo{title}{{CON-QA}: Privacy-Preserving {QA} Using Cloud {LLMs}
+  in Contract Domain}.
+\newblock
+\newblock
+\showeprint[arxiv]{2509.19925}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2509.19925}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Huang et~al\mbox{.}(2024)]%
+        {dprag2024}
+\bibfield{author}{\bibinfo{person}{Tao Huang} {et~al\mbox{.}}}
+  \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Privacy-Preserving {RAG} with Differential Privacy}.
+\newblock
+\newblock
+\showeprint[arxiv]{2412.04697}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2412.04697}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Kolesnikova et~al\mbox{.}(2025)]%
+        {metricssurvey2025}
+\bibfield{author}{\bibinfo{person}{Olga Kolesnikova} {et~al\mbox{.}}}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{How Do We Measure Privacy in Text? A Survey of Text
+  Anonymization Metrics}. In \bibinfo{booktitle}{\emph{Findings of the
+  Association for Computational Linguistics (ACL-IJCNLP 2025)}}.
+\newblock
+\showeprint[arxiv]{2512.01109}
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2512.01109}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Mai et~al\mbox{.}(2023)]%
+        {snd2023}
+\bibfield{author}{\bibinfo{person}{Peihua Mai}, \bibinfo{person}{Ran Yan},
+  {et~al\mbox{.}}} \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Split-and-Denoise ({SnD}): Protect {LLM} Inference
+  with Local Differential Privacy}.
+\newblock
+\newblock
+\showeprint[arxiv]{2310.09130}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2310.09130}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Pang et~al\mbox{.}(2024)]%
+        {pang2024}
+\bibfield{author}{\bibinfo{person}{Shuchao Pang}, \bibinfo{person}{Zhigang Lu},
+  \bibinfo{person}{Yongbin Zhou}, {et~al\mbox{.}}}
+  \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Reconstruction of Differentially Private Text
+  Sanitization via {LLMs}}.
+\newblock
+\newblock
+\showeprint[arxiv]{2410.12443}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2410.12443}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Park et~al\mbox{.}(2025)]%
+        {clusant2025}
+\bibfield{author}{\bibinfo{person}{Minsu Park} {et~al\mbox{.}}}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{{CluSanT}: Differentially Private and Semantically
+  Coherent Text Sanitization}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  2025 Conference of the North American Chapter of the Association for
+  Computational Linguistics (NAACL 2025)}}.
+\newblock
+\urldef\tempurl%
+\url{https://aclanthology.org/2025.naacl-long.187/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Wang et~al\mbox{.}(2025)]%
+        {cape2025}
+\bibfield{author}{\bibinfo{person}{Zhiwei Wang} {et~al\mbox{.}}}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{{CAPE}: Context-Aware Prompt Perturbation with
+  Differential Privacy}. In \bibinfo{booktitle}{\emph{Proceedings of the 42nd
+  International Conference on Machine Learning (ICML 2025)}}.
+\newblock
+\showeprint[arxiv]{2505.05922}
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2505.05922}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Wu et~al\mbox{.}(2023)]%
+        {inferdpt2023}
+\bibfield{author}{\bibinfo{person}{Tong Wu} {et~al\mbox{.}}}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{{InferDPT}: Privacy-Preserving Inference for
+  Closed-Box {LLMs}}.
+\newblock
+\newblock
+\showeprint[arxiv]{2310.12214}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2310.12214}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Yang et~al\mbox{.}(2025)]%
+        {yang2025}
+\bibfield{author}{\bibinfo{person}{Tianyu Yang}, \bibinfo{person}{Xiaodan Zhu},
+  {and} \bibinfo{person}{Iryna Gurevych}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{Robust Utility-Preserving Text Anonymization
+  ({RUPTA})}. In \bibinfo{booktitle}{\emph{Proceedings of the 63rd Annual
+  Meeting of the Association for Computational Linguistics (ACL 2025)}}.
+\newblock
+\showeprint[arxiv]{2407.11770}
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2407.11770}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Yue et~al\mbox{.}(2021)]%
+        {yue2021}
+\bibfield{author}{\bibinfo{person}{Xiang Yue} {et~al\mbox{.}}}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{{SanText}: Sanitized Text Generation via
+  Differential Privacy}. In \bibinfo{booktitle}{\emph{Findings of the
+  Association for Computational Linguistics}}.
+\newblock
+
+
+\bibitem[Zeng et~al\mbox{.}(2024a)]%
+        {zeng2024}
+\bibfield{author}{\bibinfo{person}{Shenglai Zeng} {et~al\mbox{.}}}
+  \bibinfo{year}{2024}\natexlab{a}.
+\newblock \showarticletitle{The Good and the Bad: Exploring Privacy Issues in
+  {RAG}}. In \bibinfo{booktitle}{\emph{Findings of the Association for
+  Computational Linguistics (ACL 2024)}}.
+\newblock
+\showeprint[arxiv]{2402.16893}
+\urldef\tempurl%
+\url{https://aclanthology.org/2024.findings-acl.267/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Zeng et~al\mbox{.}(2024b)]%
+        {syntheticrag2024}
+\bibfield{author}{\bibinfo{person}{Shenglai Zeng} {et~al\mbox{.}}}
+  \bibinfo{year}{2024}\natexlab{b}.
+\newblock \bibinfo{title}{Mitigating the Privacy Issues in Retrieval-Augmented
+  Generation ({RAG}) via Pure Synthetic Data}.
+\newblock
+\newblock
+\showeprint[arxiv]{2406.14773}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2406.14773}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Zhan et~al\mbox{.}(2026)]%
+        {zhan2025}
+\bibfield{author}{\bibinfo{person}{Junfei Zhan} {et~al\mbox{.}}}
+  \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{{PRISM}: Privacy-Aware Routing for Adaptive
+  Cloud-Edge {LLM} Inference}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  AAAI Conference on Artificial Intelligence (AAAI 2026)}}.
+\newblock
+\showeprint[arxiv]{2511.22788}
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2511.22788}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Zheng et~al\mbox{.}(2024)]%
+        {zheng2024}
+\bibfield{author}{\bibinfo{person}{Fei Zheng}, \bibinfo{person}{Chaochao Chen},
+  {et~al\mbox{.}}} \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{{PermLLM}: Private Inference within 3 Seconds under
+  {WAN}}.
+\newblock
+\newblock
+\showeprint[arxiv]{2405.18744}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2405.18744}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Zhou et~al\mbox{.}(2025)]%
+        {zhou2025}
+\bibfield{author}{\bibinfo{person}{Jijie Zhou}, \bibinfo{person}{Niloofar
+  Mireshghallah}, {and} \bibinfo{person}{Tianshi Li}.}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \bibinfo{title}{Operationalizing Data Minimization for
+  Privacy-Preserving {LLM} Prompting}.
+\newblock
+\newblock
+\showeprint[arxiv]{2510.03662}~[cs.CR]
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2510.03662}
+\showURL{%
+\tempurl}
+
+
+\end{thebibliography}
