@@ -80,3 +80,25 @@ Respond with ONLY the numbers of the selected questions, comma-separated (e.g., 
             selected = candidates[:k]
 
         return selected[:k]
+
+
+class LocalEmbeddingQuestionSelector(QuestionSelector):
+    """Selects questions by cosine similarity of a local sentence-transformers model.
+
+    Same criterion as EmbeddingQuestionSelector, without an Ollama dependency; used
+    by the adaptive-attack evaluation (all-MiniLM-L6-v2 on CPU).
+    """
+
+    def __init__(self, embed_model):
+        import threading
+        self._model = embed_model
+        self._lock = threading.Lock()
+
+    def select(self, original: str, candidates: list[str], k: int = 3) -> list[str]:
+        if not candidates:
+            return []
+        with self._lock:
+            embs = self._model.encode([original] + candidates, normalize_embeddings=True)
+        sims = embs[1:] @ embs[0]
+        order = np.argsort(-sims)
+        return [candidates[i] for i in order[:k]]
