@@ -56,7 +56,9 @@ class ClaudeCLIClient:
                 out = r.stdout.strip()
                 if r.returncode == 0 and out:
                     return out
-                last = f"rc={r.returncode} stderr={r.stderr.strip()[:300]}"
+                last = f"rc={r.returncode} stdout={out[:200]} stderr={r.stderr.strip()[:200]}"
+                if "out of usage credits" in out or "usage limit" in out.lower():
+                    raise RuntimeError(f"quota exhausted: {out[:200]}")
             except subprocess.TimeoutExpired:
                 last = "timeout"
             self.failures += 1
@@ -81,6 +83,7 @@ def main():
     ap.add_argument("--model", default="claude-fable-5-1")
     ap.add_argument("--attacks", default="direct,icl20,category_inversion")
     ap.add_argument("--max-calls", type=int, default=200, help="hard cap on claude -p invocations")
+    ap.add_argument("--tag", default="fable", help="output prefix: <tag>_<arm>.jsonl, <tag>_calibration.md")
     a = ap.parse_args()
     run_dir = Path(a.run_dir)
     attacks = a.attacks.split(",")
@@ -109,7 +112,7 @@ def main():
                 subset.append(by_title[t][rnd])
         rnd += 1
 
-    out_p = run_dir / f"fable_{a.arm}.jsonl"
+    out_p = run_dir / f"{a.tag}_{a.arm}.jsonl"
     done = {(r["sample_id"], r["attack"]) for r in jsonl(out_p) if not r.get("error")}
     client = ClaudeCLIClient(a.model)
     attacker = LLMAttacker(client, max_tokens=700)
@@ -177,10 +180,10 @@ def main():
     # ── comparison on the same (sample, attack) pairs ────────────────────────
     fable = {(r["sample_id"], r["attack"]): r for r in jsonl(out_p) if not r.get("error")}
     titles_of = {sid: meta[sid]["doc_title"] for sid in meta}
-    lines = [f"# Fable calibration — {run_dir.name}, arm {a.arm}", "",
+    lines = [f"# Frontier-attacker calibration ({a.model}) — {run_dir.name}, arm {a.arm}", "",
              f"Same (sample, attack) pairs; attacker = Gemma-4-31B (local) vs {a.model} (`claude -p`). "
              f"n = {len(subset)} samples over {len({meta[s]['doc_title'] for s in subset})} contracts. 95% cluster-bootstrap CIs by contract.", "",
-             "| Attack | n | Gemma SVR | Fable SVR | Gemma any-gold | Fable any-gold | Gemma party | Fable party | Gemma cat. named | Fable cat. named | Fable refusals |",
+             "| Attack | n | Gemma SVR | Frontier SVR | Gemma any-gold | Frontier any-gold | Gemma party | Frontier party | Gemma cat. named | Frontier cat. named | Frontier refusals |",
              "|---|---|---|---|---|---|---|---|---|---|---|"]
     summary = {}
     for at in attacks:
@@ -208,11 +211,11 @@ def main():
         if at == "category_inversion":
             cg, cf = ci(g, "cat_top1"), ci(fb, "cat_top1")
             row["cat_top1"] = {"gemma": cg.__dict__, "fable": cf.__dict__}
-            cells[0] = f"{at} (category top-1: Gemma {cg.fmt()}, Fable {cf.fmt()})"
+            cells[0] = f"{at} (category top-1: Gemma {cg.fmt()}, frontier {cf.fmt()})"
         summary[at] = row
         lines.append("| " + " | ".join(cells) + " |")
-    (run_dir / "fable_calibration.md").write_text("\n".join(lines) + "\n")
-    (run_dir / "fable_calibration.json").write_text(json.dumps(summary, indent=1))
+    (run_dir / f"{a.tag}_calibration.md").write_text("\n".join(lines) + "\n")
+    (run_dir / f"{a.tag}_calibration.json").write_text(json.dumps(summary, indent=1))
     print("\n".join(lines))
 
 
