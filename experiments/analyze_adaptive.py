@@ -151,7 +151,12 @@ class Analyzer:
         self.summary["attacks"] = {}
         self.best: dict[str, tuple[str, list[dict]]] = {}
         for arm in self.arms:
-            data = [r for r in jsonl(self.run_dir / f"attacks_{arm}.jsonl") if not r.get("error")]
+            data, seen = [], set()
+            for r in jsonl(self.run_dir / f"attacks_{arm}.jsonl"):   # parallel writers may duplicate a pair
+                if r.get("error") or (r["sample_id"], r["attack"]) in seen:
+                    continue
+                seen.add((r["sample_id"], r["attack"]))
+                data.append(r)
             for r in data:   # party tokens may have been recomputed since the attack ran
                 r["score"]["party_hit"] = party_hit(r["reconstruction"], self.tokens.get(self.titles[r["sample_id"]], set()))
             errs = [r for r in jsonl(self.run_dir / f"attacks_{arm}.jsonl") if r.get("error")]
@@ -252,8 +257,10 @@ class Analyzer:
             rows.append([ARM_LABEL.get(arm, arm), md_ci(c1), md_ci(c5), md_ci(k1), md_ci(k5), md_ci(mk[3]), md_ci(mk[5]), md_ci(mk["all"])])
             tex_rows.append([ARM_LABEL.get(arm, arm), tex_ci(c1), tex_ci(c5), tex_ci(k1), tex_ci(k5), tex_ci(mk[3]), tex_ci(mk[5]), tex_ci(mk["all"])])
         if chance:
-            rows.append(["chance", f"{100/chance[0]:.1f}%", f"{500/chance[0]:.1f}%", f"{100/chance[1]:.1f}%", f"{500/chance[1]:.1f}%", f"{100/chance[1]:.1f}%", f"{100/chance[1]:.1f}%", f"{100/chance[1]:.1f}%"])
-            tex_rows.append(["chance", f"{100/chance[0]:.1f}", f"{500/chance[0]:.1f}", f"{100/chance[1]:.1f}", f"{500/chance[1]:.1f}", f"{100/chance[1]:.1f}", f"{100/chance[1]:.1f}", f"{100/chance[1]:.1f}"])
+            c1, c5 = 100 / chance[0], min(100.0, 500 / chance[0])
+            k1, k5 = 100 / chance[1], min(100.0, 500 / chance[1])
+            rows.append(["chance", f"{c1:.1f}%", f"{c5:.1f}%", f"{k1:.1f}%", f"{k5:.1f}%", f"{k1:.1f}%", f"{k1:.1f}%", f"{k1:.1f}%"])
+            tex_rows.append(["chance", f"{c1:.1f}", f"{c5:.1f}", f"{k1:.1f}", f"{k5:.1f}", f"{k1:.1f}", f"{k1:.1f}", f"{k1:.1f}"])
         self.table("Rungs b3, c — embedding linkage (no attacker LLM)", headers, rows, tex_rows, "tab:linkage",
                    "Linkage by embedding similarity of the transmitted questions against the 41 CUAD category questions and against the full text of the sampled contracts; "
                    "k = number of queries from the same contract pooled by the attacker (rung c). Percent, 95\\% cluster-bootstrap CIs by contract.")
@@ -263,7 +270,12 @@ class Analyzer:
         rows, tex_rows = [], []
         self.summary["multiquery"] = {}
         for arm in [a for a in self.arms if a in ("plain", "vocab")]:
-            data = [r for r in jsonl(self.run_dir / f"multiquery_{arm}.jsonl") if not r.get("error")]
+            data, seen = [], set()
+            for r in jsonl(self.run_dir / f"multiquery_{arm}.jsonl"):
+                if r.get("error") or (r["doc_title"], r["k"]) in seen:
+                    continue
+                seen.add((r["doc_title"], r["k"]))
+                data.append(r)
             if not data:
                 continue
             for r in data:

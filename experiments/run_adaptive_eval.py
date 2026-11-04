@@ -475,7 +475,12 @@ def stage_multiquery(ctx: Ctx, arm: str) -> None:
     done = {(r["doc_title"], r["k"]) for r in jsonl_read(out) if not r.get("error")}
     qs_by_sample = {sid: r["transmitted"] for sid, r in data.items() if sid in by_id}
     by_title = group_by_contract({sid: by_id[sid].doc_title for sid in qs_by_sample}, qs_by_sample)
-    draws = [d for d in make_draws(by_title, qs_by_sample, ks=[3, 5, "all"], n_draws=1, seed=ctx.args.seed) if (d.doc_title, d.k) not in done]
+    draws, seen = [], set(done)
+    for d in make_draws(by_title, qs_by_sample, ks=[3, 5, "all"], n_draws=1, seed=ctx.args.seed):
+        if (d.doc_title, d.k) in seen:   # "all" coincides with k=3/5 for small contracts
+            continue
+        seen.add((d.doc_title, d.k))
+        draws.append(d)
     attacker = LLMAttacker(ctx.client())
     scorer = ctx.scorer()
 

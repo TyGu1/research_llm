@@ -1,0 +1,78 @@
+% Draft section: adaptive attacks against the topic-bottleneck defense.
+% Numbers come from results/adaptive/main/{summary.md,summary.json,tables.tex} (experiments/analyze_adaptive.py)
+% and results/adaptive/main/fable_calibration.md (experiments/run_fable_calibration.py).
+% Tables: \input{tables.tex} is generated; copy it next to this file before compiling.
+% Placeholders of the form \XX{...} mark numbers not yet filled in.
+\newcommand{\XX}[1]{\textcolor{red}{[#1]}}
+
+\section{Adaptive Attacks}
+\label{sec:adaptive}
+
+The evaluation in Section~\ref{sec:eval} assumes a \emph{passive} cloud: it reads the three transmitted questions and tries to reconstruct the original clause with a generic prompt. A defense that only survives a passive attacker has not been evaluated \cite{carlini2019evaluating,tramer2020adaptive}. This section builds the strongest attacks we could against our own pipeline, assuming the attacker knows its design (Kerckhoffs's principle), and reports where the defense holds and where it breaks. All numbers use the same samples and the same attacker model for the defense and both baselines.
+
+\subsection{Threat model and observation sets}
+\label{sec:adaptive:threat}
+
+Every attack is labelled with what the attacker observes:
+\begin{description}
+  \item[Q] the transmitted proxy questions---exactly what the cloud receives (the realistic attacker);
+  \item[Q+] Q plus knowledge of the pipeline: its prompts, the topic-extraction step, the vocabulary-exclusion rule and the 41 CUAD clause categories;
+  \item[Q$\times k$] Q for $k$ queries that the same user sent about one contract;
+  \item[Pool] a public candidate population the attacker can enumerate (here: the full text of the sampled contracts, and the 41 category questions);
+  \item[S0] the locally generated text itself. S0 is \emph{never transmitted}; we include it only as an upper bound, and every S0 number is labelled as such.
+\end{description}
+The earlier ``absence fingerprint'' attack of Section~\ref{sec:eval} read S0 and therefore measured an upper bound, not a realistic attack; we correct that here.
+
+\subsection{Attack ladder}
+\label{sec:adaptive:ladder}
+
+\begin{itemize}
+  \item \textbf{Rung 0, leak scan (Q).} No attacker model: does the transmitted text itself contain a gold span, a party name, a date or an amount? This is the floor of every LLM attack and tells us where non-zero recovery comes from.
+  \item \textbf{Rung a, single-query reconstruction (Q).} The two prompts of Section~\ref{sec:eval} (direct, expert persona), kept verbatim for comparability, plus in-context learning with 3 and 20 solved examples from \emph{other} contracts (transmitted questions paired with the original question, the gold values and a contract excerpt), and ICL with examples from the \emph{same} contract (an insider who has seen the contract's other queries resolved).
+  \item \textbf{Rung b1, category inversion (Q+).} The attacker is told the pipeline design and that the original question was one of the 41 CUAD categories; it ranks the categories and reconstructs under the top one.
+  \item \textbf{Rung b2, absence fingerprint.} For the vocabulary-exclusion variant: the questions were written from text that had the topic words deleted, so they conspicuously \emph{avoid} the terms a normal question would use. We run it on Q (realistic, Q+) and on S0 (upper bound, S0).
+  \item \textbf{Rung b3, linkage (Q, Pool).} Without any LLM, embed the transmitted questions (MiniLM) and rank the 41 category questions and the full texts of the sampled contracts by similarity: can the cloud tell \emph{which clause type} and \emph{which contract} a query is about?
+  \item \textbf{Rung c, multi-query aggregation (Q$\times k$).} The attacker pools the transmitted questions of $k\in\{3,5,\text{all}\}$ queries from one contract, both for linkage and for LLM reconstruction of the contract (parties, dates, amounts, governing law, key terms).
+\end{itemize}
+
+\subsection{Baselines under the same attacks}
+\label{sec:adaptive:baselines}
+
+Entity substitution (Section~\ref{sec:eval}) transmits the question and a 4{,}000-character window of the contract with entities replaced by placeholders. SanText+ \cite{yue2021santext} is the word-level metric local differential privacy mechanism whose reconstruction Pang et al.\ \cite{pang2024reconstruction} report at 72--94\%; we implement it over GloVe-300d (top 50k vocabulary, $\varepsilon\in\{1,3\}$, non-sensitive replacement probability $p{=}0.3$, sensitive rank 20k; out-of-vocabulary words, which include most names, are replaced uniformly) and attack it with the Pang et al.\ recipe (direct reconstruction and ICL with 8 sanitized/original pairs from other contracts). Both baselines are attacked on exactly the same samples with the same attacker model.
+
+\subsection{Setup}
+\label{sec:adaptive:setup}
+
+\paragraph{Data.} \XX{n} answerable CUAD dev questions from \XX{m} contracts (seed 42; contracts with at least five answerable questions, so every contract supports the multi-query attack). Sampling whole contracts serves two purposes: rung~c needs several queries per contract, and the confidence intervals must respect the fact that questions from one contract share parties, dates and vocabulary. The sensitive document for every arm is the 4{,}000-character window of the contract that starts 1{,}000 characters before the first gold span.
+
+\paragraph{Models.} Pipeline (local model and cloud stand-in), baselines and attacker all run on one local Gemma-4-31B (NVFP4) served by vLLM; nothing leaves the machine and no API spend is involved. Because a 31B attacker is weaker than a frontier model, we re-run the three cheapest attacks with Claude Fable on a \XX{k}-sample calibration subset (Section~\ref{sec:adaptive:fable}): ``defense holds'' numbers are therefore lower bounds on what a frontier attacker recovers.
+
+\paragraph{Metrics.} \emph{SVR} is the criterion of Section~\ref{sec:eval} (the first 50 characters of a gold span appear verbatim in the attacker's output), so numbers are directly comparable; we add the share of queries with any gold span recovered, \emph{party-name recovery} (a distinctive token of a party name, derived from the contract's ``Parties'' spans with a corpus document-frequency filter, appears in the output; defined for \XX{p} of \XX{m} contracts), \emph{category named} (the CUAD category is named), 41-way category identification, $N$-way contract identification, and the MiniLM situation score. Utility is BERTScore~F1 and MiniLM similarity of the final answer against an oracle answer (same model, plain question, full window).
+
+\paragraph{Intervals.} Every interval is a 95\% percentile cluster bootstrap over contracts (2{,}000 resamples), which is wider than a per-question bootstrap whenever recovery clusters by contract---as it does.
+
+\subsection{Results}
+\label{sec:adaptive:results}
+
+\input{tables.tex}
+
+\paragraph{Where the defense holds.} \XX{Fill from summary.md: SVR of the realistic attacks (Q, Q+) on the pipeline arms vs the baselines; leak scan; typed view.}
+
+\paragraph{Where it breaks.} \XX{Fill: category inversion top-1 / top-3; linkage top-1 vs chance for category and contract; multi-query gains with k; party-name recovery.}
+
+\paragraph{Vocabulary exclusion.} \XX{Fill: absence fingerprint on Q vs S0 (upper bound), excluded-word recall; utility cost of the exclusion variant.}
+
+\subsection{Calibration with a frontier attacker}
+\label{sec:adaptive:fable}
+
+\XX{Fill from fable_calibration.md: same (sample, attack) pairs, Gemma vs Fable; refusals.}
+
+\subsection{What this changes about the claim}
+\label{sec:adaptive:claim}
+
+\XX{Two or three sentences: the defense protects verbatim values against a realistic attacker at the per-query level but does not hide the clause type, and linkage/aggregation across queries narrows the contract; state the residual risk the system must document.}
+
+\subsection{Limitations}
+\label{sec:adaptive:limits}
+
+The attacker, the pipeline's local model and the cloud stand-in are the same 31B model; a frontier attacker is only sampled on a calibration subset. The sensitive document is a 4{,}000-character window, not the full contract. SanText+ is our re-implementation (GloVe vocabulary, OOV words replaced uniformly), not the authors' code, and its $\varepsilon$ is not comparable to document-level DP. The contract pool for linkage is the sampled set (\XX{m} candidates); a real adversary's pool is both larger (more candidates) and richer (metadata).
