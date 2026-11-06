@@ -110,6 +110,9 @@ Topic bottleneck + vocab exclusion & 160 & 0.926 [0.921, 0.931] & 0.894 [0.880, 
 Entity substitution & 160 & 0.835 [0.833, 0.837] & 0.612 [0.599, 0.624] & 2.2 [0.3, 4.4] \\
 SanText+ ($\varepsilon$=1) & 160 & 0.868 [0.861, 0.874] & 0.593 [0.551, 0.630] & 13.4 [8.5, 18.7] \\
 SanText+ ($\varepsilon$=3) & 160 & 0.924 [0.918, 0.930] & 0.846 [0.823, 0.867] & 28.7 [23.4, 34.0] \\
+Small local model alone (qwen2.5-3B, full window, no cloud) & 158 & 0.875 [0.871, 0.879] & 0.799 [0.780, 0.817] & 52.8 [45.2, 60.1] \\
+Small local model + cloud answers to the transmitted questions & 133 & 0.857 [0.853, 0.860] & 0.767 [0.746, 0.785] & 60.6 [52.5, 68.4] \\
+Small + cloud $-$ small alone (paired) & 131 & -0.018 [-0.022, -0.014] & -0.027 [-0.046, -0.007] & 9.0 [3.0, 15.6] \\
 \bottomrule
 \end{tabular}
 \end{table}

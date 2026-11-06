@@ -22,7 +22,10 @@ os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 from src.evaluation.ci import cluster_bootstrap_mean, BootstrapCI
 from src.attacks.scoring import party_hit
 
+SMALL_ARMS = ["small_local_only", "small_pipeline_plain"]
 ARM_LABEL = {
+    "small_local_only": "Small local model alone (qwen2.5-3B, full window, no cloud)",
+    "small_pipeline_plain": "Small local model + cloud answers to the transmitted questions",
     "plain": "Topic bottleneck",
     "vocab": "Topic bottleneck + vocab exclusion",
     "entity_sub": "Entity substitution",
@@ -314,7 +317,7 @@ class Analyzer:
         headers = ["Arm", "n", "BERTScore F1 vs oracle", "Semantic similarity", "Gold-span overlap"]
         rows, tex_rows = [], []
         self.summary["utility"] = {}
-        for arm in self.arms:
+        for arm in list(self.arms) + SMALL_ARMS:
             data = [r for r in jsonl(self.run_dir / f"utility_{arm}.jsonl") if not r.get("error") and r["sample_id"] in oracle]
             if not data:
                 continue
@@ -338,6 +341,19 @@ class Analyzer:
             self.summary["utility"][arm] = {"n": b.n, "bertscore_f1": b.__dict__, "semantic_sim": s.__dict__, "gold_span_overlap": g.__dict__}
             rows.append([ARM_LABEL.get(arm, arm), str(b.n), md_ci(b, pct=False), md_ci(s, pct=False), md_ci(g)])
             tex_rows.append([ARM_LABEL.get(arm, arm), str(b.n), tex_ci(b, pct=False), tex_ci(s, pct=False), tex_ci(g)])
+        # paired: does the cloud's help lift a SMALL local model? (same samples, difference per sample)
+        pairs = [(cache[f"small_pipeline_plain:{sid}"], cache[f"small_local_only:{sid}"], self.meta[sid]["doc_title"]) for sid in oracle
+                 if f"small_pipeline_plain:{sid}" in cache and f"small_local_only:{sid}" in cache]
+        if pairs:
+            from src.evaluation.ci import cluster_bootstrap_mean
+            cl = [c for _, _, c in pairs]
+            d = {k: cluster_bootstrap_mean([a[k] - b[k] for a, b, _ in pairs], cl, n_boot=self.n_boot, seed=self.seed)
+                 for k in ("bertscore_f1", "semantic_sim", "gold_span_overlap")}
+            self.summary["utility"]["small_pipeline_minus_local_only"] = {k: v.__dict__ for k, v in d.items()}
+            rows.append(["Paired difference: small model + cloud answers minus small model alone", str(d["bertscore_f1"].n),
+                         md_ci(d["bertscore_f1"], pct=False), md_ci(d["semantic_sim"], pct=False), md_ci(d["gold_span_overlap"])])
+            tex_rows.append(["Small + cloud $-$ small alone (paired)", str(d["bertscore_f1"].n),
+                             tex_ci(d["bertscore_f1"], pct=False), tex_ci(d["semantic_sim"], pct=False), tex_ci(d["gold_span_overlap"])])
         self.table("Utility — answer quality against the oracle (same model answers the plain question with the full window)", headers, rows, tex_rows, "tab:utility",
                    "Utility of each arm: final answer vs.\\ the oracle answer (BERTScore F1 with roberta-large; MiniLM cosine) and share of gold spans reproduced. 95\\% cluster-bootstrap CIs by contract.")
 
