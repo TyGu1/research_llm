@@ -1,0 +1,33 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 7520.47it/s]
+subset 36 samples over 36 contracts; 108 calls to claude-opus-5-5
+  5/108 (33s, cli calls 8, failures 0)
+  10/108 (47s, cli calls 13, failures 0)
+  15/108 (77s, cli calls 18, failures 0)
+  20/108 (100s, cli calls 23, failures 0)
+  25/108 (125s, cli calls 28, failures 0)
+  30/108 (147s, cli calls 33, failures 0)
+  35/108 (174s, cli calls 38, failures 0)
+  40/108 (200s, cli calls 43, failures 0)
+  45/108 (221s, cli calls 48, failures 0)
+  50/108 (245s, cli calls 53, failures 0)
+  55/108 (271s, cli calls 58, failures 0)
+  60/108 (289s, cli calls 63, failures 0)
+  65/108 (317s, cli calls 68, failures 0)
+  70/108 (341s, cli calls 73, failures 0)
+  75/108 (368s, cli calls 78, failures 0)
+  80/108 (396s, cli calls 83, failures 0)
+  85/108 (420s, cli calls 88, failures 0)
+  90/108 (443s, cli calls 93, failures 0)
+  95/108 (470s, cli calls 98, failures 0)
+  100/108 (502s, cli calls 103, failures 0)
+  105/108 (521s, cli calls 108, failures 0)
+  108/108 (534s, cli calls 108, failures 0)
+# Frontier-attacker calibration (claude-opus-5-5) — main, arm plain
+
+Same (sample, attack) pairs; attacker = Gemma-4-31B (local) vs claude-opus-5-5 (`claude -p`). n = 36 samples over 36 contracts. 95% cluster-bootstrap CIs by contract.
+
+| Attack | n | Gemma SVR | Frontier SVR | Gemma any-gold | Frontier any-gold | Gemma party | Frontier party | Gemma cat. named | Frontier cat. named | Frontier refusals |
+|---|---|---|---|---|---|---|---|---|---|---|
+| direct | 36 | 5.6% [0.0, 13.9] | 3.7% [0.0, 10.2] | 5.6% [0.0, 13.9] | 5.6% [0.0, 13.9] | 0.0% [0.0, 0.0] | 0.0% [0.0, 0.0] | 58.3% [44.4, 75.0] | 72.2% [58.3, 86.1] | 2 |
+| icl20 | 36 | 6.5% [0.0, 14.8] | 6.5% [0.0, 14.8] | 8.3% [0.0, 19.4] | 8.3% [0.0, 19.4] | 0.0% [0.0, 0.0] | 0.0% [0.0, 0.0] | 58.3% [41.7, 75.0] | 75.0% [61.1, 88.9] | 1 |
+| category_inversion (category top-1: Gemma 52.8% [36.1, 69.4], frontier 52.8% [36.1, 69.4]) | 36 | 2.8% [0.0, 8.3] | 8.3% [0.0, 19.4] | 2.8% [0.0, 8.3] | 8.3% [0.0, 19.4] | 0.0% [0.0, 0.0] | 0.0% [0.0, 0.0] | 88.9% [77.8, 97.2] | 80.6% [66.7, 91.7] | 0 |

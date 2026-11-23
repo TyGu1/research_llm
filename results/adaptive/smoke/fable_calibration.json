@@ -1,0 +1,154 @@
+{
+ "direct": {
+  "n": 2,
+  "svr_exact": {
+   "gemma": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "any_gold": {
+   "gemma": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "party_hit": {
+   "gemma": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "category_label_hit": {
+   "gemma": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "refusals": 0
+ },
+ "category_inversion": {
+  "n": 2,
+  "svr_exact": {
+   "gemma": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "any_gold": {
+   "gemma": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "party_hit": {
+   "gemma": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "category_label_hit": {
+   "gemma": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  },
+  "refusals": 0,
+  "cat_top1": {
+   "gemma": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   },
+   "fable": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 2,
+    "n_clusters": 2
+   }
+  }
+ }
+}

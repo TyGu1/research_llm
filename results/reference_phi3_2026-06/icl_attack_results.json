@@ -1,0 +1,389 @@
+{
+  "icl_results": [
+    {
+      "sample_id": "COOLTECHNOLOGIES,INC_10_25_2017-EX-10.71-Strategic Alliance Agreement__Notice Period To Terminate Renewal",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.4220007658004761,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "Microgenics Corporation - Collaborative Development and Commercialization Agreement__Minimum Commitment",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.40779271721839905,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "AlliedEsportsEntertainmentInc_20190815_8-K_EX-10.19_11788293_EX-10.19_Content License Agreement__Renewal Term",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.5026664137840271,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "AimmuneTherapeuticsInc_20200205_8-K_EX-10.3_11967170_EX-10.3_Development Agreement__Post-Termination Services",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.27314215898513794,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "GridironBionutrientsInc_20171206_8-K_EX-10.1_10972555_EX-10.1_Endorsement Agreement__Post-Termination Services",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.10578528791666031,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement__Expiration Date",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3419616222381592,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "CytodynInc_20200109_10-Q_EX-10.5_11941634_EX-10.5_License Agreement__Anti-Assignment",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.294281542301178,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "TRICITYBANKSHARESCORP_05_15_1998-EX-10-OUTSOURCING AGREEMENT__Source Code Escrow",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.35302990674972534,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Non-Compete",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.42569440603256226,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "SEASPINEHOLDINGSCORP_10_10_2018-EX-10.1-SUPPLY AGREEMENT__Effective Date",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.418590784072876,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "LIMEENERGYCO_09_09_1999-EX-10-DISTRIBUTOR AGREEMENT__Parties",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.25076577067375183,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "PfHospitalityGroupInc_20150923_10-12G_EX-10.1_9266710_EX-10.1_Franchise Agreement3__Parties",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.5083972215652466,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_Amendment__Governing Law",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.394048810005188,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "KitovPharmaLtd_20190326_20-F_EX-4.15_11584449_EX-4.15_Manufacturing Agreement__Uncapped Liability",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3805483877658844,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "Zounds Hearing, Inc. - MANUFACTURING DESIGN MARKETING AGREEMENT__Post-Termination Services",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.32132506370544434,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "RangeResourcesLouisianaInc_20150417_8-K_EX-10.5_9045501_EX-10.5_Transportation Agreement__Notice Period To Terminate Renewal",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.31177613139152527,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT__Revenue/Profit Sharing",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3174527585506439,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "DYNAMEXINC_06_06_1996-EX-10.4-TRANSPORTATION SERVICES AGREEMENT__Change Of Control",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.07712387293577194,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT__Parties",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.34628185629844666,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "SigaTechnologiesInc_20190603_8-K_EX-10.1_11695818_EX-10.1_Promotion Agreement__Expiration Date",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3379192650318146,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "ELFBEAUTY,INC_07_02_2020-EX-10.1-COOPERATION AGREEMENT__Document Name",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.33544355630874634,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "INTRICONCORP_03_10_2009-EX-10.22-Strategic Alliance Agreement__Termination For Convenience",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.28028208017349243,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "VIRGINGALACTICHOLDINGS,INC_04_08_2020-EX-99.1-JOINT FILING STATEMENT__Document Name",
+      "icl": {
+        "domain_recovered": false,
+        "situation_score": 0.5023391842842102,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "VerizonAbsLlc_20200123_8-K_EX-10.4_11952335_EX-10.4_Service Agreement__Cap On Liability",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3581881821155548,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT__Renewal Term",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3817710876464844,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "PerformanceSportsBrandsInc_20110909_S-1_EX-10.10_7220214_EX-10.10_Endorsement Agreement__Non-Disparagement",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.18106865882873535,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "VISIUMTECHNOLOGIES,INC_10_20_2004-EX-10.20-DISTRIBUTOR AGREEMENT__Governing Law",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.1844344437122345,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "INKTOMICORP_06_08_1998-EX-10.14-SOFTWARE HOSTING AGREEMENT__Ip Ownership Assignment",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3570725619792938,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "WARNINGMANAGEMENTSERVICESINC_12_10_1999-EX-10-ENDORSEMENT AGREEMENT__Most Favored Nation",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.08357741683721542,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "FIDELITYNATIONALINFORMATIONSERVICES,INC_08_05_2009-EX-10.3-INTELLECTUAL PROPERTY AGREEMENT__Cap On Liability",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.4316236674785614,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "ORBSATCORP_08_17_2007-EX-7.3-STRATEGIC ALLIANCE AGREEMENT__Termination For Convenience",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.23892049491405487,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "VertexEnergyInc_20200113_8-K_EX-10.1_11943624_EX-10.1_Marketing Agreement__Change Of Control",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.17174012959003448,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "PLAYAHOTELS_RESORTSNV_03_14_2017-EX-10.22-STRATEGIC ALLIANCE AGREEMENT (Hyatt Ziva Cancun)__Governing Law",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.2932261526584625,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "SYKESHEALTHPLANSERVICESINC_04_24_1998-EX-10.14-OUTSOURCING AGREEMENT__Renewal Term",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.2275954931974411,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "CYBERIANOUTPOSTINC_07_09_1998-EX-10.13-PROMOTION AGREEMENT__License Grant",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3077247142791748,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "AudibleInc_20001113_10-Q_EX-10.32_2599586_EX-10.32_Co-Branding Agreement_ Marketing Agreement_ Investment Distribution Agreement__Ip Ownership Assignment",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.33005058765411377,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "SMITHELECTRICVEHICLESCORP_04_04_2012-EX-10.26-FLEET MAINTENANCE AGREEMENT__Rofr/Rofo/Rofn",
+      "icl": {
+        "domain_recovered": false,
+        "situation_score": 0.5008119344711304,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "HertzGroupRealtyTrustInc_20190920_S-11A_EX-10.8_11816941_EX-10.8_Trademark License Agreement__Change Of Control",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.29626137018203735,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "RUBIOSRESTAURANTSINC_03_31_2008-EX-10.75-SPONSORSHIP AGREEMENT__Document Name",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3686249554157257,
+        "specific_value_rate": 1.0
+      }
+    },
+    {
+      "sample_id": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement__Competitive Restriction Exception",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.3561658561229706,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT__Non-Transferable License",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.44771304726600647,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "INTELLIGENTHIGHWAYSOLUTIONS,INC_01_18_2018-EX-10.1-Strategic Alliance Agreement__Termination For Convenience",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.27984699606895447,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "PerformanceSportsBrandsInc_20110909_S-1_EX-10.10_7220214_EX-10.10_Endorsement Agreement__Insurance",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.09491336345672607,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "BerkshireHillsBancorpInc_20120809_10-Q_EX-10.16_7708169_EX-10.16_Endorsement Agreement__Non-Disparagement",
+      "icl": {
+        "domain_recovered": false,
+        "situation_score": 0.19024673104286194,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_New__Agreement Date",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.20173168182373047,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "VNUE,INC_07_10_2015-EX-10.1-SPONSORSHIP AGREEMENT__Anti-Assignment",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.14469026029109955,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "NANOPHASETECHNOLOGIESCORP_11_01_2005-EX-99.1-DISTRIBUTOR AGREEMENT__Audit Rights",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.13231177628040314,
+        "specific_value_rate": 0.0
+      }
+    },
+    {
+      "sample_id": "EhaveInc_20190515_20-F_EX-4.44_11678816_EX-4.44_License Agreement_ Reseller Agreement__Post-Termination Services",
+      "icl": {
+        "domain_recovered": true,
+        "situation_score": 0.1503390669822693,
+        "specific_value_rate": 0.0
+      }
+    }
+  ],
+  "mean_svr": 0.020833333333333332
+}

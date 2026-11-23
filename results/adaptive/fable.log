@@ -1,0 +1,17 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8785.94it/s]
+subset 36 samples over 36 contracts; 108 calls to claude-fable-5-1
+  5/108 (75s, cli calls 20, failures 18)
+  10/108 (149s, cli calls 37, failures 36)
+  15/108 (188s, cli calls 48, failures 45)
+  20/108 (262s, cli calls 65, failures 63)
+  25/108 (335s, cli calls 82, failures 81)
+  30/108 (375s, cli calls 93, failures 91)
+  35/108 (447s, cli calls 110, failures 108)
+  40/108 (517s, cli calls 127, failures 126)
+  45/108 (557s, cli calls 138, failures 136)
+  50/108 (635s, cli calls 155, failures 154)
+  55/108 (704s, cli calls 172, failures 171)
+  60/108 (745s, cli calls 183, failures 181)
+  65/108 (816s, cli calls 200, failures 199)
+  70/108 (885s, cli calls 217, failures 216)
+  75/108 (926s, cli calls 228, failures 226)

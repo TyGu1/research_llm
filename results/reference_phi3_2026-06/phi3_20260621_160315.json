@@ -1,0 +1,3220 @@
+{
+  "run_id": "phi3_20260621_160315",
+  "timestamp": "20260621_160315",
+  "config": {
+    "local_model": "phi3",
+    "cloud_provider": "azure",
+    "cuad_split": "dev",
+    "num_samples": 48,
+    "use_vocab_exclusion": false,
+    "question_selector": "llm",
+    "num_proxy_questions": 10,
+    "num_selected_questions": 3
+  },
+  "pipeline_results": [
+    {
+      "sample_id": "COOLTECHNOLOGIES,INC_10_25_2017-EX-10.71-Strategic Alliance Agreement__Notice Period To Terminate Renewal",
+      "error": "",
+      "topics": {
+        "contract termination": 0.4,
+        "renewal terms": 0.3,
+        "notice requirements": 0.2,
+        "contract duration": 0.1
+      },
+      "s0_text_length": 2089,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the typical formats and timing requirements for providing notice under a contract?",
+        "What steps should be taken to ensure compliance with notice requirements in a contract?",
+        "How can businesses effectively manage deadlines and conditions for contract renewal?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2309,
+      "step_timings": {
+        "topic_extraction": 2.205781337999724,
+        "text_generation": 3.1128346610003064,
+        "question_generation": 2.3679493510007887,
+        "question_selection": 0.7314290879985492,
+        "cloud_answering": 21.51398955699915,
+        "synthesis": 7.106562967999707
+      }
+    },
+    {
+      "sample_id": "Microgenics Corporation - Collaborative Development and Commercialization Agreement__Minimum Commitment",
+      "error": "",
+      "topics": {
+        "Minimum Commitments and Obligations": 0.3,
+        "Contractual Performance Standards": 0.25,
+        "Supply and Commercialization": 0.2,
+        "Regulatory Compliance": 0.15,
+        "Intellectual Property Rights": 0.1
+      },
+      "s0_text_length": 2250,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are minimum commitments in a business contract, and why are they important for ensuring accountability between parties?",
+        "How can parties negotiate minimum obligations in a contract to align with their strategic goals and operational capabilities?",
+        "How do supply and commercialization agreements typically address responsibilities related to manufacturing, distribution, and marketing?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2443,
+      "step_timings": {
+        "topic_extraction": 4.665578344000096,
+        "text_generation": 3.550956701999894,
+        "question_generation": 2.3916807119985606,
+        "question_selection": 0.810670423999909,
+        "cloud_answering": 26.107017480999275,
+        "synthesis": 4.567869397000322
+      }
+    },
+    {
+      "sample_id": "AlliedEsportsEntertainmentInc_20190815_8-K_EX-10.19_11788293_EX-10.19_Content License Agreement__Renewal Term",
+      "error": "",
+      "topics": {
+        "contract renewal terms": 0.4,
+        "payment obligations": 0.2,
+        "contract duration": 0.2,
+        "automatic extensions": 0.2
+      },
+      "s0_text_length": 2126,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "How do automatic extensions (evergreen clauses) work, and what are the potential risks associated with them?",
+        "What steps can businesses take to avoid unintended contract renewals due to automatic extension clauses?",
+        "What are the key differences between automatic and manual contract renewal provisions?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2789,
+      "step_timings": {
+        "topic_extraction": 1.329526571000315,
+        "text_generation": 3.3111429610016785,
+        "question_generation": 2.014445650000198,
+        "question_selection": 0.6365451589990698,
+        "cloud_answering": 24.207596166999792,
+        "synthesis": 6.63507168400065
+      }
+    },
+    {
+      "sample_id": "AimmuneTherapeuticsInc_20200205_8-K_EX-10.3_11967170_EX-10.3_Development Agreement__Post-Termination Services",
+      "error": "",
+      "topics": {
+        "Termination and Post-Termination Obligations": 0.3,
+        "Intellectual Property Rights": 0.25,
+        "Licensing and Sublicensing": 0.2,
+        "Regulatory Compliance": 0.15,
+        "Confidentiality and Data Protection": 0.1
+      },
+      "s0_text_length": 2182,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What types of obligations typically survive the termination of a business agreement?",
+        "How do confidentiality agreements help protect trade secrets and proprietary information in business relationships?",
+        "What legal measures can businesses take to ensure compliance with data protection and privacy laws?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 5388,
+      "step_timings": {
+        "topic_extraction": 4.134107812998991,
+        "text_generation": 3.333003677000306,
+        "question_generation": 2.0919873689999804,
+        "question_selection": 0.66148656400037,
+        "cloud_answering": 22.702108717001465,
+        "synthesis": 7.983534949000386
+      }
+    },
+    {
+      "sample_id": "GridironBionutrientsInc_20171206_8-K_EX-10.1_10972555_EX-10.1_Endorsement Agreement__Post-Termination Services",
+      "error": "",
+      "topics": {
+        "contract termination": 0.3,
+        "intellectual property rights": 0.25,
+        "post-termination obligations": 0.2,
+        "licensing and endorsements": 0.15,
+        "payment and remuneration": 0.1
+      },
+      "s0_text_length": 2159,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "How can businesses ensure that post-termination obligations, such as non-compete clauses, are enforceable under the law?",
+        "How can mutual agreement be used as a basis for contract termination, and what should be documented in such cases?",
+        "How can confidentiality obligations be structured to remain effective after a contract has been terminated?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 3275,
+      "step_timings": {
+        "topic_extraction": 1.2153505940004834,
+        "text_generation": 3.5514717790010764,
+        "question_generation": 2.488738223999462,
+        "question_selection": 0.8345996600000944,
+        "cloud_answering": 19.280135275001157,
+        "synthesis": 6.943995618999907
+      }
+    },
+    {
+      "sample_id": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement__Expiration Date",
+      "error": "",
+      "topics": {
+        "Contract Termination and Expiration": 0.4,
+        "Contractual Obligations and Rights": 0.25,
+        "Regulatory Compliance": 0.15,
+        "Intellectual Property and Licensing": 0.1,
+        "Dispute Resolution": 0.1
+      },
+      "s0_text_length": 1977,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the difference between contract termination and contract expiration?",
+        "What are common reasons a contract may be terminated before its agreed-upon term?",
+        "Why is it important to include notice requirements in a contract's termination provisions?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2505,
+      "step_timings": {
+        "topic_extraction": 3.874293509999916,
+        "text_generation": 3.283288796999841,
+        "question_generation": 1.7366607210005895,
+        "question_selection": 0.6820952920006675,
+        "cloud_answering": 18.37918078900111,
+        "synthesis": 5.662796644000991
+      }
+    },
+    {
+      "sample_id": "CytodynInc_20200109_10-Q_EX-10.5_11941634_EX-10.5_License Agreement__Anti-Assignment",
+      "error": "",
+      "topics": {
+        "Assignment and Transfer of Rights": 0.35,
+        "Contractual Obligations and Restrictions": 0.25,
+        "Licensing and Intellectual Property": 0.2,
+        "Termination and Remedies": 0.1,
+        "Dispute Resolution": 0.1
+      },
+      "s0_text_length": 2307,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "Under what circumstances is consent required for the assignment of contractual rights?",
+        "What are common restrictions that may be included in contracts to limit the assignment of rights?",
+        "What are the typical conditions under which a contract can be terminated by mutual consent?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2052,
+      "step_timings": {
+        "topic_extraction": 3.8632107239991456,
+        "text_generation": 4.005452077999507,
+        "question_generation": 1.9659405759994115,
+        "question_selection": 0.7389185249994625,
+        "cloud_answering": 28.968535890000567,
+        "synthesis": 5.055797167000492
+      }
+    },
+    {
+      "sample_id": "TRICITYBANKSHARESCORP_05_15_1998-EX-10-OUTSOURCING AGREEMENT__Source Code Escrow",
+      "error": "",
+      "topics": {
+        "source_code_escrow": 0.4,
+        "intellectual_property": 0.2,
+        "contractual_obligations": 0.2,
+        "termination_and_dispute_resolution": 0.1,
+        "licensing_and_rights": 0.1
+      },
+      "s0_text_length": 2239,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the purpose of a source code escrow agreement in a software licensing arrangement?",
+        "Under what circumstances can the source code in a source code escrow agreement typically be released to the licensee?",
+        "What are the typical components of a licensing agreement that define the scope and limitations of the rights granted?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1396,
+      "step_timings": {
+        "topic_extraction": 3.8912263789989083,
+        "text_generation": 3.5900792440006626,
+        "question_generation": 2.0758219540002756,
+        "question_selection": 0.835637198000768,
+        "cloud_answering": 18.61362375400131,
+        "synthesis": 7.449635769999077
+      }
+    },
+    {
+      "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Non-Compete",
+      "error": "",
+      "topics": {
+        "Non-Compete and Exclusivity Clauses": 0.3,
+        "Contractual Obligations and Breach": 0.25,
+        "Intellectual Property Rights": 0.2,
+        "Regulatory Compliance": 0.15,
+        "Dispute Resolution": 0.1
+      },
+      "s0_text_length": 2027,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What factors determine whether a non-compete clause is enforceable in a business contract?",
+        "How does an exclusivity clause differ from a non-compete clause in terms of its purpose and application?",
+        "Why is it important to use clear and precise language when drafting a business contract?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1855,
+      "step_timings": {
+        "topic_extraction": 14.040667917999599,
+        "text_generation": 3.0375757349993364,
+        "question_generation": 2.892808263999541,
+        "question_selection": 0.6545581089994812,
+        "cloud_answering": 23.68834059999972,
+        "synthesis": 3.6409421940006723
+      }
+    },
+    {
+      "sample_id": "SEASPINEHOLDINGSCORP_10_10_2018-EX-10.1-SUPPLY AGREEMENT__Effective Date",
+      "error": "",
+      "topics": {
+        "contract_effective_date": 0.4,
+        "contractual_definitions": 0.2,
+        "contractual_obligations": 0.2,
+        "contract_execution": 0.2
+      },
+      "s0_text_length": 2421,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the significance of specifying the effective date in a contract, and how can it differ from the signing date?",
+        "What are the potential consequences if a contract lacks clarity regarding its effective date or key terms?",
+        "What legal principles govern the enforceability of a contract once it has been properly executed?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 600,
+      "step_timings": {
+        "topic_extraction": 2.9913766570007283,
+        "text_generation": 4.070976240000164,
+        "question_generation": 2.696933266999622,
+        "question_selection": 0.6725837530011631,
+        "cloud_answering": 27.29633030900004,
+        "synthesis": 2.436186799001007
+      }
+    },
+    {
+      "sample_id": "LIMEENERGYCO_09_09_1999-EX-10-DISTRIBUTOR AGREEMENT__Parties",
+      "error": "",
+      "topics": {
+        "contract_parties": 0.4,
+        "distribution_agreements": 0.3,
+        "contract_terms_and_conditions": 0.2,
+        "intellectual_property_rights": 0.1
+      },
+      "s0_text_length": 2002,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "Why is it important to clearly identify the parties in a contract?",
+        "Why is it important to carefully review contract terms and conditions before signing?",
+        "What are indemnity clauses in contracts, and how do they protect the parties involved?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 638,
+      "step_timings": {
+        "topic_extraction": 2.31915384399872,
+        "text_generation": 5.928491419999773,
+        "question_generation": 2.0167989199999283,
+        "question_selection": 0.9705202259992802,
+        "cloud_answering": 28.540925241999503,
+        "synthesis": 1.9259908799995173
+      }
+    },
+    {
+      "sample_id": "PfHospitalityGroupInc_20150923_10-12G_EX-10.1_9266710_EX-10.1_Franchise Agreement3__Parties",
+      "error": "",
+      "topics": {
+        "contractual parties identification": 0.4,
+        "franchise agreements": 0.3,
+        "non-disclosure obligations": 0.2,
+        "non-competition covenants": 0.1
+      },
+      "s0_text_length": 2123,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What information is typically required to properly identify the parties in a contract?",
+        "Why is it important to clearly define the roles of each party in a contractual agreement?",
+        "How can ambiguities in party identification lead to legal disputes or enforcement challenges?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2353,
+      "step_timings": {
+        "topic_extraction": 1.090496617000099,
+        "text_generation": 3.708726058999673,
+        "question_generation": 1.8195580990013696,
+        "question_selection": 1.0312521960004233,
+        "cloud_answering": 22.08403872800045,
+        "synthesis": 5.762978974000362
+      }
+    },
+    {
+      "sample_id": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_Amendment__Governing Law",
+      "error": "",
+      "topics": {
+        "choice_of_law": 0.4,
+        "contractual amendments": 0.2,
+        "royalty obligations": 0.15,
+        "termination provisions": 0.15,
+        "rights of first refusal": 0.1
+      },
+      "s0_text_length": 2352,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What factors should parties consider when selecting the governing law for a contract?",
+        "How can parties mitigate risks associated with conflicting legal standards in cross-jurisdictional contracts?",
+        "What are the potential consequences of failing to update contracts to reflect changing business circumstances?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1736,
+      "step_timings": {
+        "topic_extraction": 1.1470043619992794,
+        "text_generation": 4.0785962480003946,
+        "question_generation": 2.6137584499992954,
+        "question_selection": 0.7864353349996236,
+        "cloud_answering": 21.10874492000039,
+        "synthesis": 3.7392773000010493
+      }
+    },
+    {
+      "sample_id": "KitovPharmaLtd_20190326_20-F_EX-4.15_11584449_EX-4.15_Manufacturing Agreement__Uncapped Liability",
+      "error": "",
+      "topics": {
+        "liability and indemnification": 0.4,
+        "contractual obligations and breach": 0.25,
+        "risk allocation and limitations": 0.2,
+        "governing law and dispute resolution": 0.15
+      },
+      "s0_text_length": 1903,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "How do limitations of liability clauses help manage financial exposure in contracts?",
+        "How do indemnification clauses protect parties in a contract from financial harm?",
+        "How do disclaimers function in contracts to limit legal risks?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2604,
+      "step_timings": {
+        "topic_extraction": 2.3741193329988164,
+        "text_generation": 3.7438461830006418,
+        "question_generation": 2.2418890579992876,
+        "question_selection": 0.7726993919986853,
+        "cloud_answering": 23.306152825000026,
+        "synthesis": 4.692250842001158
+      }
+    },
+    {
+      "sample_id": "Zounds Hearing, Inc. - MANUFACTURING DESIGN MARKETING AGREEMENT__Post-Termination Services",
+      "error": "",
+      "topics": {
+        "Contract Termination and Obligations": 0.35,
+        "Post-Termination Rights and Responsibilities": 0.25,
+        "Intellectual Property and Confidentiality": 0.2,
+        "Payment and Financial Obligations": 0.1,
+        "Dispute Resolution": 0.1
+      },
+      "s0_text_length": 2098,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "Why is it important to comply with notice periods and other obligations after a contract is terminated?",
+        "What are non-compete and non-solicitation clauses, and how do they affect parties after a contract ends?",
+        "What steps can parties take to ensure that sensitive information is protected during and after a business relationship?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 3431,
+      "step_timings": {
+        "topic_extraction": 2.1784340670001257,
+        "text_generation": 3.842419565000455,
+        "question_generation": 2.3278931510012626,
+        "question_selection": 0.7761187649994099,
+        "cloud_answering": 25.179407026000263,
+        "synthesis": 5.281942533998517
+      }
+    },
+    {
+      "sample_id": "RangeResourcesLouisianaInc_20150417_8-K_EX-10.5_9045501_EX-10.5_Transportation Agreement__Notice Period To Terminate Renewal",
+      "error": "",
+      "topics": {
+        "Contract Termination and Renewal": 0.4,
+        "Notice Requirements": 0.3,
+        "Contract Duration and Extensions": 0.2,
+        "Obligations and Remedies": 0.1
+      },
+      "s0_text_length": 2016,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the typical notice requirements for terminating or renewing a contract, and why are they important?",
+        "What are the legal implications of failing to provide proper notice for contract termination or renewal?",
+        "How do automatic renewal clauses, or \"evergreen clauses,\" impact the duration of a contract, and what should parties consider when agreeing to them?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2427,
+      "step_timings": {
+        "topic_extraction": 6.2845495929996105,
+        "text_generation": 3.587360882998837,
+        "question_generation": 2.341689217999374,
+        "question_selection": 0.5147779730014008,
+        "cloud_answering": 22.038444215999334,
+        "synthesis": 5.89648115899945
+      }
+    },
+    {
+      "sample_id": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT__Revenue/Profit Sharing",
+      "error": "",
+      "topics": {
+        "franchise agreements": 0.3,
+        "revenue sharing": 0.25,
+        "contractual obligations": 0.2,
+        "intellectual property": 0.15,
+        "dispute resolution": 0.1
+      },
+      "s0_text_length": 2227,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What factors should be considered when drafting a revenue-sharing agreement to ensure fairness and clarity?",
+        "Why is it important to include clear payment schedules in revenue-sharing agreements?",
+        "What steps can a business take to ensure its contracts are enforceable and minimize legal risks?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1363,
+      "step_timings": {
+        "topic_extraction": 3.297760453000592,
+        "text_generation": 4.782317683000656,
+        "question_generation": 2.6472312890000467,
+        "question_selection": 0.8437407609999354,
+        "cloud_answering": 22.26159336099954,
+        "synthesis": 3.265924803001326
+      }
+    },
+    {
+      "sample_id": "DYNAMEXINC_06_06_1996-EX-10.4-TRANSPORTATION SERVICES AGREEMENT__Change Of Control",
+      "error": "",
+      "topics": {
+        "change_of_control": 0.35,
+        "termination_provisions": 0.25,
+        "non-competition": 0.15,
+        "contractual obligations": 0.15,
+        "governing law": 0.1
+      },
+      "s0_text_length": 2021,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the purpose of a change-of-control clause in a business contract, and how does it protect the parties involved?",
+        "What are the typical rights or obligations that may be triggered by a change-of-control clause in a contract?",
+        "Under what circumstances can a termination provision in a contract be triggered, and what are the common types of termination clauses?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2943,
+      "step_timings": {
+        "topic_extraction": 1.3174553680000827,
+        "text_generation": 3.921461312000247,
+        "question_generation": 2.0971247279994714,
+        "question_selection": 0.7556387130007352,
+        "cloud_answering": 23.589434955001707,
+        "synthesis": 5.912295559000995
+      }
+    },
+    {
+      "sample_id": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT__Parties",
+      "error": "",
+      "topics": {
+        "Contract Parties Identification": 0.4,
+        "Promotion and Marketing Agreements": 0.3,
+        "Intellectual Property Rights": 0.2,
+        "Regulatory Compliance": 0.1
+      },
+      "s0_text_length": 1963,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What information is typically required to properly identify parties in a business contract?",
+        "How does ambiguity in identifying contract parties affect the enforceability of an agreement?",
+        "Why is it important to specify ownership and licensing terms for intellectual property in contracts?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1139,
+      "step_timings": {
+        "topic_extraction": 2.657208544000241,
+        "text_generation": 2.9115883739996207,
+        "question_generation": 2.2725891129994125,
+        "question_selection": 0.6049382900000637,
+        "cloud_answering": 23.08489637099956,
+        "synthesis": 2.619023035000282
+      }
+    },
+    {
+      "sample_id": "SigaTechnologiesInc_20190603_8-K_EX-10.1_11695818_EX-10.1_Promotion Agreement__Expiration Date",
+      "error": "",
+      "topics": {
+        "Contract Termination and Expiration": 0.4,
+        "Intellectual Property Rights": 0.2,
+        "Regulatory Compliance": 0.15,
+        "Confidentiality and Data Protection": 0.15,
+        "Dispute Resolution": 0.1
+      },
+      "s0_text_length": 2198,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the difference between contract termination and contract expiration?",
+        "What are common reasons a contract may be terminated before its agreed-upon duration?",
+        "Why is it important to include clear termination and expiration provisions in a business contract?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2550,
+      "step_timings": {
+        "topic_extraction": 2.2323811819987895,
+        "text_generation": 3.105593428999782,
+        "question_generation": 1.9689493749992835,
+        "question_selection": 0.6889729769991391,
+        "cloud_answering": 24.47866212000008,
+        "synthesis": 15.122709989000214
+      }
+    },
+    {
+      "sample_id": "ELFBEAUTY,INC_07_02_2020-EX-10.1-COOPERATION AGREEMENT__Document Name",
+      "error": "",
+      "topics": {
+        "contract interpretation": 0.3,
+        "corporate governance": 0.25,
+        "board nominations": 0.2,
+        "shareholder agreements": 0.15,
+        "legal compliance": 0.1
+      },
+      "s0_text_length": 2336,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the typical provisions included in a shareholder agreement, and why are they important for closely held companies?",
+        "How can businesses establish effective dispute resolution mechanisms in shareholder agreements?",
+        "What are some best practices businesses can follow to ensure clarity and precision in contract drafting?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 603,
+      "step_timings": {
+        "topic_extraction": 1.7865666420002526,
+        "text_generation": 3.647735565000403,
+        "question_generation": 2.3482032020001498,
+        "question_selection": 0.6793633959987346,
+        "cloud_answering": 29.614386377999836,
+        "synthesis": 2.122078398000667
+      }
+    },
+    {
+      "sample_id": "INTRICONCORP_03_10_2009-EX-10.22-Strategic Alliance Agreement__Termination For Convenience",
+      "error": "",
+      "topics": {
+        "Contract Termination": 0.3,
+        "Licensing and Intellectual Property": 0.25,
+        "Payment Obligations": 0.2,
+        "Confidentiality and Data Protection": 0.15,
+        "Dispute Resolution and Remedies": 0.1
+      },
+      "s0_text_length": 2181,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the common grounds for terminating a business contract, and how should they be outlined in a termination clause?",
+        "What are the differences between mediation, arbitration, and litigation as methods of dispute resolution?",
+        "How can specifying remedies in a contract, such as damages or specific performance, help resolve disputes effectively?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2123,
+      "step_timings": {
+        "topic_extraction": 2.4313512699991406,
+        "text_generation": 4.212096834999102,
+        "question_generation": 2.2861885290003556,
+        "question_selection": 0.8774963180003397,
+        "cloud_answering": 26.11150395199911,
+        "synthesis": 4.761379116998796
+      }
+    },
+    {
+      "sample_id": "VIRGINGALACTICHOLDINGS,INC_04_08_2020-EX-99.1-JOINT FILING STATEMENT__Document Name",
+      "error": "",
+      "topics": {
+        "contract_identification": 0.4,
+        "regulatory_compliance": 0.3,
+        "joint_filing_agreements": 0.2,
+        "responsibility_allocation": 0.1
+      },
+      "s0_text_length": 2495,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the purpose of a joint filing agreement, and in what scenarios might it typically be used?",
+        "How can parties ensure accuracy and prevent misunderstandings when entering into a joint filing agreement?",
+        "Why is responsibility allocation important in business contracts, and how can it help minimize disputes?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 566,
+      "step_timings": {
+        "topic_extraction": 0.9501615270000912,
+        "text_generation": 4.061875740999312,
+        "question_generation": 3.7148971000005986,
+        "question_selection": 1.3100456279989885,
+        "cloud_answering": 23.308561439000187,
+        "synthesis": 2.2208100330008165
+      }
+    },
+    {
+      "sample_id": "VerizonAbsLlc_20200123_8-K_EX-10.4_11952335_EX-10.4_Service Agreement__Cap On Liability",
+      "error": "",
+      "topics": {
+        "Liability Limitations": 0.35,
+        "Contractual Obligations": 0.25,
+        "Risk Allocation": 0.2,
+        "Indemnification": 0.1,
+        "Dispute Resolution": 0.1
+      },
+      "s0_text_length": 2182,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the purpose of liability limitation clauses in business contracts, and how do they typically function?",
+        "What types of damages are commonly excluded in liability limitation provisions?",
+        "What is the role of indemnification clauses in business contracts, and how do they shift liability between parties?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 3462,
+      "step_timings": {
+        "topic_extraction": 2.8715821799996775,
+        "text_generation": 3.985896286998468,
+        "question_generation": 1.886786889999712,
+        "question_selection": 0.9328982690003613,
+        "cloud_answering": 26.232636509999793,
+        "synthesis": 9.075114385001143
+      }
+    },
+    {
+      "sample_id": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT__Renewal Term",
+      "error": "",
+      "topics": {
+        "contract_renewal_terms": 0.4,
+        "intellectual_property": 0.2,
+        "marketing_and_promotion": 0.2,
+        "termination_clauses": 0.2
+      },
+      "s0_text_length": 2214,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the key elements that should be included in a contract's renewal terms to ensure clarity and mutual understanding?",
+        "How do automatic renewal clauses, or \"evergreen clauses,\" typically function in business contracts, and what are the potential risks associated with them?",
+        "How can businesses ensure that their contract renewal terms align with current market conditions and organizational needs?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1683,
+      "step_timings": {
+        "topic_extraction": 2.3272923000004084,
+        "text_generation": 3.565518356999746,
+        "question_generation": 2.7209868149984686,
+        "question_selection": 0.6071089420001954,
+        "cloud_answering": 23.09060122399933,
+        "synthesis": 4.543262307000987
+      }
+    },
+    {
+      "sample_id": "PerformanceSportsBrandsInc_20110909_S-1_EX-10.10_7220214_EX-10.10_Endorsement Agreement__Non-Disparagement",
+      "error": "",
+      "topics": {
+        "Non-Disparagement and Reputation Management": 0.3,
+        "Contractual Obligations and Performance": 0.25,
+        "Intellectual Property and Licensing": 0.2,
+        "Termination and Remedies": 0.15,
+        "Confidentiality and Privacy": 0.1
+      },
+      "s0_text_length": 2325,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the purpose of a non-disparagement clause in a contract, and in what types of agreements is it commonly used?",
+        "What are termination clauses in contracts, and under what circumstances can a contract be legally terminated?",
+        "What is the difference between confidentiality agreements and privacy laws, and how do they protect sensitive information?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2346,
+      "step_timings": {
+        "topic_extraction": 1.8790130939996743,
+        "text_generation": 3.473775698999816,
+        "question_generation": 2.302898122999977,
+        "question_selection": 0.9679308499999024,
+        "cloud_answering": 19.747110369999064,
+        "synthesis": 4.976643492000221
+      }
+    },
+    {
+      "sample_id": "VISIUMTECHNOLOGIES,INC_10_20_2004-EX-10.20-DISTRIBUTOR AGREEMENT__Governing Law",
+      "error": "",
+      "topics": {
+        "Governing Law and Jurisdiction": 0.4,
+        "Contract Interpretation": 0.2,
+        "Dispute Resolution": 0.2,
+        "Contractual Obligations": 0.2
+      },
+      "s0_text_length": 2655,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the purpose of including a governing law clause in a contract?",
+        "How does jurisdiction impact the resolution of disputes in a legal agreement?",
+        "What factors should parties consider when selecting a governing law for a cross-border transaction?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1891,
+      "step_timings": {
+        "topic_extraction": 1.7009902559984766,
+        "text_generation": 3.738046934999147,
+        "question_generation": 1.872536406999643,
+        "question_selection": 0.570657136000591,
+        "cloud_answering": 22.417228571001033,
+        "synthesis": 4.143668552000236
+      }
+    },
+    {
+      "sample_id": "INKTOMICORP_06_08_1998-EX-10.14-SOFTWARE HOSTING AGREEMENT__Ip Ownership Assignment",
+      "error": "",
+      "topics": {
+        "Intellectual Property Rights": 0.4,
+        "Contractual Obligations": 0.25,
+        "Ownership and Licensing": 0.2,
+        "Confidentiality and Non-Disclosure": 0.15
+      },
+      "s0_text_length": 2070,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "How does a licensing agreement differ from transferring ownership of intellectual property?",
+        "What are the essential terms that should be included in a licensing agreement to avoid disputes?",
+        "What legal protections are available for trade secrets under confidentiality agreements?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2204,
+      "step_timings": {
+        "topic_extraction": 1.457741807000275,
+        "text_generation": 4.183475788999203,
+        "question_generation": 1.972117186000105,
+        "question_selection": 1.0222549659993092,
+        "cloud_answering": 23.32990076399983,
+        "synthesis": 4.29032135899979
+      }
+    },
+    {
+      "sample_id": "WARNINGMANAGEMENTSERVICESINC_12_10_1999-EX-10-ENDORSEMENT AGREEMENT__Most Favored Nation",
+      "error": "",
+      "topics": {
+        "contractual obligations": 0.3,
+        "intellectual property rights": 0.25,
+        "royalty and payment terms": 0.2,
+        "termination and default provisions": 0.15,
+        "dispute resolution": 0.1
+      },
+      "s0_text_length": 1877,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the common components of payment terms in business contracts?",
+        "What is the purpose of termination and default provisions in contracts, and how do they protect parties?",
+        "How can businesses decide which dispute resolution mechanism to include in their contracts?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1171,
+      "step_timings": {
+        "topic_extraction": 2.9432876230002876,
+        "text_generation": 3.588720067000395,
+        "question_generation": 2.9663336599987815,
+        "question_selection": 0.6540179140010878,
+        "cloud_answering": 26.252283574998728,
+        "synthesis": 3.102643160998923
+      }
+    },
+    {
+      "sample_id": "FIDELITYNATIONALINFORMATIONSERVICES,INC_08_05_2009-EX-10.3-INTELLECTUAL PROPERTY AGREEMENT__Cap On Liability",
+      "error": "",
+      "topics": {
+        "Liability Limitations": 0.4,
+        "Indemnification": 0.25,
+        "Intellectual Property Rights": 0.2,
+        "Contractual Obligations": 0.15
+      },
+      "s0_text_length": 2091,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are liability limitation clauses, and how do they function in business agreements?",
+        "What types of damages are commonly excluded in liability limitation provisions?",
+        "Are there legal restrictions on the enforceability of liability limitation clauses in contracts?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2636,
+      "step_timings": {
+        "topic_extraction": 2.3291589350010327,
+        "text_generation": 3.263125436998962,
+        "question_generation": 5.082714013999066,
+        "question_selection": 0.6418542340015847,
+        "cloud_answering": 22.426814749000187,
+        "synthesis": 5.47585380900091
+      }
+    },
+    {
+      "sample_id": "ORBSATCORP_08_17_2007-EX-7.3-STRATEGIC ALLIANCE AGREEMENT__Termination For Convenience",
+      "error": "",
+      "topics": {
+        "contract_termination": 0.4,
+        "termination_notice_periods": 0.25,
+        "mutual obligations": 0.2,
+        "contractual terms and conditions": 0.15
+      },
+      "s0_text_length": 1873,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the key elements that should be included in a termination clause within a contract?",
+        "Why is it important for contractual terms and conditions to clearly define termination rights and procedures?",
+        "What is the purpose of a termination notice period in a contractual agreement?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1859,
+      "step_timings": {
+        "topic_extraction": 1.0249288230006641,
+        "text_generation": 3.1778021869995428,
+        "question_generation": 1.8284730480008875,
+        "question_selection": 0.7523004129998299,
+        "cloud_answering": 18.30207030099882,
+        "synthesis": 4.322792294000465
+      }
+    },
+    {
+      "sample_id": "VertexEnergyInc_20200113_8-K_EX-10.1_11943624_EX-10.1_Marketing Agreement__Change Of Control",
+      "error": "",
+      "topics": {
+        "change_of_control": 0.35,
+        "contract_termination": 0.25,
+        "governance_and_management": 0.15,
+        "indemnification_and_liability": 0.15,
+        "confidentiality_and_non_compete": 0.1
+      },
+      "s0_text_length": 2294,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is a \"Change of Control\" provision, and why is it important in contracts and corporate governance?",
+        "Under what circumstances can a contract typically be terminated according to standard termination clauses?",
+        "What factors should businesses consider when negotiating Change of Control provisions in contracts?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 3728,
+      "step_timings": {
+        "topic_extraction": 1.7227659730015148,
+        "text_generation": 3.564439888999914,
+        "question_generation": 2.259619685999496,
+        "question_selection": 0.7230389450014627,
+        "cloud_answering": 20.160431012998743,
+        "synthesis": 7.439461412999663
+      }
+    },
+    {
+      "sample_id": "PLAYAHOTELS_RESORTSNV_03_14_2017-EX-10.22-STRATEGIC ALLIANCE AGREEMENT (Hyatt Ziva Cancun)__Governing Law",
+      "error": "",
+      "topics": {
+        "Governing Law and Jurisdiction": 0.4,
+        "Contractual Obligations and Terms": 0.25,
+        "Dispute Resolution and Arbitration": 0.2,
+        "Franchise and Licensing Agreements": 0.15
+      },
+      "s0_text_length": 2402,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the significance of specifying governing law in a legal agreement?",
+        "How does jurisdiction impact the resolution of disputes in a contract?",
+        "What factors should parties consider when drafting a dispute resolution clause in a contract?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2574,
+      "step_timings": {
+        "topic_extraction": 1.646691293000913,
+        "text_generation": 5.323659851999764,
+        "question_generation": 1.7558672630002548,
+        "question_selection": 0.7976577640001778,
+        "cloud_answering": 20.96272845099884,
+        "synthesis": 5.095313625999552
+      }
+    },
+    {
+      "sample_id": "SYKESHEALTHPLANSERVICESINC_04_24_1998-EX-10.14-OUTSOURCING AGREEMENT__Renewal Term",
+      "error": "",
+      "topics": {
+        "contract renewal terms": 0.4,
+        "termination clauses": 0.25,
+        "automatic extension provisions": 0.2,
+        "notice requirements": 0.15
+      },
+      "s0_text_length": 2108,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the key differences between automatic and manual contract renewal terms?",
+        "What are automatic extension provisions, and what risks do they pose to businesses?",
+        "What are some best practices for drafting clear and enforceable contract provisions related to renewal, termination, and notice requirements?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1854,
+      "step_timings": {
+        "topic_extraction": 1.2561744939994242,
+        "text_generation": 3.3170356930004345,
+        "question_generation": 2.2835474319999776,
+        "question_selection": 0.7849957819998963,
+        "cloud_answering": 23.889078745000006,
+        "synthesis": 5.016433749000498
+      }
+    },
+    {
+      "sample_id": "CYBERIANOUTPOSTINC_07_09_1998-EX-10.13-PROMOTION AGREEMENT__License Grant",
+      "error": "",
+      "topics": {
+        "intellectual_property_licenses": 0.3,
+        "advertising_and_promotion": 0.25,
+        "contractual_obligations": 0.2,
+        "confidentiality_and_data_sharing": 0.15,
+        "termination_and_exclusivity": 0.1
+      },
+      "s0_text_length": 2191,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "How do geographic limitations in an IP license agreement impact the rights of the licensee?",
+        "What are the typical conditions under which a termination clause in a business contract can be invoked?",
+        "How can businesses prevent disputes over the unauthorized use of intellectual property through proper licensing?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 3799,
+      "step_timings": {
+        "topic_extraction": 1.8346083819997148,
+        "text_generation": 2.612565406001522,
+        "question_generation": 2.506595443999686,
+        "question_selection": 0.945294733000992,
+        "cloud_answering": 19.224346938999588,
+        "synthesis": 6.8970046379999985
+      }
+    },
+    {
+      "sample_id": "AudibleInc_20001113_10-Q_EX-10.32_2599586_EX-10.32_Co-Branding Agreement_ Marketing Agreement_ Investment Distribution Agreement__Ip Ownership Assignment",
+      "error": "",
+      "topics": {
+        "intellectual_property": 0.4,
+        "contractual_obligations": 0.25,
+        "ownership_and_assignment": 0.2,
+        "licensing_and_rights": 0.1,
+        "dispute_resolution": 0.05
+      },
+      "s0_text_length": 2127,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the legal significance of ownership in intellectual property, and how can it be established?",
+        "How does the assignment of intellectual property rights typically work in employment agreements?",
+        "What steps can businesses take to ensure proper documentation of ownership and assignment of assets?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 3587,
+      "step_timings": {
+        "topic_extraction": 2.2285464920005325,
+        "text_generation": 4.355933189001007,
+        "question_generation": 2.3125840070006234,
+        "question_selection": 0.574130596998657,
+        "cloud_answering": 23.948643481000545,
+        "synthesis": 4.931451087999449
+      }
+    },
+    {
+      "sample_id": "SMITHELECTRICVEHICLESCORP_04_04_2012-EX-10.26-FLEET MAINTENANCE AGREEMENT__Rofr/Rofo/Rofn",
+      "error": "",
+      "topics": {
+        "Contractual Rights and Obligations": 0.3,
+        "Negotiation and Offer Terms": 0.25,
+        "Termination and Renewal Clauses": 0.2,
+        "Confidentiality and Disclosure": 0.15,
+        "Dispute Resolution and Remedies": 0.1
+      },
+      "s0_text_length": 2197,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What factors should be taken into account when negotiating the terms of a contract?",
+        "What is the purpose of a renewal clause in a contract, and how does it typically operate?",
+        "How can parties ensure that disclosure obligations in a contract are fair and reasonable?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2558,
+      "step_timings": {
+        "topic_extraction": 3.317330456000491,
+        "text_generation": 3.208731381999314,
+        "question_generation": 2.2122903319996112,
+        "question_selection": 0.5099517660000856,
+        "cloud_answering": 25.886376967000615,
+        "synthesis": 6.100483095000527
+      }
+    },
+    {
+      "sample_id": "HertzGroupRealtyTrustInc_20190920_S-11A_EX-10.8_11816941_EX-10.8_Trademark License Agreement__Change Of Control",
+      "error": "",
+      "topics": {
+        "contract termination": 0.3,
+        "intellectual property rights": 0.25,
+        "change of control": 0.2,
+        "license agreements": 0.15,
+        "governing law and jurisdiction": 0.1
+      },
+      "s0_text_length": 2101,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the common events or conditions that typically trigger contract termination under termination clauses?",
+        "How do change of control provisions in contracts protect parties during mergers or acquisitions?",
+        "What legal remedies are available if a party breaches a termination clause in a contract?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 3282,
+      "step_timings": {
+        "topic_extraction": 1.3090958739994676,
+        "text_generation": 3.2194757929992193,
+        "question_generation": 1.6131054620000214,
+        "question_selection": 0.8354420649993699,
+        "cloud_answering": 24.740764805001163,
+        "synthesis": 5.071841480999865
+      }
+    },
+    {
+      "sample_id": "RUBIOSRESTAURANTSINC_03_31_2008-EX-10.75-SPONSORSHIP AGREEMENT__Document Name",
+      "error": "",
+      "topics": {
+        "contract interpretation": 0.3,
+        "sponsorship agreements": 0.25,
+        "payment obligations": 0.2,
+        "legal relationships": 0.15,
+        "governing law and jurisdiction": 0.1
+      },
+      "s0_text_length": 2049,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the key elements that should be included in a sponsorship agreement?",
+        "How can parties ensure that expectations are clearly documented in a sponsorship agreement?",
+        "What details are commonly included in payment obligation provisions within a contract?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 978,
+      "step_timings": {
+        "topic_extraction": 1.8044410820002668,
+        "text_generation": 4.0449353990006784,
+        "question_generation": 2.1327557479999086,
+        "question_selection": 0.5564909429995168,
+        "cloud_answering": 28.001836464000007,
+        "synthesis": 2.4408934019993467
+      }
+    },
+    {
+      "sample_id": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement__Competitive Restriction Exception",
+      "error": "",
+      "topics": {
+        "Non-compete clauses": 0.3,
+        "Intellectual property rights": 0.25,
+        "Confidentiality obligations": 0.2,
+        "Licensing and sublicensing": 0.15,
+        "Termination provisions": 0.1
+      },
+      "s0_text_length": 2312,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "How does the geographic scope of a non-compete clause impact its enforceability?",
+        "How does the duration of a non-compete clause affect its likelihood of being upheld in court?",
+        "What factors do courts typically consider when determining the enforceability of a non-compete clause?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 4174,
+      "step_timings": {
+        "topic_extraction": 5.3754872720001,
+        "text_generation": 3.6416234849984903,
+        "question_generation": 2.3638338560012926,
+        "question_selection": 0.6764548840001225,
+        "cloud_answering": 26.821141114000056,
+        "synthesis": 9.336741159000667
+      }
+    },
+    {
+      "sample_id": "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT__Non-Transferable License",
+      "error": "",
+      "topics": {
+        "intellectual_property": 0.4,
+        "contractual_licensing": 0.3,
+        "transferability_and_assignment": 0.2,
+        "confidentiality_and_data_protection": 0.1
+      },
+      "s0_text_length": 2043,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What legal considerations should be addressed when transferring or assigning intellectual property rights?",
+        "Under what circumstances can intellectual property rights be assigned or transferred to another party?",
+        "How does exclusivity in a licensing agreement impact the rights of the licensor and licensee?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2455,
+      "step_timings": {
+        "topic_extraction": 2.191697734999252,
+        "text_generation": 4.926115944999765,
+        "question_generation": 2.665016758999627,
+        "question_selection": 0.7380191909996938,
+        "cloud_answering": 27.140195124000456,
+        "synthesis": 4.553788498998983
+      }
+    },
+    {
+      "sample_id": "INTELLIGENTHIGHWAYSOLUTIONS,INC_01_18_2018-EX-10.1-Strategic Alliance Agreement__Termination For Convenience",
+      "error": "",
+      "topics": {
+        "contract_termination": 0.4,
+        "notice_requirements": 0.2,
+        "governing_law": 0.15,
+        "confidentiality_obligations": 0.15,
+        "business partnership terms": 0.1
+      },
+      "s0_text_length": 1964,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the common grounds for terminating a business contract, and how are they typically outlined in termination clauses?",
+        "Why is it important for parties to adhere to notice requirements specified in a contract, and what are the potential consequences of failing to do so?",
+        "What are the typical methods of delivering notice under a contract, and how can parties ensure compliance with these methods?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2033,
+      "step_timings": {
+        "topic_extraction": 1.35234759100058,
+        "text_generation": 7.09830288899866,
+        "question_generation": 2.448847878000379,
+        "question_selection": 0.8737402850001672,
+        "cloud_answering": 21.07779682200089,
+        "synthesis": 4.508912847999454
+      }
+    },
+    {
+      "sample_id": "PerformanceSportsBrandsInc_20110909_S-1_EX-10.10_7220214_EX-10.10_Endorsement Agreement__Insurance",
+      "error": "",
+      "topics": {
+        "insurance requirements": 0.4,
+        "indemnification": 0.2,
+        "contractual obligations": 0.2,
+        "risk management": 0.2
+      },
+      "s0_text_length": 2203,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What types of insurance are commonly required in business contracts, and why are they important?",
+        "How can businesses ensure compliance with insurance provisions in their contracts?",
+        "How can businesses use insurance as part of their overall risk management strategy?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2567,
+      "step_timings": {
+        "topic_extraction": 1.2117492079996737,
+        "text_generation": 6.080859636000241,
+        "question_generation": 2.4436419409994414,
+        "question_selection": 0.5425312879997364,
+        "cloud_answering": 26.879420002998813,
+        "synthesis": 5.840184811000654
+      }
+    },
+    {
+      "sample_id": "BerkshireHillsBancorpInc_20120809_10-Q_EX-10.16_7708169_EX-10.16_Endorsement Agreement__Non-Disparagement",
+      "error": "",
+      "topics": {
+        "contractual_obligations": 0.3,
+        "endorsement_agreements": 0.25,
+        "confidentiality_provisions": 0.2,
+        "termination_clauses": 0.15,
+        "dispute_resolution": 0.1
+      },
+      "s0_text_length": 2391,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are the essential components of a confidentiality clause in a business contract?",
+        "How can exceptions to confidentiality obligations be defined in a contract to balance protection and practicality?",
+        "What are common grounds for terminating a contract under a termination clause?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1915,
+      "step_timings": {
+        "topic_extraction": 2.1976177050000842,
+        "text_generation": 3.760995541999364,
+        "question_generation": 2.2446229699999094,
+        "question_selection": 0.6814222029988741,
+        "cloud_answering": 23.549375086999135,
+        "synthesis": 5.0271261839989165
+      }
+    },
+    {
+      "sample_id": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_New__Agreement Date",
+      "error": "",
+      "topics": {
+        "Contract Formation": 0.4,
+        "Agreement Execution": 0.3,
+        "Legal Documentation": 0.2,
+        "Parties' Obligations": 0.1
+      },
+      "s0_text_length": 1931,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What is the significance of proper execution in making a contract legally effective?",
+        "When is notarization or witnessing required for a contract to be enforceable?",
+        "How can businesses ensure that all parties understand their obligations before signing a contract?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 570,
+      "step_timings": {
+        "topic_extraction": 1.560093454001617,
+        "text_generation": 3.051365400000577,
+        "question_generation": 2.2341585680005664,
+        "question_selection": 0.6160169630002201,
+        "cloud_answering": 29.74006109000038,
+        "synthesis": 1.8026469750002434
+      }
+    },
+    {
+      "sample_id": "VNUE,INC_07_10_2015-EX-10.1-SPONSORSHIP AGREEMENT__Anti-Assignment",
+      "error": "",
+      "topics": {
+        "Assignment and Delegation": 0.4,
+        "Contractual Restrictions": 0.3,
+        "Rights and Obligations": 0.2,
+        "Consent Requirements": 0.1
+      },
+      "s0_text_length": 1999,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "Can a party transfer contractual rights without the consent of the other party?",
+        "How does a non-assignment clause affect the ability to assign rights under a contract?",
+        "Under what circumstances might a contract prohibit the delegation of duties?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 2904,
+      "step_timings": {
+        "topic_extraction": 1.5100998309990246,
+        "text_generation": 3.01623331600058,
+        "question_generation": 2.0558299950007495,
+        "question_selection": 1.1393607070003782,
+        "cloud_answering": 33.24230792399976,
+        "synthesis": 6.685109427999123
+      }
+    },
+    {
+      "sample_id": "NANOPHASETECHNOLOGIESCORP_11_01_2005-EX-99.1-DISTRIBUTOR AGREEMENT__Audit Rights",
+      "error": "",
+      "topics": {
+        "Audit Rights": 0.4,
+        "Contractual Obligations": 0.25,
+        "Recordkeeping and Compliance": 0.2,
+        "Dispute Resolution": 0.15
+      },
+      "s0_text_length": 2291,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are audit rights in a contract, and why are they important in business agreements?",
+        "How can parties negotiate audit clauses to balance oversight with operational efficiency?",
+        "Why is precise language important when drafting contractual obligations?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 1849,
+      "step_timings": {
+        "topic_extraction": 1.8831717319990275,
+        "text_generation": 3.632849489000364,
+        "question_generation": 2.0204900890003046,
+        "question_selection": 0.427175893999447,
+        "cloud_answering": 23.93460191399936,
+        "synthesis": 4.510485530001461
+      }
+    },
+    {
+      "sample_id": "EhaveInc_20190515_20-F_EX-4.44_11678816_EX-4.44_License Agreement_ Reseller Agreement__Post-Termination Services",
+      "error": "",
+      "topics": {
+        "contract termination": 0.3,
+        "post-termination obligations": 0.25,
+        "data management": 0.2,
+        "transition services": 0.15,
+        "intellectual property rights": 0.1
+      },
+      "s0_text_length": 2098,
+      "generated_questions_count": 10,
+      "selected_questions": [
+        "What are post-termination obligations, and how do they protect the interests of the parties involved in a contract?",
+        "How do confidentiality and non-compete clauses function as part of post-termination obligations?",
+        "What are transition services in the context of contract termination, and how can they help ensure a smooth handover?"
+      ],
+      "s0_answers_count": 3,
+      "final_answer_length": 6035,
+      "step_timings": {
+        "topic_extraction": 1.6217129139986355,
+        "text_generation": 3.7571631299979344,
+        "question_generation": 2.021443244000693,
+        "question_selection": 0.9546607810007117,
+        "cloud_answering": 28.55608169700281,
+        "synthesis": 12.443558955001208
+      }
+    }
+  ],
+  "fidelity": [
+    {
+      "max_sim": 0.5119203925132751,
+      "mean_sim": 0.4795059065024058,
+      "coverage": 0.5936102867126465
+    },
+    {
+      "max_sim": 0.6237868070602417,
+      "mean_sim": 0.5240108966827393,
+      "coverage": 0.628305971622467
+    },
+    {
+      "max_sim": 0.6099964380264282,
+      "mean_sim": 0.4950956106185913,
+      "coverage": 0.6011717319488525
+    },
+    {
+      "max_sim": 0.7739434242248535,
+      "mean_sim": 0.4066382000843684,
+      "coverage": 0.5247637629508972
+    },
+    {
+      "max_sim": 0.6664320230484009,
+      "mean_sim": 0.6077226996421814,
+      "coverage": 0.7221903800964355
+    },
+    {
+      "max_sim": 0.7050284147262573,
+      "mean_sim": 0.508895069360733,
+      "coverage": 0.6083037853240967
+    },
+    {
+      "max_sim": 0.7652772665023804,
+      "mean_sim": 0.6274964809417725,
+      "coverage": 0.7400187253952026
+    },
+    {
+      "max_sim": 0.7434407472610474,
+      "mean_sim": 0.5771230657895406,
+      "coverage": 0.6758015155792236
+    },
+    {
+      "max_sim": 0.7507467269897461,
+      "mean_sim": 0.49179519216219586,
+      "coverage": 0.6590431928634644
+    },
+    {
+      "max_sim": 0.5252476334571838,
+      "mean_sim": 0.4574819505214691,
+      "coverage": 0.5596007108688354
+    },
+    {
+      "max_sim": 0.6400193572044373,
+      "mean_sim": 0.5048019091288248,
+      "coverage": 0.6351096630096436
+    },
+    {
+      "max_sim": 0.6196231842041016,
+      "mean_sim": 0.5156450470288595,
+      "coverage": 0.6102521419525146
+    },
+    {
+      "max_sim": 0.6086028814315796,
+      "mean_sim": 0.46358469128608704,
+      "coverage": 0.5952019691467285
+    },
+    {
+      "max_sim": 0.6739522814750671,
+      "mean_sim": 0.5780090093612671,
+      "coverage": 0.6572202444076538
+    },
+    {
+      "max_sim": 0.577889084815979,
+      "mean_sim": 0.40345677733421326,
+      "coverage": 0.5769277811050415
+    },
+    {
+      "max_sim": 0.7924466729164124,
+      "mean_sim": 0.6867271860440572,
+      "coverage": 0.8134305477142334
+    },
+    {
+      "max_sim": 0.5902388691902161,
+      "mean_sim": 0.47845518589019775,
+      "coverage": 0.6103259325027466
+    },
+    {
+      "max_sim": 0.714323103427887,
+      "mean_sim": 0.5781534214814504,
+      "coverage": 0.7175657153129578
+    },
+    {
+      "max_sim": 0.6040298938751221,
+      "mean_sim": 0.4962490995724996,
+      "coverage": 0.6050106883049011
+    },
+    {
+      "max_sim": 0.7050284147262573,
+      "mean_sim": 0.5893287658691406,
+      "coverage": 0.6693798303604126
+    },
+    {
+      "max_sim": 0.31053227186203003,
+      "mean_sim": 0.27886008222897846,
+      "coverage": 0.3457609713077545
+    },
+    {
+      "max_sim": 0.569097101688385,
+      "mean_sim": 0.35943572719891864,
+      "coverage": 0.4797162115573883
+    },
+    {
+      "max_sim": 0.3705102205276489,
+      "mean_sim": 0.2720259428024292,
+      "coverage": 0.34441500902175903
+    },
+    {
+      "max_sim": 0.659394383430481,
+      "mean_sim": 0.6184162696202596,
+      "coverage": 0.7121521830558777
+    },
+    {
+      "max_sim": 0.6515847444534302,
+      "mean_sim": 0.6496570507685343,
+      "coverage": 0.7432171106338501
+    },
+    {
+      "max_sim": 0.735344648361206,
+      "mean_sim": 0.43357808391253155,
+      "coverage": 0.5895081758499146
+    },
+    {
+      "max_sim": 0.5482104420661926,
+      "mean_sim": 0.5165609220663706,
+      "coverage": 0.6432483196258545
+    },
+    {
+      "max_sim": 0.6005669832229614,
+      "mean_sim": 0.4256013135115306,
+      "coverage": 0.5412654280662537
+    },
+    {
+      "max_sim": 0.3999027609825134,
+      "mean_sim": 0.34903202454249066,
+      "coverage": 0.4319959580898285
+    },
+    {
+      "max_sim": 0.6674528121948242,
+      "mean_sim": 0.6429808139801025,
+      "coverage": 0.7033111453056335
+    },
+    {
+      "max_sim": 0.522702693939209,
+      "mean_sim": 0.5001702805360159,
+      "coverage": 0.5591444969177246
+    },
+    {
+      "max_sim": 0.650002121925354,
+      "mean_sim": 0.5290603538354238,
+      "coverage": 0.6869262456893921
+    },
+    {
+      "max_sim": 0.6145577430725098,
+      "mean_sim": 0.4927636384963989,
+      "coverage": 0.5913814902305603
+    },
+    {
+      "max_sim": 0.6448320150375366,
+      "mean_sim": 0.5360616246859232,
+      "coverage": 0.680580735206604
+    },
+    {
+      "max_sim": 0.4693523347377777,
+      "mean_sim": 0.3942241668701172,
+      "coverage": 0.5152350068092346
+    },
+    {
+      "max_sim": 0.7147514820098877,
+      "mean_sim": 0.5693672299385071,
+      "coverage": 0.6838183403015137
+    },
+    {
+      "max_sim": 0.5235579013824463,
+      "mean_sim": 0.3556821346282959,
+      "coverage": 0.48391151428222656
+    },
+    {
+      "max_sim": 0.63958340883255,
+      "mean_sim": 0.46661024292310077,
+      "coverage": 0.5791274309158325
+    },
+    {
+      "max_sim": 0.4364238381385803,
+      "mean_sim": 0.30627476175626117,
+      "coverage": 0.37637588381767273
+    },
+    {
+      "max_sim": 0.6578871011734009,
+      "mean_sim": 0.5968013405799866,
+      "coverage": 0.6564655303955078
+    },
+    {
+      "max_sim": 0.5320033431053162,
+      "mean_sim": 0.5028349359830221,
+      "coverage": 0.5810486078262329
+    },
+    {
+      "max_sim": 0.5598981976509094,
+      "mean_sim": 0.417587806781133,
+      "coverage": 0.5307163000106812
+    },
+    {
+      "max_sim": 0.6847209334373474,
+      "mean_sim": 0.5877862672011057,
+      "coverage": 0.6667264699935913
+    },
+    {
+      "max_sim": 0.5050780177116394,
+      "mean_sim": 0.41995251178741455,
+      "coverage": 0.5374742746353149
+    },
+    {
+      "max_sim": 0.45487892627716064,
+      "mean_sim": 0.3767884075641632,
+      "coverage": 0.4735998213291168
+    },
+    {
+      "max_sim": 0.6778324842453003,
+      "mean_sim": 0.6561455130577087,
+      "coverage": 0.831362247467041
+    },
+    {
+      "max_sim": 0.7178945541381836,
+      "mean_sim": 0.4924150307973226,
+      "coverage": 0.6632112264633179
+    },
+    {
+      "max_sim": 0.6900764107704163,
+      "mean_sim": 0.5840638081232706,
+      "coverage": 0.7174997329711914
+    }
+  ],
+  "quality_pipeline": [
+    {
+      "bertscore_f1": 0.8977611064910889,
+      "semantic_sim": 0.8328151702880859,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.0506216696269983
+    },
+    {
+      "bertscore_f1": 0.9065477252006531,
+      "semantic_sim": 0.8892000913619995,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.1294498381877023
+    },
+    {
+      "bertscore_f1": 0.8971467018127441,
+      "semantic_sim": 0.9274240136146545,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.671455938697318
+    },
+    {
+      "bertscore_f1": 0.8635390996932983,
+      "semantic_sim": 0.8160234689712524,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.3104631217838767
+    },
+    {
+      "bertscore_f1": 0.8895224928855896,
+      "semantic_sim": 0.9580610990524292,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.2495230827928272
+    },
+    {
+      "bertscore_f1": 0.880884051322937,
+      "semantic_sim": 0.7421118021011353,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.0979899497487438
+    },
+    {
+      "bertscore_f1": 0.8767328858375549,
+      "semantic_sim": 0.8524717092514038,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.3864864864864865
+    },
+    {
+      "bertscore_f1": 0.9041253924369812,
+      "semantic_sim": 0.9239609837532043,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.3095684803001877
+    },
+    {
+      "bertscore_f1": 0.8808214664459229,
+      "semantic_sim": 0.8438289761543274,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 0.8270173874275524
+    },
+    {
+      "bertscore_f1": 0.8924577832221985,
+      "semantic_sim": 0.7302950024604797,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 1.405152224824356
+    },
+    {
+      "bertscore_f1": 0.9306892156600952,
+      "semantic_sim": 0.9622220993041992,
+      "gold_span_overlap": 0.8,
+      "length_ratio": 2.0126182965299684
+    },
+    {
+      "bertscore_f1": 0.8844692707061768,
+      "semantic_sim": 0.8651010394096375,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 1.8113933795227097
+    },
+    {
+      "bertscore_f1": 0.8675037026405334,
+      "semantic_sim": 0.8481380939483643,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.984
+    },
+    {
+      "bertscore_f1": 0.8707101345062256,
+      "semantic_sim": 0.8091477155685425,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.0982707718262337
+    },
+    {
+      "bertscore_f1": 0.8783368468284607,
+      "semantic_sim": 0.8445082902908325,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 0.9038461538461539
+    },
+    {
+      "bertscore_f1": 0.8834994435310364,
+      "semantic_sim": 0.8464598059654236,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.8152580403889305
+    },
+    {
+      "bertscore_f1": 0.8833383917808533,
+      "semantic_sim": 0.820743203163147,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 0.6015004413062666
+    },
+    {
+      "bertscore_f1": 0.8975398540496826,
+      "semantic_sim": 0.9096691012382507,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.0628385698808234
+    },
+    {
+      "bertscore_f1": 0.926095187664032,
+      "semantic_sim": 0.8979182243347168,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 1.736280487804878
+    },
+    {
+      "bertscore_f1": 0.8852907419204712,
+      "semantic_sim": 0.902080237865448,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.266137040714995
+    },
+    {
+      "bertscore_f1": 0.9079620838165283,
+      "semantic_sim": 0.8789074420928955,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 0.7426108374384236
+    },
+    {
+      "bertscore_f1": 0.8851020932197571,
+      "semantic_sim": 0.8956072926521301,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.6547155105222136
+    },
+    {
+      "bertscore_f1": 0.8977509140968323,
+      "semantic_sim": 0.8203808069229126,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 0.7828492392807745
+    },
+    {
+      "bertscore_f1": 0.8736853003501892,
+      "semantic_sim": 0.8252050876617432,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 0.9428104575163399
+    },
+    {
+      "bertscore_f1": 0.8639847636222839,
+      "semantic_sim": 0.8381494879722595,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.2651413189771197
+    },
+    {
+      "bertscore_f1": 0.865967333316803,
+      "semantic_sim": 0.7945910096168518,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.635955056179775
+    },
+    {
+      "bertscore_f1": 0.9013378024101257,
+      "semantic_sim": 0.7329751253128052,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.2996563573883162
+    },
+    {
+      "bertscore_f1": 0.8889181017875671,
+      "semantic_sim": 0.9299601316452026,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 0.981300089047195
+    },
+    {
+      "bertscore_f1": 0.9090926647186279,
+      "semantic_sim": 0.8112937211990356,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.286813186813187
+    },
+    {
+      "bertscore_f1": 0.8874053955078125,
+      "semantic_sim": 0.9188051223754883,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.5850871918220084
+    },
+    {
+      "bertscore_f1": 0.9043477773666382,
+      "semantic_sim": 0.9127200841903687,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 1.7604166666666667
+    },
+    {
+      "bertscore_f1": 0.8824672102928162,
+      "semantic_sim": 0.7450188398361206,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.563758389261745
+    },
+    {
+      "bertscore_f1": 0.919786810874939,
+      "semantic_sim": 0.9605444073677063,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.535799522673031
+    },
+    {
+      "bertscore_f1": 0.92772376537323,
+      "semantic_sim": 0.9278213977813721,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.2595108695652173
+    },
+    {
+      "bertscore_f1": 0.8879942297935486,
+      "semantic_sim": 0.9410983920097351,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.6186621218576907
+    },
+    {
+      "bertscore_f1": 0.9327873587608337,
+      "semantic_sim": 0.946611225605011,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.244190079778009
+    },
+    {
+      "bertscore_f1": 0.8889797329902649,
+      "semantic_sim": 0.6324284076690674,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.314932126696833
+    },
+    {
+      "bertscore_f1": 0.9033585786819458,
+      "semantic_sim": 0.8820777535438538,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 1.196064139941691
+    },
+    {
+      "bertscore_f1": 0.8915308713912964,
+      "semantic_sim": 0.907538890838623,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 2.4696969696969697
+    },
+    {
+      "bertscore_f1": 0.9184861183166504,
+      "semantic_sim": 0.9084728360176086,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.1857954545454545
+    },
+    {
+      "bertscore_f1": 0.8923494219779968,
+      "semantic_sim": 0.9175740480422974,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.0954930834448906
+    },
+    {
+      "bertscore_f1": 0.8785790205001831,
+      "semantic_sim": 0.7501865029335022,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 1.7361229718189581
+    },
+    {
+      "bertscore_f1": 0.8656435012817383,
+      "semantic_sim": 0.7566022276878357,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 3.066905615292712
+    },
+    {
+      "bertscore_f1": 0.9079809188842773,
+      "semantic_sim": 0.8543370962142944,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 1.8134469696969697
+    },
+    {
+      "bertscore_f1": 0.9860296845436096,
+      "semantic_sim": 0.8914725184440613,
+      "gold_span_overlap": 1.0,
+      "length_ratio": 1.0
+    },
+    {
+      "bertscore_f1": 0.8579984903335571,
+      "semantic_sim": 0.6174771785736084,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 3.1496746203904555
+    },
+    {
+      "bertscore_f1": 0.881814181804657,
+      "semantic_sim": 0.8679009079933167,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.2439320388349513
+    },
+    {
+      "bertscore_f1": 0.8679454922676086,
+      "semantic_sim": 0.8419778347015381,
+      "gold_span_overlap": 0.0,
+      "length_ratio": 2.35190958690569
+    }
+  ],
+  "quality_local_only": [
+    {
+      "bertscore_f1": 0.9821869134902954,
+      "semantic_sim": 0.9883390069007874,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8989002108573914,
+      "semantic_sim": 0.9178434610366821,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9075003862380981,
+      "semantic_sim": 0.9332940578460693,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9307469129562378,
+      "semantic_sim": 0.9446113705635071,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9554675221443176,
+      "semantic_sim": 0.9860266447067261,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9240702986717224,
+      "semantic_sim": 0.9597733020782471,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.900580644607544,
+      "semantic_sim": 0.899480402469635,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9880021810531616,
+      "semantic_sim": 0.9943031668663025,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9180231690406799,
+      "semantic_sim": 0.9419257044792175,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9901716113090515,
+      "semantic_sim": 0.9744471311569214,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.9884287118911743,
+      "semantic_sim": 0.9974769353866577,
+      "gold_span_overlap": 0.8
+    },
+    {
+      "bertscore_f1": 0.9685269594192505,
+      "semantic_sim": 0.9916576147079468,
+      "gold_span_overlap": 0.6666666666666666
+    },
+    {
+      "bertscore_f1": 0.894079864025116,
+      "semantic_sim": 0.747564435005188,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8913832306861877,
+      "semantic_sim": 0.8723848462104797,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9053394198417664,
+      "semantic_sim": 0.9567779302597046,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9331023097038269,
+      "semantic_sim": 0.9646807909011841,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9018407464027405,
+      "semantic_sim": 0.9466002583503723,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9022972583770752,
+      "semantic_sim": 0.890613317489624,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9999999403953552,
+      "semantic_sim": 1.0,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.9295568466186523,
+      "semantic_sim": 0.9261850714683533,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.959177553653717,
+      "semantic_sim": 0.9413883686065674,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.9028823971748352,
+      "semantic_sim": 0.9173750877380371,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9583367109298706,
+      "semantic_sim": 0.9343795776367188,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.9080222845077515,
+      "semantic_sim": 0.9393458366394043,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9560651183128357,
+      "semantic_sim": 0.9631776213645935,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9253804087638855,
+      "semantic_sim": 0.931313157081604,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9548081755638123,
+      "semantic_sim": 0.9912176728248596,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9624602198600769,
+      "semantic_sim": 0.9644331932067871,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8819838762283325,
+      "semantic_sim": 0.7419814467430115,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9070537686347961,
+      "semantic_sim": 0.8744884133338928,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9669632911682129,
+      "semantic_sim": 0.9687862992286682,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.8841494917869568,
+      "semantic_sim": 0.7616134881973267,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9377288818359375,
+      "semantic_sim": 0.9842541813850403,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9479718804359436,
+      "semantic_sim": 0.9587341547012329,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9005936980247498,
+      "semantic_sim": 0.9324387311935425,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9205824136734009,
+      "semantic_sim": 0.9526568651199341,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9431405663490295,
+      "semantic_sim": 0.9198696613311768,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8937374353408813,
+      "semantic_sim": 0.8662799596786499,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9364033341407776,
+      "semantic_sim": 0.9767245054244995,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.9366914629936218,
+      "semantic_sim": 0.8904352784156799,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9125879406929016,
+      "semantic_sim": 0.9297902584075928,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9824429750442505,
+      "semantic_sim": 0.993471622467041,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9277468919754028,
+      "semantic_sim": 0.9264465570449829,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9294446706771851,
+      "semantic_sim": 0.8868268728256226,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9915492534637451,
+      "semantic_sim": 0.8973104953765869,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.9293278455734253,
+      "semantic_sim": 0.7965194582939148,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9216321110725403,
+      "semantic_sim": 0.9022270441055298,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.9138463139533997,
+      "semantic_sim": 0.9132448434829712,
+      "gold_span_overlap": 0.0
+    }
+  ],
+  "quality_entity_substitution": [
+    {
+      "bertscore_f1": 0.8223795890808105,
+      "semantic_sim": 0.5538772344589233,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8188661932945251,
+      "semantic_sim": 0.5122079253196716,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.7927348613739014,
+      "semantic_sim": 0.5183276534080505,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8225417733192444,
+      "semantic_sim": 0.7447783946990967,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8044331669807434,
+      "semantic_sim": 0.4312081038951874,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8161207437515259,
+      "semantic_sim": 0.6333379149436951,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8243945240974426,
+      "semantic_sim": 0.7051066756248474,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8266767859458923,
+      "semantic_sim": 0.8104654550552368,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8415470719337463,
+      "semantic_sim": 0.45677271485328674,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.7940822243690491,
+      "semantic_sim": 0.39257606863975525,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.809436023235321,
+      "semantic_sim": 0.3395370841026306,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8168519139289856,
+      "semantic_sim": 0.448106586933136,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8146650195121765,
+      "semantic_sim": 0.3474166691303253,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8423610925674438,
+      "semantic_sim": 0.7505300641059875,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.7999957203865051,
+      "semantic_sim": 0.5467729568481445,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8443159461021423,
+      "semantic_sim": 0.673946738243103,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.7871503233909607,
+      "semantic_sim": 0.5747241377830505,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8408604264259338,
+      "semantic_sim": 0.6452224850654602,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.7967552542686462,
+      "semantic_sim": 0.37286943197250366,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8367326259613037,
+      "semantic_sim": 0.6636893153190613,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.792618989944458,
+      "semantic_sim": 0.506584882736206,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8404771685600281,
+      "semantic_sim": 0.7010284066200256,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8060698509216309,
+      "semantic_sim": 0.5431429743766785,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8219481110572815,
+      "semantic_sim": 0.6426387429237366,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8370384573936462,
+      "semantic_sim": 0.6262480020523071,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8165837526321411,
+      "semantic_sim": 0.6728924512863159,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8396045565605164,
+      "semantic_sim": 0.5068052411079407,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8073058724403381,
+      "semantic_sim": 0.7065485715866089,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8089864253997803,
+      "semantic_sim": 0.657121479511261,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8051060438156128,
+      "semantic_sim": 0.6142710447311401,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8253970742225647,
+      "semantic_sim": 0.39820507168769836,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8441636562347412,
+      "semantic_sim": 0.6130586266517639,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8184352517127991,
+      "semantic_sim": 0.5635821223258972,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8106883764266968,
+      "semantic_sim": 0.4761269986629486,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8208125829696655,
+      "semantic_sim": 0.3954765200614929,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.819778561592102,
+      "semantic_sim": 0.6658530235290527,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8341656923294067,
+      "semantic_sim": 0.5263872742652893,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8217917084693909,
+      "semantic_sim": 0.4070896506309509,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8187834620475769,
+      "semantic_sim": 0.5689777135848999,
+      "gold_span_overlap": 1.0
+    },
+    {
+      "bertscore_f1": 0.8301185369491577,
+      "semantic_sim": 0.6862167716026306,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8445104360580444,
+      "semantic_sim": 0.7697497606277466,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8171201348304749,
+      "semantic_sim": 0.5821671485900879,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8362535238265991,
+      "semantic_sim": 0.7653296589851379,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8361621499061584,
+      "semantic_sim": 0.7081416249275208,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.7460405826568604,
+      "semantic_sim": 0.4985780715942383,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.8271294832229614,
+      "semantic_sim": 0.5442852973937988,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.835996150970459,
+      "semantic_sim": 0.7592207193374634,
+      "gold_span_overlap": 0.0
+    },
+    {
+      "bertscore_f1": 0.82551109790802,
+      "semantic_sim": 0.6364507079124451,
+      "gold_span_overlap": 0.0
+    }
+  ],
+  "recovery": [
+    {
+      "sample_id": "COOLTECHNOLOGIES,INC_10_25_2017-EX-10.71-Strategic Alliance Agreement__Notice Period To Terminate Renewal",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.20951977372169495,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.1829412877559662,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "Microgenics Corporation - Collaborative Development and Commercialization Agreement__Minimum Commitment",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.28734415769577026,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2551731467247009,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "AlliedEsportsEntertainmentInc_20190815_8-K_EX-10.19_11788293_EX-10.19_Content License Agreement__Renewal Term",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.19505105912685394,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.16100738942623138,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "AimmuneTherapeuticsInc_20200205_8-K_EX-10.3_11967170_EX-10.3_Development Agreement__Post-Termination Services",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.23628109693527222,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.23324906826019287,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "GridironBionutrientsInc_20171206_8-K_EX-10.1_10972555_EX-10.1_Endorsement Agreement__Post-Termination Services",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.12687882781028748,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.1712595522403717,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "ZogenixInc_20190509_10-Q_EX-10.2_11663313_EX-10.2_Distributor Agreement__Expiration Date",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.14031411707401276,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2456899881362915,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "CytodynInc_20200109_10-Q_EX-10.5_11941634_EX-10.5_License Agreement__Anti-Assignment",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.2847851514816284,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.20495669543743134,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "TRICITYBANKSHARESCORP_05_15_1998-EX-10-OUTSOURCING AGREEMENT__Source Code Escrow",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.3099852502346039,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.35921815037727356,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Non-Compete",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.3779904246330261,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2520809769630432,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "SEASPINEHOLDINGSCORP_10_10_2018-EX-10.1-SUPPLY AGREEMENT__Effective Date",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.39477047324180603,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.3890860080718994,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "LIMEENERGYCO_09_09_1999-EX-10-DISTRIBUTOR AGREEMENT__Parties",
+      "mean_specific_value_rate": 0.1,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.15221171081066132,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.289588987827301,
+        "specific_value_rate": 0.2
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "PfHospitalityGroupInc_20150923_10-12G_EX-10.1_9266710_EX-10.1_Franchise Agreement3__Parties",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": false,
+        "situation_score": 0.4287360608577728,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.4626072645187378,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_Amendment__Governing Law",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.3525956869125366,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.3380674123764038,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "KitovPharmaLtd_20190326_20-F_EX-4.15_11584449_EX-4.15_Manufacturing Agreement__Uncapped Liability",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.2270115166902542,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.31373199820518494,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "Zounds Hearing, Inc. - MANUFACTURING DESIGN MARKETING AGREEMENT__Post-Termination Services",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.2116512805223465,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.23511873185634613,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "RangeResourcesLouisianaInc_20150417_8-K_EX-10.5_9045501_EX-10.5_Transportation Agreement__Notice Period To Terminate Renewal",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.24105852842330933,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.21483197808265686,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT__Revenue/Profit Sharing",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.266209214925766,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.3717572093009949,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "DYNAMEXINC_06_06_1996-EX-10.4-TRANSPORTATION SERVICES AGREEMENT__Change Of Control",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.2664455473423004,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.15607121586799622,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT__Parties",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.3977513909339905,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.3027203679084778,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "SigaTechnologiesInc_20190603_8-K_EX-10.1_11695818_EX-10.1_Promotion Agreement__Expiration Date",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.24786414206027985,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.23241287469863892,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "ELFBEAUTY,INC_07_02_2020-EX-10.1-COOPERATION AGREEMENT__Document Name",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.24209530651569366,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": false,
+        "situation_score": 0.3283482789993286,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "INTRICONCORP_03_10_2009-EX-10.22-Strategic Alliance Agreement__Termination For Convenience",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.17473188042640686,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2950875461101532,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "VIRGINGALACTICHOLDINGS,INC_04_08_2020-EX-99.1-JOINT FILING STATEMENT__Document Name",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": false,
+        "situation_score": 0.5761997103691101,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.532878577709198,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "VerizonAbsLlc_20200123_8-K_EX-10.4_11952335_EX-10.4_Service Agreement__Cap On Liability",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.29550957679748535,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.36833786964416504,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT__Renewal Term",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.3686535358428955,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.25562766194343567,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "PerformanceSportsBrandsInc_20110909_S-1_EX-10.10_7220214_EX-10.10_Endorsement Agreement__Non-Disparagement",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.05018381029367447,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.13651904463768005,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "VISIUMTECHNOLOGIES,INC_10_20_2004-EX-10.20-DISTRIBUTOR AGREEMENT__Governing Law",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.20085115730762482,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.23921938240528107,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "INKTOMICORP_06_08_1998-EX-10.14-SOFTWARE HOSTING AGREEMENT__Ip Ownership Assignment",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.33616864681243896,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2767637372016907,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "WARNINGMANAGEMENTSERVICESINC_12_10_1999-EX-10-ENDORSEMENT AGREEMENT__Most Favored Nation",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.05915505066514015,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.13439205288887024,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "FIDELITYNATIONALINFORMATIONSERVICES,INC_08_05_2009-EX-10.3-INTELLECTUAL PROPERTY AGREEMENT__Cap On Liability",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.31862279772758484,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.32183924317359924,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "ORBSATCORP_08_17_2007-EX-7.3-STRATEGIC ALLIANCE AGREEMENT__Termination For Convenience",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.18619294464588165,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2340494692325592,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "VertexEnergyInc_20200113_8-K_EX-10.1_11943624_EX-10.1_Marketing Agreement__Change Of Control",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.22525359690189362,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.14063778519630432,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "PLAYAHOTELS_RESORTSNV_03_14_2017-EX-10.22-STRATEGIC ALLIANCE AGREEMENT (Hyatt Ziva Cancun)__Governing Law",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": false,
+        "situation_score": 0.2608320415019989,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.4772895276546478,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "SYKESHEALTHPLANSERVICESINC_04_24_1998-EX-10.14-OUTSOURCING AGREEMENT__Renewal Term",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.1229039877653122,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.1849949061870575,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "CYBERIANOUTPOSTINC_07_09_1998-EX-10.13-PROMOTION AGREEMENT__License Grant",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.3695148527622223,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.3092157244682312,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "AudibleInc_20001113_10-Q_EX-10.32_2599586_EX-10.32_Co-Branding Agreement_ Marketing Agreement_ Investment Distribution Agreement__Ip Ownership Assignment",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.3212243914604187,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2686815857887268,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "SMITHELECTRICVEHICLESCORP_04_04_2012-EX-10.26-FLEET MAINTENANCE AGREEMENT__Rofr/Rofo/Rofn",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": false,
+        "situation_score": 0.5225828886032104,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": false,
+        "situation_score": 0.2948949933052063,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "HertzGroupRealtyTrustInc_20190920_S-11A_EX-10.8_11816941_EX-10.8_Trademark License Agreement__Change Of Control",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.1638307273387909,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2641916275024414,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "RUBIOSRESTAURANTSINC_03_31_2008-EX-10.75-SPONSORSHIP AGREEMENT__Document Name",
+      "mean_specific_value_rate": 1.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.29932495951652527,
+        "specific_value_rate": 1.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.3607875406742096,
+        "specific_value_rate": 1.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "CERES,INC_01_25_2012-EX-10.20-Collaboration Agreement__Competitive Restriction Exception",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.21987709403038025,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.18604779243469238,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT__Non-Transferable License",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.4799119234085083,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.49004828929901123,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "INTELLIGENTHIGHWAYSOLUTIONS,INC_01_18_2018-EX-10.1-Strategic Alliance Agreement__Termination For Convenience",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.24346870183944702,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.2744736671447754,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "PerformanceSportsBrandsInc_20110909_S-1_EX-10.10_7220214_EX-10.10_Endorsement Agreement__Insurance",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.05310508608818054,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.05898599699139595,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "BerkshireHillsBancorpInc_20120809_10-Q_EX-10.16_7708169_EX-10.16_Endorsement Agreement__Non-Disparagement",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": false,
+        "situation_score": 0.10524224489927292,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": false,
+        "situation_score": 0.15891024470329285,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_New__Agreement Date",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.1952562779188156,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.3172800838947296,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "VNUE,INC_07_10_2015-EX-10.1-SPONSORSHIP AGREEMENT__Anti-Assignment",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.1498098373413086,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.11276084184646606,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "NANOPHASETECHNOLOGIESCORP_11_01_2005-EX-99.1-DISTRIBUTOR AGREEMENT__Audit Rights",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.11196403950452805,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.17754219472408295,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    },
+    {
+      "sample_id": "EhaveInc_20190515_20-F_EX-4.44_11678816_EX-4.44_License Agreement_ Reseller Agreement__Post-Termination Services",
+      "mean_specific_value_rate": 0.0,
+      "direct": {
+        "domain_recovered": true,
+        "situation_score": 0.20033594965934753,
+        "specific_value_rate": 0.0
+      },
+      "icl": null,
+      "expert": {
+        "domain_recovered": true,
+        "situation_score": 0.1843814253807068,
+        "specific_value_rate": 0.0
+      },
+      "absence_fingerprint": null
+    }
+  ],
+  "task_sensitivity": {
+    "framework_reasoning": {
+      "n": 12,
+      "mean_bertscore_f1": 0.8901478896538416,
+      "mean_semantic_sim": 0.8141033897797266,
+      "mean_gold_span_overlap": 0.08333333333333333,
+      "mean_specific_value_recovery": 0.0,
+      "ci95_bertscore_f1": [
+        0.8800654288381338,
+        0.8995360493659973
+      ],
+      "ci95_semantic_sim": [
+        0.75355973901848,
+        0.8660642541944981
+      ],
+      "ci95_gold_span_overlap": [
+        0.0,
+        0.25
+      ],
+      "ci95_specific_value_recovery": [
+        0.0,
+        0.0
+      ]
+    },
+    "compliance_regulatory": {
+      "n": 12,
+      "mean_bertscore_f1": 0.8897546728452047,
+      "mean_semantic_sim": 0.861716186006864,
+      "mean_gold_span_overlap": 0.0,
+      "mean_specific_value_recovery": 0.0,
+      "ci95_bertscore_f1": [
+        0.8783041740457217,
+        0.9022136844694615
+      ],
+      "ci95_semantic_sim": [
+        0.8223848501841227,
+        0.9009527416278919
+      ],
+      "ci95_gold_span_overlap": [
+        0.0,
+        0.0
+      ],
+      "ci95_specific_value_recovery": [
+        0.0,
+        0.0
+      ]
+    },
+    "procedural": {
+      "n": 12,
+      "mean_bertscore_f1": 0.8864573836326599,
+      "mean_semantic_sim": 0.8659795373678207,
+      "mean_gold_span_overlap": 0.16666666666666666,
+      "mean_specific_value_recovery": 0.0,
+      "ci95_bertscore_f1": [
+        0.8766377692421278,
+        0.8968050402899583
+      ],
+      "ci95_semantic_sim": [
+        0.8349303793162107,
+        0.8986682619899511
+      ],
+      "ci95_gold_span_overlap": [
+        0.0,
+        0.3333333333333333
+      ],
+      "ci95_specific_value_recovery": [
+        0.0,
+        0.0
+      ]
+    },
+    "entity_specific": {
+      "n": 12,
+      "mean_bertscore_f1": 0.9064751466115316,
+      "mean_semantic_sim": 0.8690272122621536,
+      "mean_gold_span_overlap": 0.65,
+      "mean_specific_value_recovery": 0.09166666666666667,
+      "ci95_bertscore_f1": [
+        0.8931127904603879,
+        0.9248020850121975
+      ],
+      "ci95_semantic_sim": [
+        0.828635739410917,
+        0.9057192865759135
+      ],
+      "ci95_gold_span_overlap": [
+        0.3833333333333333,
+        0.9
+      ],
+      "ci95_specific_value_recovery": [
+        0.0,
+        0.25833333333333336
+      ]
+    }
+  },
+  "total_pipeline_time_s": 1868.2841595579994
+}

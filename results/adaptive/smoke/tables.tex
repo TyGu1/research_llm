@@ -1,0 +1,109 @@
+\begin{table}[t]
+\centering\small
+\caption{Rung 0: does the transmitted content itself contain the sensitive values? Percent of queries, 95\% cluster-bootstrap CI by contract.}
+\label{tab:leak}
+\begin{tabular}{lrrrrr}
+\toprule
+Arm & n & Gold span in transmitted text & Party name & Any date & Any amount \\
+\midrule
+Topic bottleneck & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] \\
+Topic bottleneck + vocab exclusion & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] \\
+Entity substitution & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] \\
+SanText+ ($\varepsilon$=1) & 6 & 16.7 [0.0, 33.3] & 0.0 [0.0, 0.0] & 83.3 [66.7, 100.0] & 16.7 [0.0, 33.3] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Reconstruction attacks. SVR = specific value recovery (paper criterion: first 50 characters of a gold span appear verbatim in the attacker's output), \emph{any gold span} = share of queries with SVR $>0$, \emph{party name} = a distinctive party token appears, \emph{category named} = the CUAD category is named, \emph{situation} = MiniLM cosine between reconstruction and contract. Obs.\ = observation set (Q transmitted questions; Q+ with pipeline knowledge; S0 the never-transmitted local text, upper bound). 95\% cluster-bootstrap CIs by contract.}
+\label{tab:attacks}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+Arm & Rung & Attack & Obs. & n & SVR & Any gold span & Party name & Category named & Situation \\
+\midrule
+Topic bottleneck & a & Direct (paper prompt) & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.333 [0.332, 0.334] \\
+Topic bottleneck & a & Expert persona (paper prompt) & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.309 [0.298, 0.319] \\
+Topic bottleneck & a & ICL, 3 solved examples & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.324 [0.297, 0.352] \\
+Topic bottleneck & a & ICL, 20 solved examples & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 83.3 [66.7, 100.0] & 0.361 [0.335, 0.387] \\
+Topic bottleneck & a & ICL, examples from the same contract & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.343 [0.336, 0.351] \\
+Topic bottleneck & b1 & Category inversion (pipeline-aware) & Q+ & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 100.0 [100.0, 100.0] & 0.262 [0.260, 0.264] \\
+Topic bottleneck + vocab exclusion & a & Direct (paper prompt) & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.325 [0.315, 0.335] \\
+Topic bottleneck + vocab exclusion & a & Expert persona (paper prompt) & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.345 [0.338, 0.352] \\
+Topic bottleneck + vocab exclusion & a & ICL, 3 solved examples & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.358 [0.330, 0.386] \\
+Topic bottleneck + vocab exclusion & a & ICL, 20 solved examples & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.315 [0.286, 0.344] \\
+Topic bottleneck + vocab exclusion & a & ICL, examples from the same contract & Q & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.310 [0.259, 0.361] \\
+Topic bottleneck + vocab exclusion & b1 & Category inversion (pipeline-aware) & Q+ & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 100.0 [100.0, 100.0] & 0.255 [0.228, 0.283] \\
+Topic bottleneck + vocab exclusion & b2 & Absence fingerprint on Q & Q+ & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.280 [0.225, 0.335] \\
+Topic bottleneck + vocab exclusion & b2 & Absence fingerprint on S0 text (upper bound) & S0 & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.410 [0.379, 0.442] \\
+Entity substitution & a & Placeholder re-identification & SUB-text & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 33.3 [33.3, 33.3] & 0.337 [0.324, 0.351] \\
+Entity substitution & a & ICL reconstruction (Pang et al. recipe) & DP/SUB-text & 6 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 16.7 [0.0, 33.3] & 0.358 [0.341, 0.374] \\
+SanText+ ($\varepsilon$=1) & a & Direct reconstruction & DP-text & 6 & 50.0 [16.7, 83.3] & 66.7 [33.3, 100.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.605 [0.575, 0.635] \\
+SanText+ ($\varepsilon$=1) & a & ICL reconstruction (Pang et al. recipe) & DP/SUB-text & 6 & 50.0 [16.7, 83.3] & 66.7 [33.3, 100.0] & 0.0 [0.0, 0.0] & 66.7 [66.7, 66.7] & 0.586 [0.579, 0.594] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{SVR of the strongest realistic attack per arm, split by the type of the sensitive value (n in parentheses).}
+\label{tab:typed}
+\begin{tabular}{lrrrr}
+\toprule
+Arm (strongest realistic attack) & Parties & Dates & Document name & Clause text \\
+\midrule
+Topic bottleneck (Direct (paper prompt)) & -- (0) & 0.0 [0.0, 0.0] (2) & -- (0) & 0.0 [0.0, 0.0] (4) \\
+Topic bottleneck + vocab exclusion (Direct (paper prompt)) & -- (0) & 0.0 [0.0, 0.0] (2) & -- (0) & 0.0 [0.0, 0.0] (4) \\
+Entity substitution (Placeholder re-identification) & -- (0) & 0.0 [0.0, 0.0] (2) & -- (0) & 0.0 [0.0, 0.0] (4) \\
+SanText+ ($\varepsilon$=1) (Direct reconstruction) & -- (0) & 50.0 [0.0, 100.0] (2) & -- (0) & 50.0 [25.0, 75.0] (4) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Linkage by embedding similarity of the transmitted questions against the 41 CUAD category questions and against the full text of the sampled contracts; k = number of queries from the same contract pooled by the attacker (rung c). Percent, 95\% cluster-bootstrap CIs by contract.}
+\label{tab:linkage}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Arm & Category top-1 & Category top-5 & Contract top-1 & Contract top-5 & Contract top-1, k=3 & k=5 & k=all \\
+\midrule
+Topic bottleneck & 100.0 [100.0, 100.0] & 100.0 [100.0, 100.0] & 33.3 [33.3, 33.3] & 100.0 [100.0, 100.0] & 100.0 [100.0, 100.0] & -- & 100.0 [100.0, 100.0] \\
+Topic bottleneck + vocab exclusion & 83.3 [66.7, 100.0] & 83.3 [66.7, 100.0] & 50.0 [0.0, 100.0] & 100.0 [100.0, 100.0] & 100.0 [100.0, 100.0] & -- & 100.0 [100.0, 100.0] \\
+chance & 2.4 & 12.2 & 50.0 & 250.0 & 50.0 & 50.0 & 50.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Rung c: the attacker pools the transmitted questions of $k$ queries from the same contract and reconstructs the contract. One draw per contract and $k$; intervals are bootstraps over contracts.}
+\label{tab:multiquery}
+\begin{tabular}{lrrrrr}
+\toprule
+Arm & k & n contracts & Any gold span of the contract & SVR over the contract's spans & Party name \\
+\midrule
+Topic bottleneck & 3 & 4 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] \\
+Topic bottleneck & all & 4 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] \\
+Topic bottleneck + vocab exclusion & 3 & 4 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] \\
+Topic bottleneck + vocab exclusion & all & 4 & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] & 0.0 [0.0, 0.0] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Utility of each arm: final answer vs.\ the oracle answer (BERTScore F1 with roberta-large; MiniLM cosine) and share of gold spans reproduced. 95\% cluster-bootstrap CIs by contract.}
+\label{tab:utility}
+\begin{tabular}{lrrrr}
+\toprule
+Arm & n & BERTScore F1 vs oracle & Semantic similarity & Gold-span overlap \\
+\midrule
+Topic bottleneck & 6 & 0.910 [0.907, 0.913] & 0.852 [0.848, 0.855] & 83.3 [66.7, 100.0] \\
+Topic bottleneck + vocab exclusion & 6 & 0.905 [0.904, 0.905] & 0.856 [0.846, 0.866] & 83.3 [66.7, 100.0] \\
+Entity substitution & 6 & 0.823 [0.821, 0.824] & 0.610 [0.560, 0.659] & 16.7 [0.0, 33.3] \\
+SanText+ ($\varepsilon$=1) & 6 & 0.857 [0.849, 0.866] & 0.597 [0.593, 0.601] & 16.7 [0.0, 33.3] \\
+\bottomrule
+\end{tabular}
+\end{table}
+

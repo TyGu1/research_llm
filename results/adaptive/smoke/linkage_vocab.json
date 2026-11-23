@@ -1,0 +1,187 @@
+{
+ "arm": "vocab",
+ "n_contracts": 2,
+ "n_categories": 41,
+ "category_rows": [
+  {
+   "sample_id": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Agreement Date",
+   "true_key": "Agreement Date",
+   "rank": 1,
+   "n_candidates": 41,
+   "top1": true,
+   "top5": true
+  },
+  {
+   "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Cap On Liability",
+   "true_key": "Cap On Liability",
+   "rank": 1,
+   "n_candidates": 41,
+   "top1": true,
+   "top5": true
+  },
+  {
+   "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Agreement Date",
+   "true_key": "Agreement Date",
+   "rank": 8,
+   "n_candidates": 41,
+   "top1": false,
+   "top5": false
+  },
+  {
+   "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Anti-Assignment",
+   "true_key": "Anti-Assignment",
+   "rank": 1,
+   "n_candidates": 41,
+   "top1": true,
+   "top5": true
+  },
+  {
+   "sample_id": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Anti-Assignment",
+   "true_key": "Anti-Assignment",
+   "rank": 1,
+   "n_candidates": 41,
+   "top1": true,
+   "top5": true
+  },
+  {
+   "sample_id": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Audit Rights",
+   "true_key": "Audit Rights",
+   "rank": 1,
+   "n_candidates": 41,
+   "top1": true,
+   "top5": true
+  }
+ ],
+ "contract_rows": [
+  {
+   "sample_id": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Agreement Date",
+   "true_key": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT",
+   "rank": 1,
+   "n_candidates": 2,
+   "top1": true,
+   "top5": true
+  },
+  {
+   "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Cap On Liability",
+   "true_key": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement",
+   "rank": 2,
+   "n_candidates": 2,
+   "top1": false,
+   "top5": true
+  },
+  {
+   "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Agreement Date",
+   "true_key": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement",
+   "rank": 2,
+   "n_candidates": 2,
+   "top1": false,
+   "top5": true
+  },
+  {
+   "sample_id": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Anti-Assignment",
+   "true_key": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement",
+   "rank": 2,
+   "n_candidates": 2,
+   "top1": false,
+   "top5": true
+  },
+  {
+   "sample_id": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Anti-Assignment",
+   "true_key": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT",
+   "rank": 1,
+   "n_candidates": 2,
+   "top1": true,
+   "top5": true
+  },
+  {
+   "sample_id": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Audit Rights",
+   "true_key": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT",
+   "rank": 1,
+   "n_candidates": 2,
+   "top1": true,
+   "top5": true
+  }
+ ],
+ "multi_rows": [
+  {
+   "doc_title": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement",
+   "k": 1,
+   "draw": 0,
+   "sample_ids": [
+    "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Cap On Liability"
+   ],
+   "rank": 2,
+   "top1": false,
+   "top5": true,
+   "n_candidates": 2
+  },
+  {
+   "doc_title": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement",
+   "k": 3,
+   "draw": 0,
+   "sample_ids": [
+    "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Agreement Date",
+    "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Anti-Assignment",
+    "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Cap On Liability"
+   ],
+   "rank": 1,
+   "top1": true,
+   "top5": true,
+   "n_candidates": 2
+  },
+  {
+   "doc_title": "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement",
+   "k": 3,
+   "draw": 0,
+   "sample_ids": [
+    "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Agreement Date",
+    "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Anti-Assignment",
+    "PhasebioPharmaceuticalsInc_20200330_10-K_EX-10.21_12086810_EX-10.21_Development Agreement__Cap On Liability"
+   ],
+   "rank": 1,
+   "top1": true,
+   "top5": true,
+   "n_candidates": 2
+  },
+  {
+   "doc_title": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT",
+   "k": 1,
+   "draw": 0,
+   "sample_ids": [
+    "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Agreement Date"
+   ],
+   "rank": 1,
+   "top1": true,
+   "top5": true,
+   "n_candidates": 2
+  },
+  {
+   "doc_title": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT",
+   "k": 3,
+   "draw": 0,
+   "sample_ids": [
+    "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Agreement Date",
+    "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Anti-Assignment",
+    "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Audit Rights"
+   ],
+   "rank": 1,
+   "top1": true,
+   "top5": true,
+   "n_candidates": 2
+  },
+  {
+   "doc_title": "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT",
+   "k": 3,
+   "draw": 0,
+   "sample_ids": [
+    "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Agreement Date",
+    "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Anti-Assignment",
+    "VIRTUALSCOPICS,INC_11_12_2010-EX-10.1-STRATEGIC ALLIANCE AGREEMENT__Audit Rights"
+   ],
+   "rank": 1,
+   "top1": true,
+   "top5": true,
+   "n_candidates": 2
+  }
+ ]
+}
