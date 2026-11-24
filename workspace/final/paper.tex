@@ -26,17 +26,19 @@
 
 \author{Andreas Tonio Liebrand}
 \affiliation{%
-  \institution{}
-  \country{}}
+  \institution{Independent researcher}
+  \city{Frankfurt}
+  \country{Germany}}
 
 \begin{abstract}
-We introduce \emph{topic-bottleneck query reformulation}, a pipeline for privacy-preserving inference with cloud-hosted large language models (LLMs) that routes sensitive enterprise queries through an irreversible information bottleneck.
-Unlike entity substitution and differential privacy (DP) methods---from which modern LLMs recover 72--94\% of original sensitive content---our approach compresses a sensitive query into a topic distribution via a local model, generates generic proxy questions from that distribution, and sends only these questions---which contain no sensitive specifics by construction---to the cloud.
-A local model then synthesizes the final answer by applying the cloud-obtained reasoning frameworks to the locally-held sensitive context.
-Evaluated on 48 answerable contract QA pairs from the CUAD dataset, the pipeline achieves a \textbf{2.3\% specific value recovery rate} (compared to 91--94\% for DP methods) while preserving \textbf{89.3\% BERTScore F1} relative to an oracle with full access to the sensitive query.
-An optional vocabulary exclusion hardening layer reduces recovery to 0\% at the cost of a 7-percentage-point BERTScore reduction.
-We characterize the pipeline's operating envelope across four task types: framework/reasoning, compliance, and procedural queries achieve zero recovery with strong quality, while entity-specific queries exhibit the expected quality-privacy trade-off.
-We openly discuss the absence fingerprint vulnerability introduced by vocabulary exclusion and propose four mitigations.
+We introduce \emph{topic-bottleneck query reformulation}, a pipeline for privacy-preserving inference with cloud-hosted large language models (LLMs) that routes sensitive enterprise queries through a many-to-one information bottleneck.
+A local model compresses a sensitive query into a topic distribution, generates generic proxy questions from that distribution, and sends only these questions to the cloud; the local model then applies the cloud's answers to the locally-held sensitive context.
+Unlike entity substitution and token-level differential privacy (DP), nothing derived token-by-token from the sensitive text crosses the trust boundary.
+We evaluate the defense against an \emph{adaptive} attacker that knows the pipeline design, on 425 contract questions from 40 CUAD contracts, with a re-implemented DP baseline (SanText+) and entity substitution attacked by the same attacker on the same samples.
+Six attack families---leak scanning, direct and in-context-learning reconstruction, pipeline-aware category inversion, the absence-fingerprint attack on vocabulary exclusion, embedding linkage, and multi-query aggregation---recover at most \textbf{3.7\%} of sensitive values from the transmitted questions, and no party name, date or amount, while the same attacks recover \textbf{30--62\%} from SanText+ output; a frontier-model attacker on a calibration subset is no stronger.
+The defense does \emph{not} hide the subject of a query: a pipeline-aware attacker identifies the clause type in 73\% of queries.
+We therefore claim value confidentiality, not topic confidentiality.
+We also report a modest utility result: the cloud's answers help a small local model locate the right clause (+9 points gold-span overlap) but do not bring its answers closer to a strong model's.
 \end{abstract}
 
 \keywords{privacy-preserving inference, large language models, topic modeling, information bottleneck, differential privacy, query reformulation}
@@ -55,27 +57,29 @@ Yet enterprises holding classified data---merger and acquisition strategies, fin
 GDPR Article~5(1)(c) mandates data minimization; HIPAA requires de-identification of protected health information; and the US CLOUD Act empowers US authorities to compel US-incorporated cloud providers to disclose data regardless of its physical storage location, including data hosted in EU data centers.
 
 This creates a fundamental tension: \emph{LLM value is proportional to prompt specificity, but privacy requires removing specificity before transmission.}
-Every existing approach to resolving this tension attempts to preserve specificity while hiding identity---and fails, because modern LLMs can reverse the hiding.
+Most deployable approaches to resolving this tension attempt to preserve specificity while hiding identity---and modern LLMs can often reverse the hiding.
 Entity substitution methods~\cite{chen2023, albanese2026, agyemang2026, yang2025} replace sensitive entities with pseudonyms, creating a one-to-one mapping that is structurally invertible.
 Differential privacy (DP) methods~\cite{yue2021, chen2023custext, tem2021, cape2025, inferdpt2023, dyntext2025, clusant2025} add calibrated noise to token embeddings, but Pang et al.~\cite{pang2024} demonstrated that modern LLMs recover 72--94\% of original sensitive content from DP-sanitized text, with Claude-3.5 Sonnet achieving 94.01\% recovery.
 This reconstruction attack fundamentally limits all approaches that transmit a modified version of the sensitive content.
 
 We propose a qualitatively different mechanism: \emph{topic-bottleneck query reformulation}.
 Rather than sanitizing a sensitive prompt by modifying its tokens, we compress it through a \emph{many-to-one} semantic bottleneck---topic modeling---that strips sensitive specifics while preserving reasoning structure.
-An enormous number of different sensitive prompts map to the same topic distribution; exact reconstruction from the distribution is infeasible---bounded by the bottleneck's information capacity rather than a statistical privacy budget.
+An enormous number of different sensitive prompts map to the same topic distribution, so specific values cannot be read back from it; the open question is how much an attacker can still infer, which we answer empirically rather than by assumption.
 The pipeline generates generic proxy questions from the topic distribution, sends only these to the cloud LLM, and synthesizes the final answer locally by applying the cloud-obtained reasoning frameworks to the locally-held sensitive context.
 
 \paragraph{Contributions.} We make four contributions:
 
 \begin{enumerate}
-\item \textbf{Topic modeling as an irreversible privacy bottleneck.} We formalize topic extraction as a many-to-one information bottleneck for privacy-preserving LLM inference. Unlike entity substitution (one-to-one) and DP noise (many-to-many within a recoverable neighborhood), many-to-one compression is structurally irreversible.
+\item \textbf{Topic modeling as a privacy bottleneck.} We use topic extraction as a many-to-one bottleneck for privacy-preserving LLM inference. Unlike entity substitution (one-to-one) and DP noise (a perturbation within a recoverable neighborhood), the cloud receives questions generated from the topic distribution, not a transformed copy of the sensitive text.
 
-\item \textbf{Vocabulary exclusion hardening.} We introduce a novel second compression layer that strips domain vocabulary from the generated text before proxy question creation. When combined with the topic bottleneck, the cloud LLM receives neither the original content nor the lexical anchors that would enable re-identification. To our knowledge, this technique has not appeared in the existing literature.
+\item \textbf{Vocabulary exclusion hardening.} An optional second layer strips topic vocabulary from the generated text before proxy question creation, so the cloud also loses the lexical anchors of the topic.
 
-\item \textbf{Local synthesis architecture.} We demonstrate that a local LLM can apply externally-obtained, generic reasoning frameworks to locally-held sensitive specifics---analogous to how a consultant looks up best practices externally and applies them to a confidential internal situation.
+\item \textbf{Local synthesis architecture.} A local LLM applies externally-obtained, generic reasoning to locally-held sensitive specifics---analogous to a consultant who looks up best practices externally and applies them to a confidential internal situation.
 
-\item \textbf{Empirical operating envelope characterization.} We provide honest, task-type-level characterization of where the pipeline works and where it degrades, evaluated on the CUAD dataset: 2.3\% specific value recovery (vs.\ 91--94\% for DP), 89.3\% BERTScore F1, with zero recovery for framework, compliance, and procedural queries and 9.2\% for entity-specific queries.
+\item \textbf{An adaptive-attack evaluation.} Following the standard that a defense must be evaluated against attacks designed for it~\cite{carlini2019evaluating,tramer2020adaptive}, we attack our own pipeline with six attack families under explicit observation sets, alongside a re-implemented DP baseline and entity substitution attacked by the same attacker on the same 425 questions, with cluster-bootstrap intervals and a frontier-model calibration (Section~\ref{sec:adaptive}). The result sharpens the claim: specific values are protected (at most 3.7\% recovery vs.\ 30--62\% for DP), the topic of a query is not.
 \end{enumerate}
+
+A preliminary evaluation with Phi-3 and GPT-4o on 48 questions (Section~\ref{sec:results}) motivated the design; the adaptive evaluation (Section~\ref{sec:adaptive}) supersedes its privacy numbers and corrects two of its conclusions.
 
 %% ============================================================
 %% SECTION 2: RELATED WORK
@@ -122,7 +126,7 @@ Fully homomorphic encryption (FHE) offers the strongest theoretical guarantees b
 
 These approaches require either specialized hardware (TEE, FHE) or model modifications (split inference).
 Our pipeline requires only a local small language model and a cloud API---no specialized hardware, no model modifications, and no cryptographic protocols.
-Privacy is achieved through information-theoretic compression rather than computational hardness assumptions.
+Privacy comes from what is transmitted, not from computational hardness; the price is that the guarantee is empirical rather than cryptographic. Unlike TEE-based services, which can only serve models the operator can run inside an enclave, the pipeline can use closed frontier models.
 
 \subsection{Data Minimization and Privacy Metrics}
 \label{sec:rw-minimization}
@@ -133,7 +137,7 @@ Privacy-preserving RAG~\cite{zeng2024, syntheticrag2024, dprag2024} addresses co
 
 A comprehensive survey of text anonymization metrics~\cite{metricssurvey2025} reviews 47~papers across six distinct privacy notions and finds that existing metrics ``often fail to fully capture legal standards and user expectations''---GDPR and HIPAA compliance cannot be certified by any current anonymization metric alone.
 
-Our approach operationalizes data minimization at the semantic level: the topic bottleneck transmits only the minimum information needed (topic structure) while ensuring that all sensitive specifics are irreversibly compressed away.
+Our approach operationalizes data minimization at the semantic level: the topic bottleneck aims to transmit only the topic structure and none of the sensitive specifics; Section~\ref{sec:adaptive} measures how well it succeeds.
 
 %% ============================================================
 %% SECTION 3: THREAT MODEL AND PROBLEM FORMULATION
@@ -158,7 +162,7 @@ The pipeline targets S1--S3 queries where the user seeks cloud LLM reasoning cap
 \subsection{Adversary Model}
 \label{sec:adversary}
 
-\paragraph{Adversary.} The cloud LLM provider, or any party with access to the data transmitted to the cloud. The adversary has full access to the S0 proxy questions sent via the API and possesses state-of-the-art LLM capabilities for reconstruction attacks. We follow the attack methodology of Pang et al.~\cite{pang2024}: the adversary attempts to reconstruct the original sensitive content from the transmitted content using direct prompting and domain-expert prompting.
+\paragraph{Adversary.} The cloud LLM provider, or any party with access to the data transmitted to the cloud. The adversary has full access to the S0 proxy questions sent via the API and possesses state-of-the-art LLM capabilities for reconstruction attacks. Following Kerckhoffs's principle, the adversary may know the pipeline's design, prompts and the space of possible query categories, and may observe several queries from the same user. Section~\ref{sec:adaptive:threat} defines the observation sets used to label every attack.
 
 \paragraph{What is protected.} Specific entity names, numerical values (deal sizes, financial figures, patient identifiers), temporal references, and any content classified S1 or above.
 
@@ -190,7 +194,7 @@ The pipeline comprises six steps executed across a trust boundary between a loca
 \boldsymbol{\tau} = \bigl\{(\text{M\&A},\, 0.6),\; (\text{antitrust},\, 0.25),\; (\text{ent.\ SaaS},\, 0.15)\bigr\}
 \]
 
-This step implements a \emph{many-to-one compression}: an enormous number of different sensitive queries---involving different companies, deal sizes, market shares, and timelines---map to the same topic distribution. The compression is irreversible by design: one cannot reconstruct ``TechCorp, EUR~2.3B, 60\% EU market share'' from the topic distribution above.
+This step implements a \emph{many-to-one compression}: an enormous number of different sensitive queries---involving different companies, deal sizes, market shares, and timelines---map to the same topic distribution. One cannot read back ``TechCorp, EUR~2.3B, 60\% EU market share'' from the topic distribution above.
 
 \paragraph{Step 2: S0 Text Generation.} $\mathcal{M}_L$ generates 200--300 words of generic, factual, S0-level text about the topics in $\boldsymbol{\tau}$. This text contains no reference to the original query's specifics---it discusses the topic space in general terms. The text serves as the substrate from which proxy questions will be derived.
 
@@ -203,9 +207,9 @@ The key property distinguishing this from DP-based approaches is the nature of t
 
 For example, with topics $\{$M\&A, antitrust, SaaS$\}$, the exclusion set includes words like ``acquisition,'' ``merger,'' ``antitrust,'' ``EBITDA,'' and ``SaaS.'' After exclusion, ``In software M\&A, antitrust regulators examine market concentration'' becomes ``In strategic consolidation, regulators examine dominance metrics.''
 
-\paragraph{Absence Fingerprint Vulnerability.} Vocabulary exclusion introduces a second-order information leak. An adversary who infers the general topic of the S0 text can compare the observed vocabulary against the vocabulary expected for that topic. Words that are conspicuously absent---``EBITDA,'' ``valuation,'' ``multiple''---form an \emph{absence fingerprint} that reveals which terms were stripped. The current implementation uses deterministic regex-based exclusion, making this fingerprint fully recoverable by an adversary with topic knowledge.
+\paragraph{Absence Fingerprint Vulnerability.} Vocabulary exclusion introduces a second-order information leak. An adversary who infers the general topic of the S0 text can compare the observed vocabulary against the vocabulary expected for that topic. Words that are conspicuously absent---``EBITDA,'' ``valuation,'' ``multiple''---form an \emph{absence fingerprint} that reveals which terms were stripped. The current implementation uses deterministic regex-based exclusion, so the fingerprint is in principle visible in the S0 text. Note, however, that the S0 text itself is never transmitted; the cloud sees only questions generated from it.
 
-We identify four mitigations: (1)~random over-exclusion with decoy terms; (2)~paraphrase-based replacement instead of deletion; (3)~generation-time avoidance, where Step~2 is instructed to never produce topic-specific vocabulary (recommended default); (4)~fixed-size vocabulary masking from a predefined domain lexicon. The generation-time avoidance approach eliminates the attack surface entirely because no gap artifacts are created. We did not empirically evaluate these mitigations in the current study; this is left for future work (Section~\ref{sec:future}).
+We identify four mitigations: (1)~random over-exclusion with decoy terms; (2)~paraphrase-based replacement instead of deletion; (3)~generation-time avoidance, where Step~2 is instructed to never produce topic-specific vocabulary (recommended default); (4)~fixed-size vocabulary masking from a predefined domain lexicon. The generation-time avoidance approach eliminates the attack surface entirely because no gap artifacts are created. Section~\ref{sec:adaptive} evaluates the attack empirically: on the transmitted questions it recovers 14.9\% of the excluded words and 0.2\% of sensitive values, so the concern applies mainly to the never-transmitted S0 text (44.2\% word recall, upper bound). The mitigations remain untested.
 
 \subsection{Proxy Question Generation and Selection}
 \label{sec:proxy-questions}
@@ -217,7 +221,7 @@ We identify four mitigations: (1)~random over-exclusion with decoy terms; (2)~pa
 \subsection{Cloud Answering and Local Synthesis}
 \label{sec:synthesis}
 
-\paragraph{Step 5: Cloud Answering.} The $k = 3$ selected S0 proxy questions are sent to the cloud LLM $\mathcal{M}_C$. The cloud receives genuinely S0 content---no sensitive data crosses the trust boundary. The cloud returns answers $\{a_1, a_2, a_3\}$.
+\paragraph{Step 5: Cloud Answering.} The $k = 3$ selected S0 proxy questions are sent to the cloud LLM $\mathcal{M}_C$. By design the cloud receives only S0 content; Section~\ref{sec:adaptive} measures the residual leakage (Table~\ref{tab:leak}). The cloud returns answers $\{a_1, a_2, a_3\}$.
 
 \paragraph{Step 6: Local Synthesis.} $\mathcal{M}_L$ combines the original sensitive query $q_s$ with the three cloud-obtained S0 answers to produce the final answer~$a_f$. This mirrors how a consultant works: look up best practices externally (cloud LLM answers generic questions), apply them to a confidential internal situation (local LLM synthesizes with sensitive context). The synthesis step bridges S0 reasoning frameworks with S2/S3 specifics without ever transmitting the specifics.
 
@@ -232,15 +236,17 @@ We characterize the privacy properties of the topic bottleneck through the lens 
 \[
 I(q_s; P) \leq I(q_s; \boldsymbol{\tau}) \leq H(\boldsymbol{\tau})
 \]
-where $H(\boldsymbol{\tau})$ is the entropy of the topic distribution. Since $\boldsymbol{\tau}$ is a $k$-dimensional probability vector with typically $k \in [3, 6]$, this bounds information leakage to at most $\log_2(k!)$ bits for a uniform distribution over topic orderings---far less than the information content of the original query, which may contain hundreds of bits of specific entity, value, and temporal information. The topic bottleneck thus provides a \emph{structural} information bound, not a statistical one: leakage is bounded by the bottleneck's capacity, not by a privacy budget parameter.
+where $H(\boldsymbol{\tau})$ is the entropy of the topic distribution. Since $\boldsymbol{\tau}$ is a $k$-dimensional probability vector with typically $k \in [3, 6]$, this bounds information leakage to at most $\log_2(k!)$ bits for a uniform distribution over topic orderings---far less than the information content of the original query, which may contain hundreds of bits of specific entity, value, and temporal information. This is an informal, heuristic argument rather than a privacy guarantee: topic labels are free text, not a fixed alphabet, so their entropy is not bounded by $\log_2(k!)$ in practice. We therefore rely on the adaptive evaluation in Section~\ref{sec:adaptive}, not on this bound, for our claims.
 
 \paragraph{Limitations of this analysis.} This bound assumes the topic extraction function is deterministic and that the proxy questions are conditionally independent of $q_s$ given $\boldsymbol{\tau}$. In practice, the local LLM's question selection step (Step~4) compares candidates against $q_s$ directly, which could introduce subtle correlations between $P$ and $q_s$ beyond what $\boldsymbol{\tau}$ captures. We leave a tighter analysis incorporating the selection step to future work.
 
 %% ============================================================
 %% SECTION 5: EXPERIMENTAL SETUP
 %% ============================================================
-\section{Experimental Setup}
+\section{Preliminary Evaluation: Setup}
 \label{sec:setup}
+
+This section and the next report the first, small-scale evaluation (Phi-3 local model, GPT-4o cloud, 48 questions). We keep it because it established the pipeline's utility in its intended deployment (small local model, strong cloud model). Its privacy numbers are superseded by the adaptive evaluation in Section~\ref{sec:adaptive}, which uses 425 questions, baselines attacked on the same data, and stronger attacks.
 
 \subsection{Dataset and Task Types}
 \label{sec:dataset}
@@ -306,13 +312,13 @@ The absence fingerprint attack was not evaluated in this run and is discussed as
 %% ============================================================
 %% SECTION 6: RESULTS
 %% ============================================================
-\section{Results}
+\section{Preliminary Evaluation: Results}
 \label{sec:results}
 
 \subsection{Privacy: Specific Value Recovery}
 \label{sec:privacy-results}
 
-\paragraph{Headline result.} The pipeline achieves a mean specific value recovery rate of \textbf{2.3\%} across all 48 samples and both attack variants (Table~\ref{tab:recovery}). For context, Pang et al.~\cite{pang2024} report 91--94\% recovery rates when applying reconstruction attacks to DP-sanitized text on different datasets; while a direct comparison across datasets requires caution, the two-order-of-magnitude gap (2.3\% vs.\ 91--94\%) reflects a qualitative difference in the underlying privacy mechanism rather than dataset-specific tuning. Figure~\ref{fig:recovery} visualizes this comparison.
+\paragraph{Result.} The pipeline achieves a mean specific value recovery rate of \textbf{2.3\%} across all 48 samples and the attack variants (Table~\ref{tab:recovery}). An earlier version of this paper compared this number with the 72--94\% that Pang et al.~\cite{pang2024} report for DP-sanitized text; because those numbers come from different datasets and attackers, that comparison was not meaningful. Section~\ref{sec:adaptive} replaces it with a DP baseline attacked on the same data by the same attacker.
 
 \begin{table}[t]
 \caption{Sensitive data recovery from transmitted S0 proxy questions (N=48).}
@@ -331,23 +337,9 @@ Domain Expert & 93.8\% & 0.266 & 2.5\% \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_recovery_rate_comparison.png}
-\caption{Specific value recovery rates for our topic-bottleneck pipeline compared with DP-sanitized text attacked by various LLMs (Pang et al., 2024). Our approach achieves 2.3\% recovery (0\% with vocabulary exclusion), compared to 72--94\% for differential privacy methods. The dashed red line indicates the 10\% acceptable recovery threshold.}
-\label{fig:recovery}
-\end{figure}
-
 Domain recovery is high (90--94\%), indicating that adversaries can infer the general legal/contract domain from the proxy questions. This is expected and accepted by design: the topic structure is intentionally preserved. Situation scores are low (mean 0.254 for direct recovery, 0.266 for domain expert), indicating that adversaries can partially infer the \emph{type} of contractual situation but cannot identify the specific parties or terms.
 
-\paragraph{Vocabulary exclusion ablation.} With vocabulary exclusion enabled, specific value recovery drops to \textbf{0.0\%}---perfect privacy---at the cost of quality degradation discussed in Section~\ref{sec:quality-results}. Figure~\ref{fig:scatter} shows the quality-privacy trade-off.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_quality_privacy_scatter.png}
-\caption{Quality-privacy trade-off across methods. The x-axis shows specific value recovery rate (lower is better for privacy) and the y-axis shows BERTScore F1 (higher is better for quality). Our pipeline and the entity substitution baseline are measured on CUAD; DP method recovery rates are from Pang et al.~\cite{pang2024} with quality values estimated from the literature (not measured on CUAD). The green-shaded area marks the target zone below 10\% recovery.}
-\label{fig:scatter}
-\end{figure}
+\paragraph{Vocabulary exclusion ablation.} With vocabulary exclusion enabled, specific value recovery dropped to 0.0\% on these 48 questions, at a quality cost discussed in Section~\ref{sec:quality-results}. At larger scale this did not hold: on 425 questions, exclusion reduces recovery only slightly (Section~\ref{sec:adaptive}).
 
 \subsection{Quality: Answer Preservation}
 \label{sec:quality-results}
@@ -375,7 +367,7 @@ The pipeline preserves 89.3\% BERTScore F1 relative to the oracle, substantially
 
 The pipeline produces answers that are on average 1.61$\times$ the length of oracle answers, consistent with a reasoning-based answer style rather than extractive span selection. Gold span overlap is low (22.5\%), confirming this interpretation.
 
-\paragraph{Vocabulary exclusion quality cost.} Vocabulary exclusion reduces BERTScore F1 from 0.893 to 0.823 ($-$7.0 percentage points) and semantic similarity from 0.853 to 0.413 ($-$44.0 percentage points). The steep semantic similarity drop indicates that stripping topic vocabulary disrupts the S0 text's coherence enough to meaningfully degrade the cloud LLM's responses. This validates that vocabulary exclusion should be reserved for S3 (strictly confidential) data where even 2.3\% recovery is unacceptable.
+\paragraph{Vocabulary exclusion quality cost.} Vocabulary exclusion reduces BERTScore F1 from 0.893 to 0.823 ($-$7.0 percentage points) and semantic similarity from 0.853 to 0.413 ($-$44.0 percentage points). With the Phi-3 local model, stripping topic vocabulary disrupted the S0 text's coherence enough to degrade the cloud LLM's responses. With the 31B local model of Section~\ref{sec:adaptive}, exclusion has no measurable utility cost (BERTScore 0.926 vs.\ 0.923), so this cost appears to depend on the local model's capacity.
 
 \subsection{Task-Type Analysis}
 \label{sec:task-results}
@@ -415,7 +407,12 @@ Entity-Spec. & 0.907 & 0.869 & 0.650 & 0.092 \\
 \paragraph{Bottleneck fidelity.} The three selected proxy questions achieve a mean maximum cosine similarity of 0.613 and mean coverage of 0.607 relative to the original S2 question, confirming that the bottleneck preserves approximately 61\% of the original query's semantic space---sufficient for topic-level reasoning but not for specific-value extraction.
 
 %% ============================================================
-%% SECTION 7: DISCUSSION
+%% SECTION 7: ADAPTIVE ATTACKS
+%% ============================================================
+\input{adaptive_section.tex}
+
+%% ============================================================
+%% SECTION 8: DISCUSSION
 %% ============================================================
 \section{Discussion}
 \label{sec:discussion}
@@ -423,7 +420,7 @@ Entity-Spec. & 0.907 & 0.869 & 0.650 & 0.092 \\
 \subsection{Why the Information Bottleneck Works}
 \label{sec:why-works}
 
-The qualitative difference between our 2.3\% recovery rate and the 91--94\% rate for DP methods is not an incremental improvement---it reflects a fundamentally different privacy mechanism.
+Under the same attacker and on the same data, the pipeline leaks at most 3.7\% of sensitive values while SanText+ leaks 30--62\% (Section~\ref{sec:adaptive}). The gap reflects a different mechanism rather than better tuning.
 
 DP sanitization applies a many-to-many perturbation: each token is replaced with a noisy alternative drawn from a neighborhood in embedding space. The original token remains within the support of the perturbation distribution, and a sufficiently capable model can exploit training-data memorization to invert the perturbation. Entity substitution creates a one-to-one mapping that is straightforwardly invertible.
 
@@ -431,58 +428,59 @@ Topic extraction, by contrast, implements a many-to-one mapping. The space of se
 \[
 \boldsymbol{\tau} = \bigl\{(\text{M\&A},\, 0.6),\; (\text{antitrust},\, 0.25),\; (\text{SaaS},\, 0.15)\bigr\}
 \]
-is combinatorially large: any company, any deal size, any market share, any timeline that involves M\&A with antitrust considerations in the SaaS sector maps to the same distribution. The mapping has no inverse function; reconstruction requires guessing from a space whose size grows exponentially with the number of possible specific values.
+is combinatorially large: any company, any deal size, any market share, any timeline that involves M\&A with antitrust considerations in the SaaS sector maps to the same distribution. Values have no path to the cloud; the topic does, and that is exactly what the attacks recover (Section~\ref{sec:adaptive:results}).
 
 Table~\ref{tab:comparison} summarizes the key properties of our approach relative to the main competing paradigms.
 
 \begin{table}[t]
-\caption{Comparison of privacy-preserving LLM inference approaches. Recovery rates for DP methods are from Pang et al.~\cite{pang2024}; TEE and FHE overhead from the respective papers.}
+\caption{Comparison of privacy-preserving LLM inference approaches. Recovery for entity substitution, SanText+ and ours is the strongest realistic attack in Section~\ref{sec:adaptive} (same data, same attacker); other rows are qualitative, from the respective papers.}
 \label{tab:comparison}
-\begin{tabular}{lccc}
+\small
+\begin{tabular}{@{}lccc@{}}
 \toprule
-\textbf{Approach} & \textbf{Recovery} & \textbf{Hardware} & \textbf{Deployable} \\
+\textbf{Approach} & \textbf{Value rec.} & \textbf{Closed models} & \textbf{Deployable} \\
 \midrule
-Entity substitution & Invertible & None & Now \\
-DP sanitization & 72--94\% & None & Now \\
-Split inference & Variable & GPU & Partial \\
-TEE (H100 CC) & Protected & H100 & Now \\
-FHE/MPC & Protected & GPU+FHE & No \\
-\textbf{Ours} & \textbf{2.3\%} & \textbf{None} & \textbf{Now} \\
-Ours + vocab excl. & 0.0\% & None & Now \\
+Entity substitution & 1.5\%$^\dagger$ & Yes & Now \\
+DP (SanText+) & 33--62\% & Yes & Now \\
+Split inference & Variable & No & Partial \\
+TEE (H100 CC) & Protected & No & Now \\
+FHE/MPC & Protected & No & No \\
+\textbf{Ours} & \textbf{3.7\%} & \textbf{Yes} & \textbf{Now} \\
+Ours + vocab excl. & 2.7\% & Yes & Now \\
 \bottomrule
 \end{tabular}
+\\[2pt]{\footnotesize $^\dagger$ but party names and amounts in the transmitted text (6.9\%, 13.9\%) and the lowest utility.}
 \end{table}
 
 \subsection{Operating Envelope and Deployment Guidance}
 \label{sec:envelope}
 
-The task-type analysis establishes a clear operating envelope:
+The two evaluations together suggest the following operating envelope:
 
 \begin{itemize}
-\item \textbf{Strong fit:} Framework/reasoning, compliance/regulatory, procedural queries. These task types together represent an estimated 60--70\% of enterprise LLM use cases. The pipeline provides strong privacy (zero recovery) with high quality (BERTScore $\geq$ 0.886).
-\item \textbf{Weak fit:} Entity-specific and quantitative queries. These require the sensitive specifics that the bottleneck strips by design. They should be routed to local models or TEE-based inference.
+\item \textbf{Good fit:} queries whose sensitive part is the \emph{values}---who, how much, when---while the subject may be known: framework/reasoning, compliance/regulatory and procedural questions about a confidential document.
+\item \textbf{Poor fit:} queries whose \emph{subject} is itself sensitive (``does this contract have a change-of-control clause?'' can signal a pending acquisition). The clause type is identifiable in about 70\% of queries; such deployments need cover queries or topic-level noise, or local or TEE-based inference.
+\item \textbf{Utility caveat:} the measured benefit of the cloud's answers for a small local model is modest (Section~\ref{sec:adaptive:results}); the pipeline is most attractive where the cloud model contributes reasoning or domain knowledge the local model lacks.
 \end{itemize}
 
-A system that reliably handles 60--70\% of enterprise LLM use cases with strong privacy properties---and \emph{knows its limits} for the remaining 30--40\%---is more deployable than one that claims universal coverage. We recommend a graduated deployment model: S1 data uses the standard topic bottleneck; S2 data uses the bottleneck with vocabulary exclusion as an optional hardening step; S3 data uses the bottleneck with mandatory vocabulary exclusion.
-
-The vocabulary exclusion trade-off is stark: perfect privacy (0\% recovery) at a steep quality cost (semantic similarity drops 44 percentage points). We recommend it only for S3 scenarios where even the 2.3\% baseline recovery rate is unacceptable. For S1 and S2 data, the standard bottleneck provides sufficient privacy with substantially better quality.
+Vocabulary exclusion lowers verbatim leakage slightly at no measurable utility cost with a capable local model, and its absence-fingerprint weakness does not show up in what is transmitted; it is a reasonable default, not a large privacy gain.
 
 \subsection{Limitations}
 \label{sec:limitations}
 
 \paragraph{Single dataset.} Our evaluation uses only CUAD (legal contracts). Generalization to healthcare, finance, internal process, and other S2/S3 domains is untested. The privacy properties should transfer (the bottleneck mechanism is domain-independent), but quality preservation may vary with domain.
 
-\paragraph{Small sample size.} N=48 (12 per task type) yields wide confidence intervals, particularly for entity-specific recovery where the CI includes zero. Larger-scale evaluation is needed to establish precise recovery rates by task type.
+\paragraph{No formal guarantee.} The privacy claim is empirical: it holds for the attacks we built (Section~\ref{sec:adaptive}), not for all attacks. The adaptive evaluation's own limitations are listed in Section~\ref{sec:adaptive:limits}.
 
-\paragraph{Absence fingerprint attack not evaluated.} We characterize the vulnerability theoretically (Section~\ref{sec:vocab-exclusion}) and propose four mitigations, but we did not empirically test the attack or the mitigations. The fingerprint vulnerability may partially undermine the privacy gains of vocabulary exclusion.
+\paragraph{Topic is not protected.} By design the bottleneck reveals the subject of a query, and the attacks confirm it: clause type in about 70\% of queries, contract linkage at about 2.5$\times$ chance.
 
-\paragraph{Untested attack variants.} The in-context learning (ICL) attack---where the adversary is given example (S2, S0) pairs---was not evaluated. Session-level aggregation attacks, where an adversary correlates multiple queries from the same user, were not evaluated. Both could reveal more information than single-query attacks.
+\paragraph{Utility evidence is modest.} Utility is measured by similarity to an oracle answer and gold-span overlap, not by human or model-judged answer quality. With a small local model the cloud's answers improve gold-span overlap but not similarity to a strong model's answer.
 
-\paragraph{Local model capacity.} Phi-3 (3.8B parameters) is a capable but not state-of-the-art local model. The synthesis step's quality is bounded by the local model's ability to apply external reasoning frameworks to specific data. Larger local models (e.g., Llama-3 70B) may yield different quality-privacy trade-offs.
+\paragraph{Local model capacity.} The utility cost of vocabulary exclusion differed between Phi-3 (3.8B) and Gemma-4-31B, so results depend on the local model.
 
 \paragraph{Latency.} The pipeline requires approximately 39 seconds per query (31 minutes for 48 samples), dominated by cloud answering latency. This may be impractical for interactive use cases without optimization.
 
-\paragraph{Ethical considerations.} Our reconstruction attacks use only public benchmark data (CUAD contracts) and do not involve real personal or enterprise data. The attack methodology demonstrates vulnerabilities in existing privacy methods; responsible disclosure norms are followed. The pipeline itself is designed to protect sensitive data, and our evaluation of its limitations (entity-specific leakage, absence fingerprint) is intended to prevent premature deployment in scenarios where these weaknesses are material.
+\paragraph{Ethical considerations.} Our reconstruction attacks use only public benchmark data (CUAD contracts) and do not involve real personal or enterprise data. The attack methodology demonstrates vulnerabilities in existing privacy methods; responsible disclosure norms are followed. The pipeline itself is designed to protect sensitive data, and our evaluation of its limitations (topic identifiability, contract linkage, modest utility) is intended to prevent premature deployment in scenarios where these weaknesses are material.
 
 %% ============================================================
 %% SECTION 8: CONCLUSION
@@ -493,12 +491,12 @@ The vocabulary exclusion trade-off is stark: perfect privacy (0\% recovery) at a
 \subsection{Summary}
 \label{sec:summary}
 
-We introduced topic-bottleneck query reformulation, a pipeline for privacy-preserving cloud LLM inference that routes sensitive queries through an irreversible many-to-one information bottleneck. Unlike entity substitution and DP methods---from which modern LLMs recover 72--94\% of original content---our pipeline achieves 2.3\% specific value recovery while preserving 89.3\% BERTScore F1 quality. An optional vocabulary exclusion layer achieves 0\% recovery at the cost of a 7-percentage-point quality reduction. We characterized the operating envelope across four task types, demonstrating zero recovery for framework, compliance, and procedural queries and identifying entity-specific queries as the design boundary.
+We introduced topic-bottleneck query reformulation, a pipeline for privacy-preserving cloud LLM inference that routes sensitive queries through a many-to-one topic bottleneck, and evaluated it against adaptive attacks designed for it. On 425 contract questions, the strongest realistic attack recovers at most 3.7\% of sensitive values and never a distinctive name, date or amount, while the same attacker recovers 30--62\% from a DP baseline; a frontier-model attacker is no stronger, and pooling all queries of a contract does not help. The defense does not hide a query's subject, so we claim value confidentiality, not topic confidentiality. The utility benefit of the cloud for a small local model is real but modest.
 
 \subsection{Future Work}
 \label{sec:future}
 
-Several directions merit investigation. First, multi-domain evaluation beyond legal contracts---healthcare, finance, and internal process scenarios---would test generalization. Second, empirical evaluation of the absence fingerprint attack and its four proposed mitigations (Section~\ref{sec:vocab-exclusion}), particularly generation-time avoidance, is needed to validate the vocabulary exclusion variant. Third, the ICL attack variant and session-level aggregation attacks should be evaluated to characterize multi-query privacy. Fourth, larger local models may shift the quality-privacy Pareto frontier. Fifth, latency optimization---batched proxy generation, cached topic distributions, speculative generation---could make the pipeline suitable for interactive use. Finally, a formal privacy guarantee connecting the topic compression to information-theoretic bounds (e.g., bounding the mutual information between the topic distribution and any specific sensitive value) would strengthen the theoretical foundation.
+Several directions merit investigation. First, multi-domain evaluation beyond legal contracts---healthcare, finance, and internal process scenarios---would test generalization. Second, topic confidentiality: cover queries or topic-level noise to hide the subject of a query, evaluated with the linkage and category-inversion attacks of Section~\ref{sec:adaptive}. Third, a judged utility evaluation (human or LLM-as-judge) of whether the cloud's answers improve a small local model's answers. Fourth, a full frontier-attacker run instead of a calibration subset. Fifth, latency optimization---batched proxy generation, cached topic distributions, speculative generation---could make the pipeline suitable for interactive use. Finally, a formal privacy guarantee connecting the topic compression to information-theoretic bounds (e.g., bounding the mutual information between the topic distribution and any specific sensitive value) would strengthen the theoretical foundation.
 
 \clearpage
 \bibliographystyle{ACM-Reference-Format}
@@ -541,7 +539,7 @@ Table~\ref{tab:attack-detail} provides detailed metrics for each attack variant.
 Direct Recovery & 89.6\% & 0.254 & 2.1\% \\
 In-Context Learning & 93.8\% & --- & 2.1\% \\
 Domain Expert & 93.8\% & 0.266 & 2.5\% \\
-Absence Fingerprint & \multicolumn{3}{c}{Not evaluated (see Section~\ref{sec:vocab-exclusion})} \\
+Absence Fingerprint & \multicolumn{3}{c}{Not run here; see Section~\ref{sec:adaptive}} \\
 \bottomrule
 \end{tabular}
 \end{table}

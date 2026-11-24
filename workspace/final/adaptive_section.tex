@@ -1,0 +1,77 @@
+\section{Adaptive Attacks}
+\label{sec:adaptive}
+
+The evaluation in Section~\ref{sec:results} assumes a \emph{passive} cloud: it reads the three transmitted questions and tries to reconstruct the original clause with a generic prompt. A defense that only survives a passive attacker has not been evaluated \cite{carlini2019evaluating,tramer2020adaptive}. This section builds the strongest attacks we could against our own pipeline, assuming the attacker knows its design (Kerckhoffs's principle), and reports where the defense holds and where it breaks. All numbers use the same samples and the same attacker model for the defense and both baselines.
+
+\subsection{Threat model and observation sets}
+\label{sec:adaptive:threat}
+
+Every attack is labelled with what the attacker observes:
+\begin{description}
+  \item[Q] the transmitted proxy questions---exactly what the cloud receives (the realistic attacker);
+  \item[Q+] Q plus knowledge of the pipeline: its prompts, the topic-extraction step, the vocabulary-exclusion rule and the 41 CUAD clause categories;
+  \item[Q$\times k$] Q for $k$ queries that the same user sent about one contract;
+  \item[Pool] a public candidate population the attacker can enumerate (here: the full text of the sampled contracts, and the 41 category questions);
+  \item[S0] the locally generated text itself. S0 is \emph{never transmitted}; we include it only as an upper bound, and every S0 number is labelled as such.
+\end{description}
+An earlier implementation of the absence-fingerprint attack (not reported in Section~\ref{sec:results}) read S0 and therefore measured an upper bound, not a realistic attack; we correct that here.
+
+\subsection{Attack ladder}
+\label{sec:adaptive:ladder}
+
+\begin{itemize}
+  \item \textbf{Rung 0, leak scan (Q).} No attacker model: does the transmitted text itself contain a gold span, a party name, a date or an amount? This is the floor of every LLM attack and tells us where non-zero recovery comes from.
+  \item \textbf{Rung a, single-query reconstruction (Q).} The two prompts of Section~\ref{sec:results} (direct, expert persona), kept verbatim for comparability, plus in-context learning with 3 and 20 solved examples from \emph{other} contracts (transmitted questions paired with the original question, the gold values and a contract excerpt), and ICL with examples from the \emph{same} contract (an insider who has seen the contract's other queries resolved).
+  \item \textbf{Rung b1, category inversion (Q+).} The attacker is told the pipeline design and that the original question was one of the 41 CUAD categories; it ranks the categories and reconstructs under the top one.
+  \item \textbf{Rung b2, absence fingerprint.} For the vocabulary-exclusion variant: the questions were written from text that had the topic words deleted, so they conspicuously \emph{avoid} the terms a normal question would use. We run it on Q (realistic, Q+) and on S0 (upper bound, S0).
+  \item \textbf{Rung b3, linkage (Q, Pool).} Without any LLM, embed the transmitted questions (MiniLM) and rank the 41 category questions and the full texts of the sampled contracts by similarity: can the cloud tell \emph{which clause type} and \emph{which contract} a query is about?
+  \item \textbf{Rung c, multi-query aggregation (Q$\times k$).} The attacker pools the transmitted questions of $k\in\{3,5,\text{all}\}$ queries from one contract, both for linkage and for LLM reconstruction of the contract (parties, dates, amounts, governing law, key terms).
+\end{itemize}
+
+\subsection{Baselines under the same attacks}
+\label{sec:adaptive:baselines}
+
+Entity substitution (Section~\ref{sec:results}) transmits the question and a 4{,}000-character window of the contract with entities replaced by placeholders. SanText+ \cite{yue2021} is the word-level metric local differential privacy mechanism whose reconstruction Pang et al.\ \cite{pang2024} report at 72--94\%; we implement it over GloVe-300d (top 50k vocabulary, $\varepsilon\in\{1,3\}$, non-sensitive replacement probability $p{=}0.3$, sensitive rank 20k; out-of-vocabulary words, which include most names, are replaced uniformly) and attack it with the Pang et al.\ recipe (direct reconstruction and ICL with 8 sanitized/original pairs from other contracts). Both baselines are attacked on exactly the same samples with the same attacker model.
+
+\subsection{Setup}
+\label{sec:adaptive:setup}
+
+\paragraph{Data.} 425 answerable CUAD dev questions from 40 contracts (seed 42; contracts with at least five answerable questions, so every contract supports the multi-query attack). Sampling whole contracts serves two purposes: rung~c needs several queries per contract, and the confidence intervals must respect the fact that questions from one contract share parties, dates and vocabulary. The sensitive document for every arm is the 4{,}000-character window of the contract that starts 1{,}000 characters before the first gold span.
+
+\paragraph{Models.} Pipeline (local model and cloud stand-in), baselines and attacker all run on one local Gemma-4-31B (NVFP4) served by vLLM; nothing leaves the machine and no API spend is involved. Because a 31B attacker is weaker than a frontier model, we re-run three attacks with a frontier model on a 36-sample calibration subset (Section~\ref{sec:adaptive:fable}): ``defense holds'' numbers are therefore lower bounds on what a frontier attacker recovers.
+
+\paragraph{Metrics.} \emph{SVR} is the criterion of Section~\ref{sec:results} (the first 50 characters of a gold span appear verbatim in the attacker's output), so numbers are directly comparable; we add the share of queries with any gold span recovered, \emph{party-name recovery} (a distinctive token of a party name, derived from the contract's ``Parties'' spans with a corpus document-frequency filter, appears in the output; defined for 35 of 40 contracts), \emph{category named} (the CUAD category is named), 41-way category identification, $N$-way contract identification, and the MiniLM situation score. Utility is BERTScore~F1 and MiniLM similarity of the final answer against an oracle answer (same model, plain question, full window).
+
+\paragraph{Intervals.} Every interval is a 95\% percentile cluster bootstrap over contracts (2{,}000 resamples), which is wider than a per-question bootstrap whenever recovery clusters by contract---as it does.
+
+\subsection{Results}
+\label{sec:adaptive:results}
+
+\input{adaptive_tables.tex}
+
+\paragraph{Where the defense holds: verbatim values.} The transmitted questions almost never contain a sensitive value themselves: a gold span appears in 1.6\% [0.6, 2.9] of plain-pipeline queries and 0.9\% [0.2, 2.0] with vocabulary exclusion, and no party name, date or amount appears at all (Table~\ref{tab:leak}). Every realistic single-query attack stays in the same range: the strongest, ICL with 20 solved examples, reaches SVR 3.7\% [2.1, 5.4] on the plain pipeline, the paper's two prompts 2.8\% and 1.5\%, and no attack on Q or Q+ ever names a party (Table~\ref{tab:attacks}). The baselines fare far worse under the \emph{same} attacker on the \emph{same} samples: SanText+ leaks gold spans verbatim before any attack (15.1\% at $\varepsilon{=}1$, 54.6\% at $\varepsilon{=}3$) and the Pang et al.\ recipe recovers 33.3\% [28.1, 38.7] and 62.3\% [56.7, 67.9] SVR---the latter matching their reported 72--94\% range in order of magnitude. Entity substitution keeps SVR low (1.5\%) but its transmitted window still exposes party names in 6.9\% of queries (names the regex missed) and amounts in 13.9\%, and it buys this with the worst utility of all arms (BERTScore 0.835 against the oracle, versus 0.923 for the pipeline; Table~\ref{tab:utility}). Pipeline utility is measured against an oracle that sees the full window; the pipeline's synthesis step also sees it locally, so this is utility of the full system, not of the cloud answers alone.
+
+\paragraph{Does the cloud help?} A defense that sends almost nothing is only interesting if what it sends is useful. In the runs above the local and cloud roles are played by the same 31B model, so the pipeline cannot beat its own full-window oracle (BERTScore 0.923 vs.\ 1 by construction). We therefore re-ran synthesis in the paper's intended setting, a \emph{small} local model (Qwen2.5-3B, standing in for Phi-3) with a strong cloud, on the same 160 questions, and compared it with the same small model answering from the full window alone (Table~\ref{tab:utility}, paired by question). The cloud's answers to the three transmitted questions raise the share of gold spans the small model reproduces by 9.0 points [3.0, 15.6] (60.6\% vs.\ 52.8\%), but lower similarity to the strong model's answer slightly (BERTScore $-0.018$ [$-0.022$, $-0.014$]; MiniLM $-0.027$). The second effect is at least partly length: with cloud input the small model's median answer doubles (1{,}807 vs.\ 921 characters; oracle 537), which both lowers similarity to a short reference and gives more chances to quote a gold span. 27 of 160 synthesis calls timed out on the CPU-only local server and are excluded (same window length as the rest). The honest reading is a modest benefit: the bottleneck's questions help a small model find the right clause, but we find no evidence that they bring its answers closer to a strong model's. A stronger utility claim needs a judged quality evaluation, which we leave open.
+
+\paragraph{An apparent break that is not one.} An insider who has seen \emph{other} queries of the same contract resolved (ICL with same-contract examples) appears to reach SVR 13.3\% [10.0, 17.2] and names a party in a third of queries. A copy control shows this is the examples, not the questions: the gold values and excerpts in the examples alone already cover 20.8\% [16.3, 26.1] of the target's gold spans, and the attacker recovers a value \emph{not} present in its examples in only 2.6\% [1.2, 4.3] of queries---the single-query rate. We report it because a naive reading of this number would overstate the attack.
+
+\paragraph{Where it breaks: the clause type.} The bottleneck hides values, not the \emph{subject} of a query. A pipeline-aware attacker who knows the 41 CUAD categories names the right one first in 72.7\% [69.5, 76.1] of queries and in its top three in 90.6\% (chance: 2.4\% and 7.3\%); with no LLM at all, embedding similarity between the transmitted questions and the 41 category questions gets 64.5\% top-1 (Table~\ref{tab:linkage}). Vocabulary exclusion does not change this (71.5\%, 65.2\%). Whether this matters depends on the deployment: for a lawyer, ``this query is about a change-of-control clause'' can itself be sensitive (it signals a pending acquisition).
+
+\paragraph{Partial: which contract.} Linking a query to its contract among the 40 sampled ones is above chance but weak: top-1 6.4\% [3.7, 9.5] (chance 2.5\%), top-5 20.9\%. Pooling queries does not help the embedding attacker (5.0--7.3\% top-1 for $k\in\{3,5,\text{all}\}$), because the proxy questions are generic by construction and averaging them moves toward the generic centroid. With the LLM attacker (Table~\ref{tab:multiquery}), pooling all queries of a contract recovers at least one gold span of the contract for 27.5\% [15.0, 40.0] of contracts versus 15.0\% at $k{=}3$, but the share of the contract's spans recovered stays at 2.5--3.4\% and no party is ever named. Inspecting every recovered span shows they carry no contract-specific information: document names (``Franchise Agreement''), the boilerplate opening ``This Agreement shall be governed by and'', role words annotated as party spans (``Company'', ``Agent''), and two- or three-letter spans (``MA'', ``VAL'') that the substring criterion matches inside unrelated words. Across all realistic single-query attacks on both pipeline arms, none of the 118 gold-span hits is a distinctive name, date or amount. This also exposes a weakness of the SVR criterion inherited from Section~\ref{sec:results}: short or generic gold spans inflate it, so the pipeline's residual SVR is an upper bound on real value leakage, while for SanText+ the recovered spans include dates and names (Table~\ref{tab:typed}).
+
+\paragraph{Vocabulary exclusion.} The absence-fingerprint attack does not work on what is actually transmitted: from Q, the attacker recovers 14.9\% [13.2, 16.5] of the excluded topic words and SVR 0.2\%. Only with the never-transmitted S0 text does recall rise to 44.2\% (SVR 2.1\%), so the earlier concern about this attack applied to an observation the cloud never has. Exclusion lowers verbatim leakage slightly (0.9\% vs 1.6\% in the leak scan) at no measurable utility cost (BERTScore 0.926 vs 0.923).
+
+\subsection{Calibration with a frontier attacker}
+\label{sec:adaptive:fable}
+
+To check that the results are not an artifact of a weak attacker, we re-ran the direct, ICL-20 and category-inversion attacks on the plain pipeline with Claude Opus~5.5 on 36 queries, one per contract (seed 42), using exactly the prompts, examples and scoring of the Gemma runs. The frontier attacker is no stronger at recovering values: SVR 3.7\% vs 5.6\% (direct), 6.5\% vs 6.5\% (ICL-20) and 8.3\% vs 2.8\% (category inversion), all with overlapping intervals, and it never names a party. It names the clause category somewhat more often in free text (72--75\% vs 58\%) but is no better at identifying it under the pipeline-aware prompt (52.8\% top-1 for both). Three of its 108 outputs matched a refusal pattern; none of them recovered a value. At this sample size the calibration rules out a large attacker-strength gap, not a small one.
+
+\subsection{What this changes about the claim}
+\label{sec:adaptive:claim}
+
+Against the strongest attacks we could build, the topic bottleneck keeps specific values out of the cloud: no realistic attack recovers a distinctive name, date or amount, with a frontier attacker or by pooling every query of a contract, while the differential-privacy baseline leaks 30--62\% of values to the same attacker. What it does not hide is \emph{what a query is about}: the clause type is identifiable about 70\% of the time, and a query is linked to its contract at roughly 2.5$\times$ chance. The defense should therefore be claimed as value confidentiality, not topic confidentiality; a deployment where the topic of a question is itself sensitive needs an additional mechanism (cover queries or topic-level noise), which we leave to future work.
+
+\subsection{Limitations}
+\label{sec:adaptive:limits}
+
+The attacker, the pipeline's local model and the cloud stand-in are the same 31B model; a frontier attacker is only sampled on a 36-query subset. Same-contract ICL leaks through its examples (Section~\ref{sec:adaptive:results}); a copy control is required whenever examples share a source with the target. SVR inherits the substring criterion of Section~\ref{sec:results}, which short or generic gold spans inflate. The sensitive document is a 4{,}000-character window, not the full contract. SanText+ is our re-implementation (GloVe vocabulary, OOV words replaced uniformly), not the authors' code, and its $\varepsilon$ is not comparable to document-level DP. The contract pool for linkage is the sampled set (40 candidates); a real adversary's pool is both larger (more candidates) and richer (metadata).
